@@ -23,9 +23,8 @@ import HttpPlugin from 'tb-vue-http'                          // https://www.npm
 
 
 // Components
-import LoginPage from './components/login-page'
 import LandingPage from './components/landing-page'
-import DashboardPage from './components/dashboard-page'
+import NavbarComponent from './components/common/navbar-component'
 
 
 // Language config
@@ -54,9 +53,8 @@ Vue.use(HttpPlugin, apiConfig)
 Vue.use(HashRouterPlugin, { landingPage: 'landing-page' })
 Vue.use(AuthPlugin)
 
-Vue.component('login-page', LoginPage)
 Vue.component('landing-page', LandingPage)
-Vue.component('dashboard-page', DashboardPage)
+Vue.component('navbar-component', NavbarComponent)
 
 import Root from './Root'
 new Vue({

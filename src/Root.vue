@@ -13,4 +13,7 @@ export default {
 
 <style>
 /* Put here style that is applied to all components */
+.container {
+  margin-top: 25px;
+}
 </style>
