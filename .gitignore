@@ -13,3 +13,4 @@ build/
 *.ntvs*
 *.njsproj
 *.sln
+package-lock.json
