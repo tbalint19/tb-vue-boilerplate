@@ -25,6 +25,8 @@ import HttpPlugin from 'tb-vue-http'                          // https://www.npm
 // Components
 import LandingPage from './components/landing-page'
 import NavbarComponent from './components/common/navbar-component'
+import LoginComponent from './components/common/login-component'
+import GoogleLoginComponent from './components/common/google-login-component'
 
 
 // Language config
@@ -55,6 +57,8 @@ Vue.use(AuthPlugin)
 
 Vue.component('landing-page', LandingPage)
 Vue.component('navbar-component', NavbarComponent)
+Vue.component('login-component', LoginComponent)
+Vue.component('google-login-component', GoogleLoginComponent)
 
 import Root from './Root'
 new Vue({

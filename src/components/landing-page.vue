@@ -50,6 +50,8 @@
           </p>
         </div>
       </div>
+
+      <login-component></login-component>
     </div>
   </div>
 </template>
