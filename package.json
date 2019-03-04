@@ -23,6 +23,7 @@
     "npm": "^6.1.0",
     "popper.js": "^1.12.9",
     "tb-vue-auth": "^1.0.0",
+    "tb-vue-google-login": "^1.0.5",
     "tb-vue-hash-router": "^1.0.2",
     "tb-vue-http": "^1.0.12",
     "tb-vue-i18n": "^1.0.5",

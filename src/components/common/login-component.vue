@@ -12,7 +12,7 @@ export default {
   name: "LoginComponent",
   data() {
     return {
-      googleAuthUrl: 'http://localhost:8080/api/auth/token'
+      googleAuthUrl: 'http://localhost:8080/login'
     }
   },
   methods: {

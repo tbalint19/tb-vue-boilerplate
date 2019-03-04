@@ -27,7 +27,6 @@ import GoogleLoginPlugin from 'tb-vue-google-login'           // https://www.npm
 import LandingPage from './components/landing-page'
 import NavbarComponent from './components/common/navbar-component'
 import LoginComponent from './components/common/login-component'
-import GoogleLoginComponent from './components/common/google-login-component'
 
 
 // Language config
