@@ -14,34 +14,29 @@
         });
       }
       function onSuccess(googleUser) {
-        // Useful data for your client-side scripts:
         var profile = googleUser.getBasicProfile();
-        // The ID token you need to pass to your backend:
+        window.emitGoogleLoginSuccess(profile);
         var id_token = googleUser.getAuthResponse().id_token;
         sendToken(id_token)
       }
-      function onFailure(error) {
-        console.log(error);
+      function onFailure(err) {
+        window.emitGoogleLoginFailure(err)
       }
       function sendToken(token) {
-        console.log("sending now...")
         var xhr = new XMLHttpRequest();
         xhr.open('POST', window.googleAuthUrl);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.onload = function() {
           if (xhr.status === 200) {
-            console.log('Signed in as: ' + xhr.responseText);
-            signOut()
-            window.emitLogin()
+            window.emitLoginSuccess()
           } else {
-            console.log("Error with status code", xhr.status)
-            signOut()
-            window.emitLogin()
+            window.emitLoginFailure()
           }
+          googleSignOut()
         };
         xhr.send(JSON.stringify({ token }));
       }
-      function signOut() {
+      function googleSignOut() {
         gapi.auth2.getAuthInstance().signOut()
           .then(() => console.log("Succes"))
           .catch(err => console.log("Error", err))
@@ -61,15 +56,36 @@ export default {
     authUrl: String
   },
   methods: {
-    emitGoogleLogin: function() {
+    emitGoogleLoginSuccess: function() {
       this.$emit("googleLoginSuccess")
+    },
+    emitLoginSuccess: function() {
+      this.$emit("loginSuccess")
+      this.disconnectGoogle()
+    },
+    emitGoogleLoginFailure: function() {
+      this.$emit("googleLoginFailure")
+    },
+    emitLoginFailure: function() {
+      this.$emit("loginFailure")
+    },
+    setup: function() {
+      window.googleAuthUrl = this.authUrl
+      window.emitGoogleLoginSuccess = this.emitGoogleLoginSuccess.bind(this)
+      window.emitLoginSuccess = this.emitLoginSuccess.bind(this)
+      window.emitGoogleLoginFailure = this.emitGoogleLoginFailure.bind(this)
+      window.emitLoginFailure = this.emitLoginFailure.bind(this)
+    },
+    disconnectGoogle: function() {
       delete window["googleAuthUrl"]
-      delete window["emitLogin"]
+      delete window["emitGoogleLoginSuccess"]
+      delete window["emitLoginSuccess"]
+      delete window["emitGoogleLoginFailure"]
+      delete window["emitLoginFailure"]
     }
   },
   created() {
-    window.googleAuthUrl = this.authUrl
-    window.emitLogin = this.emitGoogleLogin.bind(this)
+    this.setup()
   }
 }
 </script>

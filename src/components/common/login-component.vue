@@ -1,8 +1,8 @@
 <template lang="html">
   <div class="card">
     <google-login-component
-      @googleLoginSuccess="googleLoginSuccessHandler()"
-      :authUrl="'http://localhost:8080/api/auth/token'">
+      @loginSuccess="loginSuccessHandler()"
+      :authUrl="googleAuthUrl">
     </google-login-component>
   </div>
 </template>
@@ -10,8 +10,13 @@
 <script>
 export default {
   name: "LoginComponent",
+  data() {
+    return {
+      googleAuthUrl: 'http://localhost:8080/api/auth/token'
+    }
+  },
   methods: {
-    googleLoginSuccessHandler: function() {
+    loginSuccessHandler: function() {
       console.log("received")
     }
   }
