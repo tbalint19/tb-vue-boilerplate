@@ -20,6 +20,7 @@ import NotificationPlugin from 'tb-vue-notifications'         // https://www.npm
 import HashRouterPlugin from 'tb-vue-hash-router'             // https://www.npmjs.com/package/tb-vue-hash-router
 import AuthPlugin from 'tb-vue-auth'                          // https://www.npmjs.com/package/tb-vue-auth
 import HttpPlugin from 'tb-vue-http'                          // https://www.npmjs.com/package/tb-vue-http
+import GoogleLoginPlugin from 'tb-vue-google-login'           // https://www.npmjs.com/package/tb-google-login
 
 
 // Components
@@ -54,11 +55,11 @@ Vue.use(LanguagePlugin, languageConfig)
 Vue.use(HttpPlugin, apiConfig)
 Vue.use(HashRouterPlugin, { landingPage: 'landing-page' })
 Vue.use(AuthPlugin)
+Vue.use(GoogleLoginPlugin, { authUrl: "http://localhost:8080/api/login" })
 
 Vue.component('landing-page', LandingPage)
 Vue.component('navbar-component', NavbarComponent)
 Vue.component('login-component', LoginComponent)
-Vue.component('google-login-component', GoogleLoginComponent)
 
 import Root from './Root'
 new Vue({
