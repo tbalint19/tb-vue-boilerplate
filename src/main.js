@@ -20,14 +20,14 @@ import NotificationPlugin from 'tb-vue-notifications'         // https://www.npm
 import HashRouterPlugin from 'tb-vue-hash-router'             // https://www.npmjs.com/package/tb-vue-hash-router
 import AuthPlugin from 'tb-vue-auth'                          // https://www.npmjs.com/package/tb-vue-auth
 import HttpPlugin from 'tb-vue-http'                          // https://www.npmjs.com/package/tb-vue-http
-import GoogleLoginPlugin from 'tb-vue-google-login'           // https://www.npmjs.com/package/tb-google-login
+import GoogleLoginPlugin from 'tb-vue-google-login'           // https://www.npmjs.com/package/tb-vue-google-login
+import FacebookLoginPlugin from 'tb-vue-facebook-login'       // https://www.npmjs.com/package/tb-vue-facebook-login
 
 
 // Components
 import LandingPage from './components/landing-page'
 import NavbarComponent from './components/common/navbar-component'
 import LoginComponent from './components/common/login-component'
-import FacebookLoginComponent from './components/common/facebook-login-component'
 
 
 // Language config
@@ -56,11 +56,11 @@ Vue.use(HttpPlugin, apiConfig)
 Vue.use(HashRouterPlugin, { landingPage: 'landing-page' })
 Vue.use(AuthPlugin)
 Vue.use(GoogleLoginPlugin, { loginUrl: "http://localhost:8080/api/login" })
+Vue.use(FacebookLoginPlugin, { loginUrl: "http://localhost:8080/api/login" })
 
 Vue.component('landing-page', LandingPage)
 Vue.component('navbar-component', NavbarComponent)
 Vue.component('login-component', LoginComponent)
-Vue.component('facebook-login-component', FacebookLoginComponent)
 
 
 import Root from './Root'
