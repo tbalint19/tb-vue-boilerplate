@@ -10,12 +10,15 @@
         });
 
         window.statusChangeCallback = function(response) {
-          window.emitFacebookLoginSuccess();
-          FB.logout(function(response){});
+          window.emitFacebookAuthSuccess(response);
+          if (response.status !== "unknown") {
+              sendToken(response.authResponse.accessToken);
+              FB.logout(function(response){});
+          }
         }
 
         FB.getLoginStatus(function(response) {
-          window.statusChangeCallback(response);
+            window.statusChangeCallback(response);
         });
         FB.AppEvents.logPageView();
 
@@ -25,11 +28,11 @@
           xhr.setRequestHeader('Content-Type', 'application/json');
           xhr.onload = function() {
             if (xhr.status === 200) {
-              window.emitLoginSuccessWithFBToken()
+              window.emitLoginSuccessWithFBToken(xhr.response)
             } else {
-              window.emitLoginFailureWithFBToken()
+              window.emitLoginFailWithFBToken(xhr.response)
             }
-            FB.logout(function(response){})
+            FB.logout(function(){});
           };
           xhr.send(JSON.stringify({ token }));
         }
@@ -45,6 +48,7 @@
     </script>
 
     <fb:login-button
+      v-pre
       size="large"
       scope="public_profile,email"
       onlogin="checkLoginState();">
@@ -65,30 +69,30 @@
 export default {
   name: "FacebookLoginComponent",
   methods: {
-    emitFacebookLoginSuccess: function() {
-      this.$emit("facebookLoginSuccess")
+    emitFacebookAuthSuccess: function(res) {
+      this.$emit("authSuccess", res)
     },
-    emitLoginSuccess: function() {
-      this.$emit("loginSuccess")
+    emitLoginSuccessWithFBToken: function(res) {
+      this.$emit("loginSuccess", res)
       this.disconnectGoogle()
     },
-    emitFacebookLoginFailure: function() {
-      this.$emit("facebookLoginFailure")
+    emitFacebookAuthFail: function(res) {
+      this.$emit("authFail", res)
     },
-    emitLoginFailure: function() {
-      this.$emit("loginFailure")
+    emitLoginFailWithFBToken: function(res) {
+      this.$emit("loginFail", res)
     },
     setup: function() {
-      window.emitFacebookLoginSuccess = this.emitFacebookLoginSuccess.bind(this)
-      window.emitLoginSuccessWithFBToken = this.emitLoginSuccess.bind(this)
-      window.emitFacebookLoginFailure = this.emitFacebookLoginFailure.bind(this)
-      window.emitLoginFailureWithFBToken = this.emitLoginFailure.bind(this)
+      window.emitFacebookAuthSuccess = this.emitFacebookAuthSuccess.bind(this)
+      window.emitLoginSuccessWithFBToken = this.emitLoginSuccessWithFBToken.bind(this)
+      window.emitFacebookAuthFail = this.emitFacebookAuthFail.bind(this)
+      window.emitLoginFailWithFBToken = this.emitLoginFailWithFBToken.bind(this)
     },
     disconnectGoogle: function() {
-      delete window["emitFacebookLoginSuccess"]
+      delete window["emitFacebookAuthSuccess"]
+      delete window["emitFacebookAuthFail"]
+      delete window["emitLoginFailWithFBToken"]
       delete window["emitLoginSuccessWithFBToken"]
-      delete window["emitFacebookLoginFailure"]
-      delete window["emitLoginFailureWithFBToken"]
     }
   },
   created() {

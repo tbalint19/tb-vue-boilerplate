@@ -1,13 +1,17 @@
 <template lang="html">
-  <div class="d-flex justify-content-center">
+  <div class="d-flex justify-content-around">
     <google-login-component
       @authSuccess="log"
       @authFail="log"
       @loginSuccess="log"
       @loginFail="log">
     </google-login-component>
-    &nbsp;
-    <facebook-login-component>
+
+    <facebook-login-component
+      @authSuccess="log"
+      @authFail="log"
+      @loginSuccess="log"
+      @loginFail="log">
     </facebook-login-component>
   </div>
 </template>
@@ -15,15 +19,8 @@
 <script>
 export default {
   name: "LoginComponent",
-  data() {
-    return {
-      googleAuthUrl: 'http://localhost:8080/login'
-    }
-  },
   methods: {
-    log: function(r) {
-      console.log(r)
-    }
+    log: function(emittedData) { console.log(emittedData); }
   }
 }
 </script>

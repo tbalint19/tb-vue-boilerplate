@@ -51,6 +51,8 @@
         </div>
       </div>
 
+      <hr>
+
       <login-component></login-component>
     </div>
   </div>
