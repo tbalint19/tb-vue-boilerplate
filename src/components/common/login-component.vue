@@ -1,9 +1,14 @@
 <template lang="html">
-  <div class="card">
+  <div class="d-flex justify-content-center">
     <google-login-component
-      @loginSuccess="loginSuccessHandler()"
-      :authUrl="googleAuthUrl">
+      @authSuccess="log"
+      @authFail="log"
+      @loginSuccess="log"
+      @loginFail="log">
     </google-login-component>
+    &nbsp;
+    <facebook-login-component>
+    </facebook-login-component>
   </div>
 </template>
 
@@ -16,8 +21,8 @@ export default {
     }
   },
   methods: {
-    loginSuccessHandler: function() {
-      console.log("received")
+    log: function(r) {
+      console.log(r)
     }
   }
 }

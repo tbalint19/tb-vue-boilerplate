@@ -27,6 +27,7 @@ import GoogleLoginPlugin from 'tb-vue-google-login'           // https://www.npm
 import LandingPage from './components/landing-page'
 import NavbarComponent from './components/common/navbar-component'
 import LoginComponent from './components/common/login-component'
+import FacebookLoginComponent from './components/common/facebook-login-component'
 
 
 // Language config
@@ -54,11 +55,13 @@ Vue.use(LanguagePlugin, languageConfig)
 Vue.use(HttpPlugin, apiConfig)
 Vue.use(HashRouterPlugin, { landingPage: 'landing-page' })
 Vue.use(AuthPlugin)
-Vue.use(GoogleLoginPlugin, { authUrl: "http://localhost:8080/api/login" })
+Vue.use(GoogleLoginPlugin, { loginUrl: "http://localhost:8080/api/login" })
 
 Vue.component('landing-page', LandingPage)
 Vue.component('navbar-component', NavbarComponent)
 Vue.component('login-component', LoginComponent)
+Vue.component('facebook-login-component', FacebookLoginComponent)
+
 
 import Root from './Root'
 new Vue({
