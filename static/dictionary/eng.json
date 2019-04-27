@@ -1,3 +1,5 @@
 {
-  "example.hello": "Hello in english"
+  "demo": {
+    "title": "Hello in english"
+  }
 }

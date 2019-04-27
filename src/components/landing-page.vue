@@ -16,9 +16,21 @@
               Npm packages
             </div>
             <div class="card-body">
-              <p class="card-text">VueJs</p>
-              <p class="card-text">Bootstrap</p>
-              <p class="card-text">Fontawesome</p>
+              <p class="card-text">
+                <a href="https://vuejs.org/v2/guide/" target="_blank">
+                  VueJs
+                </a>
+              </p>
+              <p class="card-text">
+                <a href="https://getbootstrap.com/docs/4.3/components/alerts/" target="_blank">
+                  Bootstrap (out-of-the-box prod ready css components)
+                </a>
+              </p>
+              <p class="card-text">
+                <a href="https://github.com/Justineo/vue-awesome" target="_blank">
+                  Fontawesome (icons)
+                </a>
+              </p>
               <p class="card-text">
                 <a href="https://www.npmjs.com/package/vue-notification" target="_blank">
                   Vue notifications
@@ -31,12 +43,20 @@
               </p>
               <p class="card-text">
                 <a href="https://github.com/axios/axios" target="_blank">
-                  Axios (HTTP plugin)
+                  Axios (HTTP client)
                 </a>
               </p>
-              <p class="card-text">Vuex (state management)</p>
-              <p class="card-text">I18n plugin</p>
-              <p class="card-text">Auth setup</p>
+              <p class="card-text">
+                <a href="http://kazupon.github.io/vue-i18n/started.html#html" target="_blank">
+                  I18n plugin
+                </a>
+              </p>
+              <p class="card-text">
+                <a href="https://vuex.vuejs.org/guide/" target="_blank">
+                  Vuex (state management)
+                </a>
+              </p>
+              <p class="card-text">Auth setup (custom implementation)</p>
             </div>
           </div>
         </div>
@@ -72,6 +92,13 @@
                 </button>
               </p>
               <hr>
+              <p class="card-text">
+                <select v-model="$i18n.locale">
+                  <option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">{{ lang }}</option>
+                </select>
+                <span>{{ $t("demo.title") }}</span>
+              </p>
+              <hr>
               <p class="card-text btn-group">
                 <button  class="btn btn-outline-primary" @click="$notify()">
                   <v-icon name="minus"/>
@@ -104,14 +131,16 @@ export default {
   name: "LandingPage",
   data() {
     return {
+      langs: ['hu', 'en'],
       errorNotification: {
         group: 'error',
-        type: 'warn',
+        type: 'error',
         title: 'Important message',
         text: 'Hello user! This is a notification!'
       },
       authNotification: {
         group: 'auth',
+        type: 'success',
         title: 'Important message',
         text: 'Hello user! This is a notification!'
       }
