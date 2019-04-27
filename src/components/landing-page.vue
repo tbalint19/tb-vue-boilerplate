@@ -1,5 +1,5 @@
 <template lang="html">
-  <div>
+  <div id="landing-page">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -54,6 +54,12 @@
                 <input type="text" class="form-control">
                 <button  class="btn btn-outline-primary" @click="$notify()">
                   <v-icon name="plus"/>
+                </button>
+              </p>
+              <hr>
+              <p class="card-text">
+                <button class="btn btn-outline-secondary" @click="$router.push('/other')">
+                  To other page
                 </button>
               </p>
             </div>
