@@ -44,11 +44,11 @@ Vue.prototype.$todoApi = require("./api/todo.js").default
 Vue.config.productionTip = false
 Vue.config.devtools = process.env.NODE_ENV === 'development'
 
-import Root from './Root'
+import App from './App'
 new Vue({
-  components: { Root },
+  components: { App },
   router,
   store,
   i18n,
-  template: '<Root/>'
-}).$mount('#root-container')
+  template: '<App/>'
+}).$mount('#app-container')
