@@ -1,36 +1,18 @@
 import Vue from 'vue'
 
+import router from './router'
+import store from './store'
 
-// Bootstrap
+import Notifications from 'vue-notification'
 import BootstrapVue from "bootstrap-vue"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'vue-awesome/icons'
+import Icon from 'vue-awesome/components/Icon'
 
 
-// Fontawesome
-import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
-import fontawesome from '@fortawesome/fontawesome'
-import fas from '@fortawesome/fontawesome-free-solid'
-fontawesome.library.add(fas)
 
-
-// tbalint19 plugins
-import LanguagePlugin from 'tb-vue-i18n'                      // https://www.npmjs.com/package/tb-vue-i18n
-import NotificationPlugin from 'tb-vue-notifications'         // https://www.npmjs.com/package/tb-vue-notifications
-import HashRouterPlugin from 'tb-vue-hash-router'             // https://www.npmjs.com/package/tb-vue-hash-router
-import AuthPlugin from 'tb-vue-auth'                          // https://www.npmjs.com/package/tb-vue-auth
-import HttpPlugin from 'tb-vue-http'                          // https://www.npmjs.com/package/tb-vue-http
-import GoogleLoginPlugin from 'tb-vue-google-login'           // https://www.npmjs.com/package/tb-vue-google-login
-import FacebookLoginPlugin from 'tb-vue-facebook-login'       // https://www.npmjs.com/package/tb-vue-facebook-login
-
-
-// Components
-import LandingPage from './components/landing-page'
-import NavbarComponent from './components/common/navbar-component'
-import LoginComponent from './components/common/login-component'
-
-
-// Language config
+// Config
 import englishDictionary from '../static/dictionary/eng.json'
 import hungarianDictionary from '../static/dictionary/hu.json'
 let languageConfig = {
@@ -38,34 +20,28 @@ let languageConfig = {
   "hu": hungarianDictionary
 }
 
+// Vue.http = Vue.prototype.$http = axios
 
-// Api config
-let apiConfig = [
-  { name: "api1", url: "http://localhost:5000", headers: { "Authorization": () => localStorage.getItem('my-auth-token') } },
-  { name: "api2", url: "http://localhost:6000", headers: { "api-key": "1x2y3zasd456fgh789" } }
-]
+
+
+// Plugins
+Vue.use(BootstrapVue)
+Vue.use(Notifications)
+
+
+// Components
+Vue.component('navbar-component', require('@/components/common/navbar-component').default)
+Vue.component('v-icon', Icon)
+
 
 
 // Init
-Vue.use(BootstrapVue)
-Vue.component(FontAwesomeIcon.name, FontAwesomeIcon)
-
-Vue.use(NotificationPlugin)
-Vue.use(LanguagePlugin, languageConfig)
-Vue.use(HttpPlugin, apiConfig)
-Vue.use(HashRouterPlugin, { landingPage: 'landing-page' })
-Vue.use(AuthPlugin)
-Vue.use(GoogleLoginPlugin, { loginUrl: "http://localhost:8080/api/login" })
-Vue.use(FacebookLoginPlugin, { loginUrl: "http://localhost:8080/api/login" })
-
-Vue.component('landing-page', LandingPage)
-Vue.component('navbar-component', NavbarComponent)
-Vue.component('login-component', LoginComponent)
-
+Vue.config.productionTip = false
 
 import Root from './Root'
 new Vue({
-  el: '#root',
-  template: '<Root/>',
-  components: { Root }
-})
+  components: { Root },
+  router,
+  store,
+  template: '<Root/>'
+}).$mount('#root-container')
