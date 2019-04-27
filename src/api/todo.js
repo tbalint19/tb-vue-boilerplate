@@ -1,14 +1,14 @@
 import axios from 'axios'
 
-module.exports = (() => {
+export default (() => {
 
   let http = axios.create({
-    baseURL: 'https://some-domain.com/api/'
+    baseURL: 'https://jsonplaceholder.typicode.com'
   })
 
-  let getTodo = ({ id }) => http.get("/api/todo", params: { id })
+  let getTodo = ({ userId }) => http.get("/posts", { params: { userId } })
 
-  let addTodo = ({ title, text }) => http.post("/api/todo", { title, text })
+  let addTodo = ({ title, text }) => http.post("/posts", { title, text })
 
   return {
     getTodo,

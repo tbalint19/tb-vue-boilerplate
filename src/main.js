@@ -20,7 +20,7 @@ let languageConfig = {
   "hu": hungarianDictionary
 }
 
-// Vue.http = Vue.prototype.$http = axios
+Vue.todoApi = Vue.prototype.$todoApi = require("./api/todo.js").default
 
 
 

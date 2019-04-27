@@ -19,11 +19,21 @@
               <p class="card-text">VueJs</p>
               <p class="card-text">Bootstrap</p>
               <p class="card-text">Fontawesome</p>
-              <a class="card-text" href="https://www.npmjs.com/package/vue-notification" target="_blank">
-                Vue notifications
-              </a>
-              <p class="card-text">Axios (HTTP plugin)</p>
-              <p class="card-text">Vue router</p>
+              <p class="card-text">
+                <a href="https://www.npmjs.com/package/vue-notification" target="_blank">
+                  Vue notifications
+                </a>
+              </p>
+              <p class="card-text">
+                <a href="https://router.vuejs.org/guide/#html" target="_blank">
+                  Vue router
+                </a>
+              </p>
+              <p class="card-text">
+                <a href="https://github.com/axios/axios" target="_blank">
+                  Axios (HTTP plugin)
+                </a>
+              </p>
               <p class="card-text">Vuex (state management)</p>
               <p class="card-text">I18n plugin</p>
               <p class="card-text">Auth setup</p>
@@ -47,6 +57,21 @@
                 </button>
               </p>
               <hr>
+              <p class="card-text">
+                <button class="btn btn-outline-secondary" @click="$router.push('/other')">
+                  To other page
+                </button>
+              </p>
+              <hr>
+              <p class="card-text">
+                <button class="btn btn-outline-warning" @click="getTodo()">
+                  Get todos
+                </button>
+                <button class="btn btn-outline-warning">
+                  Post todo
+                </button>
+              </p>
+              <hr>
               <p class="card-text btn-group">
                 <button  class="btn btn-outline-primary" @click="$notify()">
                   <v-icon name="minus"/>
@@ -54,12 +79,6 @@
                 <input type="text" class="form-control">
                 <button  class="btn btn-outline-primary" @click="$notify()">
                   <v-icon name="plus"/>
-                </button>
-              </p>
-              <hr>
-              <p class="card-text">
-                <button class="btn btn-outline-secondary" @click="$router.push('/other')">
-                  To other page
                 </button>
               </p>
             </div>
@@ -96,6 +115,13 @@ export default {
         title: 'Important message',
         text: 'Hello user! This is a notification!'
       }
+    }
+  },
+  methods: {
+    getTodo () {
+      this.$todoApi.getTodo({ userId: 1 })
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
     }
   }
 }
