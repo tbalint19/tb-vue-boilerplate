@@ -100,11 +100,11 @@
               </p>
               <hr>
               <p class="card-text btn-group">
-                <button  class="btn btn-outline-primary" @click="$notify()">
+                <button  class="btn btn-outline-primary" @click="$store.commit('DECREMENT_MAIN_COUNTER')">
                   <v-icon name="minus"/>
                 </button>
-                <input type="text" class="form-control">
-                <button  class="btn btn-outline-primary" @click="$notify()">
+                <input class="form-control" type="text" disabled :placeholder="$store.state.counter.main">
+                <button  class="btn btn-outline-primary" @click="$store.commit('INCREMENT_MAIN_COUNTER')">
                   <v-icon name="plus"/>
                 </button>
               </p>
@@ -157,7 +157,5 @@ export default {
 </script>
 
 <style lang="css" scoped>
-.link-like {
 
-}
 </style>
