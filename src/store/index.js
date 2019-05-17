@@ -1,9 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 import modules from './modules'
 
 Vue.use(Vuex)
+
+Vue.mixin({
+  computed: mapState({
+    loggedIn: state => state.user.loggedIn
+  })
+})
 
 export default new Vuex.Store({
   modules,
