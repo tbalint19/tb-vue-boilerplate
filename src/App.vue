@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <navbar-component></navbar-component>
+    <navbar-top></navbar-top>
 
     <router-view></router-view>
 
     <notifications group="auth" position="bottom center" width="75%"/>
     <notifications group="error" position="top right" classes="vue-notification with-margin"/>
 
-    <footer-component></footer-component>
+    <navbar-bottom></navbar-bottom>
   </div>
 </template>
 

@@ -15,10 +15,10 @@ Vue.use(Notifications)
 Vue.use(VueI18n)
 
 // Components
-Vue.component('navbar-component', require('@/components/common/navbar-component').default)
-Vue.component('login-card-component', require('@/components/common/login-card-component').default)
-Vue.component('landing-message-component', require('@/components/common/landing-message-component').default)
-Vue.component('footer-component', require('@/components/common/footer-component').default)
+Vue.component('navbar-top', require('@/components/common/navbar-top').default)
+Vue.component('login-card', require('@/components/common//card/login-card').default)
+Vue.component('landing-message', require('@/components/common/text/landing-message').default)
+Vue.component('navbar-bottom', require('@/components/common/navbar-bottom').default)
 Vue.component('v-icon', Icon)
 
 // Language config
