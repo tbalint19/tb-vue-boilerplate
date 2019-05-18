@@ -1,32 +1,22 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+const { attemptAuthenticate, attemptAuthorize } = require("./guards.js").default
 
 Vue.use(Router)
 
-const loginUrl = "/login"
-
-const attemptAuthenticate = (to, from, next) => {
-  if (store.state.user.loggedIn) next()
-  else next(loginUrl)
-}
-
-const attemptAuthorize = (cred) => (to, from, next) => {
-  authenticate(to, from, next)
-  if (store.state.user.role == cred || store.state.user.permissions.includes(cred)) next()
-  else next(loginUrl)
-}
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'landing-page',
-      component: require('@/components/landing-page').default
+      path: '/login',
+      name: 'login-page',
+      component: require('@/components/login-page').default
     },
     {
-      path: '/other',
-      name: 'other-page',
-      component: require('@/components/other-page').default
+      path: '/',
+      name: 'home-page',
+      component: require('@/components/home-page').default,
+      beforeEnter: attemptAuthenticate
     },
     {
       path: '*',

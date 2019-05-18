@@ -128,7 +128,6 @@
 
 <script>
 export default {
-  name: "LandingPage",
   data() {
     return {
       langs: ['hu', 'en'],
