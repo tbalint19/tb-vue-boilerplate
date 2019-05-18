@@ -1,5 +1,21 @@
 {
-  "demo": {
-    "title": "Hello in english"
+  "navbar": {
+    "title": "Boilerplate app",
+    "logout": {
+      "button": "Logout"
+    }
+  },
+
+  "welcome": {
+    "title": "Hello in english",
+    "p1": "This is the welcome message.",
+    "p2": "If you want to proceed, login."
+  },
+
+  "login": {
+    "title": "Login",
+    "username": "Username",
+    "password": "Password",
+    "button": "Login"
   }
 }

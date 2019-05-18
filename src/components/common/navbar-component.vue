@@ -1,16 +1,15 @@
 <template>
-  <nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand">tb-vue-boilerplate</a>
+<b-navbar type="light" variant="light">
+  <b-navbar-brand to="/">{{ $t("navbar.title") }}</b-navbar-brand>
   <!-- <div class="form-inline">
     <input class="form-control mr-sm-2" type="search" placeholder="Random navbar input" aria-label="Search">
     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Useless navbar button</button>
   </div> -->
-</nav>
+</b-navbar>
 </template>
 
 <script>
 export default {
-    name: "NavbarComponent"
 }
 </script>
 

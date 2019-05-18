@@ -1,9 +1,9 @@
 <template lang="html">
-<b-card header="Login">
-  <b-form-input type="text" placeholder="username"/>
-  <b-form-input type="text" placeholder="password"/>
+<b-card :header="$t('login.title')">
+  <b-form-input type="text" :placeholder="$t('login.username')"/>
+  <b-form-input type="text" :placeholder="$t('login.password')"/>
   <hr>
-  <b-button variant="outline-success btn-block">Login</b-button>
+  <b-button variant="outline-success btn-block">{{ $t('login.button') }}</b-button>
 </b-card>
 </template>
 

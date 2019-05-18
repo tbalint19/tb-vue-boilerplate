@@ -18,6 +18,7 @@ Vue.use(VueI18n)
 Vue.component('navbar-component', require('@/components/common/navbar-component').default)
 Vue.component('login-card-component', require('@/components/common/login-card-component').default)
 Vue.component('landing-message-component', require('@/components/common/landing-message-component').default)
+Vue.component('footer-component', require('@/components/common/footer-component').default)
 Vue.component('v-icon', Icon)
 
 // Language config
@@ -25,7 +26,7 @@ const i18n = new VueI18n({
   locale: 'en',
   messages: {
     en: require('../static/dictionary/eng.json'),
-    hu: require('../static/dictionary/hu.json')
+    hu: require('../static/dictionary/hun.json')
   }
 })
 

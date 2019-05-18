@@ -6,6 +6,8 @@
 
     <notifications group="auth" position="bottom center" width="75%"/>
     <notifications group="error" position="top right" classes="vue-notification with-margin"/>
+
+    <footer-component></footer-component>
   </div>
 </template>
 

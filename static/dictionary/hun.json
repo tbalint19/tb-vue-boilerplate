@@ -1,0 +1,21 @@
+{
+  "navbar": {
+    "title": "Alap app",
+    "logout": {
+      "button": "Kijelentkezés"
+    }
+  },
+
+  "welcome": {
+    "title": "Hello magyarul",
+    "p1": "Ez egy üdvözlő üzenet.",
+    "p2": "Jelentkezz be a továbblépélshez."
+  },
+
+  "login": {
+    "title": "Bejelentkezés",
+    "username": "Felhasználónév",
+    "password": "Jelszó",
+    "button": "Bejelentkezés"
+  }
+}

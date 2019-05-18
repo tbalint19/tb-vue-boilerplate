@@ -1,8 +1,8 @@
 <template lang="html">
 <div class="landing-message">
-  <h4>Welcome to the site!</h4>
-  <p>This is the welcome message.</p>
-  <p>If you want to proceed, login.</p>
+  <h4>{{ $t("welcome.title") }}</h4>
+  <p>{{ $t("welcome.p1") }}</p>
+  <p>{{ $t("welcome.p2") }}</p>
   <hr>
 </div>
 </template>
