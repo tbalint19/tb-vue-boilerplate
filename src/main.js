@@ -16,6 +16,8 @@ Vue.use(VueI18n)
 
 // Components
 Vue.component('navbar-component', require('@/components/common/navbar-component').default)
+Vue.component('login-card-component', require('@/components/common/login-card-component').default)
+Vue.component('landing-message-component', require('@/components/common/landing-message-component').default)
 Vue.component('v-icon', Icon)
 
 // Language config
