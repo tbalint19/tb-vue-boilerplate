@@ -1,5 +1,5 @@
 <template>
-<b-navbar type="light" variant="light">
+<b-navbar type="light" variant="light" fixed="top">
   <b-navbar-brand to="/">{{ $t("navbar.title") }}</b-navbar-brand>
   <!-- <div class="form-inline">
     <input class="form-control mr-sm-2" type="search" placeholder="Random navbar input" aria-label="Search">

@@ -13,16 +13,16 @@
         </login-card-component>
       </b-col>
     </b-row>
+    <b-row v-for="number in numbers">{{number}}</b-row>
   </b-container>
 </div>
 </template>
 
 <script>
 export default {
-
+  data() {return {numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 3, 4, 5, 6, 7, 8, 9]}}
 }
 </script>
 
 <style lang="css" scoped>
-
 </style>

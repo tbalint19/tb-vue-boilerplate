@@ -20,7 +20,12 @@ export default {
 <style>
 /* Put here style that is applied to all components */
 .container {
-  margin-top: 25px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.navbar {
+  box-shadow: 0 0 15px 15px white;
 }
 
 .with-margin {
