@@ -1,4 +1,5 @@
 import router from '../router'
+import { reportLogout } from '../util/notify'
 
 export default {
   state: {
@@ -34,6 +35,7 @@ export default {
     LOGOUT(context) {
       context.commit('RESET_USER')
       router.push("/login")
+      reportLogout()
     }
   }
 }

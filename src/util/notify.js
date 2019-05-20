@@ -1,14 +1,22 @@
 import Vue from 'vue'
 import root from '../main'
 
-export const reportLoginClientError = (vue=root) => vue.$notify(
-  { title: vue.$t('login.client.error.title'), text: vue.$t('login.client.error.text'), type: 'error', group: 'auth' }
+const authNotification = ({title, text, type, to}) => root.$notify(
+  { title: root.$t(title), text: root.$t(text), type: type, group: 'auth' }
 )
 
-export const reportLoginServerError = (vue=root) => vue.$notify(
-  { title: vue.$t('login.server.error.title'), text: vue.$t('login.server.error.text'), type: 'error', group: 'auth' }
+export const reportLoginClientError = () => authNotification(
+  { title: 'notification.login.error.client.title', text: 'notification.login.error.client.text', type: 'error' }
 )
 
-export const reportLoginSuccess = (vue=root) => vue.$notify(
-  { title: vue.$t('login.success.title'), text: vue.$t('login.success.title'), type: 'success', group: 'auth' }
+export const reportLoginServerError = () => authNotification(
+  { title: 'notification.login.error.server.title', text: 'notification.login.error.server.text', type: 'error' }
+)
+
+export const reportLoginSuccess = () => authNotification(
+  { title: 'notification.login.success.title', text: 'notification.login.success.title', type: 'success' }
+)
+
+export const reportLogout = () => authNotification(
+  { title: 'notification.logout.title', text: 'notification.logout.text', type: 'warn' }
 )

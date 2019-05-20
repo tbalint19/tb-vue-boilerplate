@@ -1,7 +1,7 @@
 import API from '../api'
 import Vue from 'vue'
 import router from '../router'
-import { reportLoginSuccess } from '../util/notify'
+import { reportLoginSuccess, reportLoginClientError, reportLoginServerError } from '../util/notify'
 
 export default {
 
@@ -48,10 +48,10 @@ export default {
             reportLoginSuccess()
             router.push('/')
           } else {
-            reportLoginSuccess()
+            reportLoginClientError()
           }
         })
-        .catch(err => reportLoginSuccess())
+        .catch(err => reportLoginServerError())
         .finally(() => context.commit('TOGGLE_LOADING', false))
     }
   }

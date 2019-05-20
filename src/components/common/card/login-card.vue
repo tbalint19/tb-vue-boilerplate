@@ -29,10 +29,9 @@ import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapState({
-      username: state => state.login.username,
-      password: state => state.login.password
-    }),
+    ...mapState('login', [
+      'username', 'password'
+    ]),
     ...mapGetters('login', [
       'isLoading', 'isActive', 'usernameIsValid', 'passwordIsValid'
     ])

@@ -17,5 +17,28 @@
     "username": "Felhasználónév",
     "password": "Jelszó",
     "button": "Bejelentkezés"
+  },
+
+  "notification": {
+    "login": {
+      "error": {
+        "client": {
+          "title": "Sikertelen bejelentkezés!",
+          "text": "(Rossz felhasználónév vagy jelszó)"
+        },
+        "server": {
+          "title": "Sikertelen bejelentkezés!",
+          "text": "(Szerver hiba)"
+        }
+      },
+      "success": {
+        "title": "Sikeres bejelentkezés",
+        "text": "Üdvözölük az oldalon!"
+      }
+    },
+    "logout": {
+      "title": "Kijelentkezve",
+      "text": "Viszlát"
+    }
   }
 }

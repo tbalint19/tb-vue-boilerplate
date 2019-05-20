@@ -17,5 +17,28 @@
     "username": "Username",
     "password": "Password",
     "button": "Login"
+  },
+
+  "notification": {
+    "login": {
+      "error": {
+        "client": {
+          "title": "Unsuccessful attempt",
+          "text": "(Wrong username or password)"
+        },
+        "server": {
+          "title": "Unsuccessful attempt",
+          "text": "(Server error)"
+        }
+      },
+      "success": {
+        "title": "Successful login",
+        "text": "Welcome to the site!"
+      }
+    },
+    "logout": {
+      "title": "Logout complete",
+      "text": "Goodbye"
+    }
   }
 }
