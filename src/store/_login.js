@@ -39,10 +39,11 @@ export default {
     REQUEST_LOGIN (context) {
       context.commit('TOGGLE_LOADING', true)
       this.$api.todo.addTodo({ title: "a", text: "a" })
-        .then(response => {
+        .then((response) => {
           if (response.status == 201) {
             context.commit('RESET_LOGIN_CREDENTIALS')
-            context.commit('user/SET_USER', {}, { root: true })
+            console.log(response)
+            context.commit('user/SET_USER', response.data, { root: true })
             reportLoginSuccess(this.$app)
             this.$app.$router.push('/')
           } else {

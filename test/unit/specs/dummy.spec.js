@@ -1,6 +1,7 @@
 var sinon = require('sinon');
 
 import { testStore } from '../util/testStoreFactory'
+import { unitTestMockTodo, applyMocks } from '../../../src/api/mock/todo-mock'
 
 describe('Store tests', () => {
 
@@ -9,17 +10,13 @@ describe('Store tests', () => {
   beforeEach(() => {
     store = testStore()
 
-    store.$app.$router.push.callsFake((...args) => {
-      console.info("FAKE ROUTING!!!", args)
-    })
+    store.$app.$router.push.callsFake((...args) => console.info("FAKE ROUTING!!!", args))
 
-    store.$app.$t.callsFake((...args) => {
-      console.info("FAKE LOCALIZATION!!!", args)
-    })
+    store.$app.$t.callsFake((...args) => console.info("FAKE LOCALIZATION!!!", args))
 
-    store.$app.$notify.callsFake((...args) => {
-      console.info("FAKE NOTIFICATION!!!", args)
-    })
+    store.$app.$notify.callsFake((...args) => console.info("FAKE NOTIFICATION!!!", args))
+
+    applyMocks(unitTestMockTodo(store))
   })
 
   it('Should update username', () => {
@@ -73,5 +70,19 @@ describe('Store tests', () => {
     sinon.assert.calledOnce(store.$app.$router.push);
     sinon.assert.calledOnce(store.$app.$notify);
     sinon.assert.callCount(store.$app.$t, 2);
+  })
+
+  it('Should mock login', () => {
+    // given
+    /* Default store is not touched */
+
+    // when
+    store.dispatch("login/REQUEST_LOGIN")
+
+    // then
+    .then(() => {
+      expect(store.state.user.loggedIn).to.equal(true)
+      expect(store.state.user.username).to.equal("belaFromMock")
+    })
   })
 })

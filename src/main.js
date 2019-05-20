@@ -47,3 +47,6 @@ const app = new Vue({
 
 store.$app = app
 store.$api = api
+
+// import { uiMockTodo, applyMocks } from './api/mock/todo-mock'
+// applyMocks(uiMockTodo(store))

@@ -1,4 +1,5 @@
 import Vuex from 'vuex';
+import api from '../../../src/api'
 
 const initialLoginState = (require('../../../src/store/_login').default).state
 const initialUserState = (require('../../../src/store/_user').default).state
@@ -17,6 +18,8 @@ export const testStore = () => {
   testStore.state.login = Object.assign({}, initialLoginState)
   testStore.state.user = Object.assign({}, initialUserState)
   testStore.state.search = Object.assign({}, initialSearchState)
+
+  testStore.$api = api
 
   stubApp(testStore)
 
