@@ -24,6 +24,15 @@ export default {
   margin-bottom: 100px;
 }
 
+.fa-icon {
+  width: auto;
+  height: 0.8em;
+  margin-left: 5px;
+  margin-right: 5px;
+  max-width: 100%;
+  max-height: 100%;
+}
+
 .navbar {
   box-shadow: 0 0 15px 15px white;
 }

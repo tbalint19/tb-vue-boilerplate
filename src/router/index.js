@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-const { attemptAuthenticate, attemptAuthorize } = require("./guards.js").default
+const { attemptAuthenticate, attemptAuthorize } = require("./_guards.js").default
 
 Vue.use(Router)
-
 
 export default new Router({
   routes: [

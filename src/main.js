@@ -30,16 +30,13 @@ const i18n = new VueI18n({
   }
 })
 
-// Api config
-Vue.prototype.$todoApi = require("./api/todo.js").default
-
 // Dev config
 Vue.config.productionTip = false
 Vue.config.devtools = process.env.NODE_ENV === 'development'
 
 // Init
 import App from './App'
-new Vue({
+export default new Vue({
   components: { App },
   router,
   store,
