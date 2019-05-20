@@ -1,6 +1,6 @@
 import API from '../api'
 import Vue from 'vue'
-import router from '../router'
+import root from '../main'
 import { reportLoginSuccess, reportLoginClientError, reportLoginServerError } from '../util/notify'
 
 export default {
@@ -46,7 +46,7 @@ export default {
             context.commit('RESET_LOGIN_CREDENTIALS')
             context.commit('user/SET_USER', {}, { root: true })
             reportLoginSuccess()
-            router.push('/')
+            root.$router.push('/')
           } else {
             reportLoginClientError()
           }
