@@ -71,7 +71,7 @@ describe('Store tests', () => {
     expect(store.state.user.loggedIn).to.equal(false)
 
     sinon.assert.calledOnce(store.$app.$router.push);
-    //sinon.assert.calledOnce(i18nStub);
     sinon.assert.calledOnce(store.$app.$notify);
+    sinon.assert.callCount(store.$app.$t, 2);
   })
 })
