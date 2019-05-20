@@ -6,6 +6,9 @@ describe('Store tests', () => {
 
   let store
   let consoleLogStub
+  let routerStub
+  let i18nStub
+  let notifyStub
 
   beforeEach(() => {
     store = testStore()
@@ -14,10 +17,28 @@ describe('Store tests', () => {
     console.log.callsFake((...args) => {
       console.info("STUBBED!!!", args)
     });
+
+    routerStub = sinon.stub(store.$app.$router, 'push')
+    routerStub.callsFake((...args) => {
+      console.info("FAKE ROUTING!!!", args)
+    })
+
+    i18nStub = sinon.stub(store.$app, '$t')
+    i18nStub.callsFake((...args) => {
+      console.info("FAKE LOCALIZATION!!!", args)
+    })
+
+    notifyStub = sinon.stub(store.$app, '$notify')
+    notifyStub.callsFake((...args) => {
+      console.info("FAKE NOTIFICATION!!!", args)
+    })
   })
 
   afterEach(() => {
     consoleLogStub.restore()
+    notifyStub.restore()
+    routerStub.restore()
+    i18nStub.restore()
   })
 
   it('Should update username', () => {
@@ -59,5 +80,20 @@ describe('Store tests', () => {
     expect(store.state.login.username).to.equal("")
     expect(store.getters["login/passwordIsValid"]).to.equal(true)
     expect(store.getters["login/usernameIsValid"]).to.equal(false)
+  })
+
+  it('Should logout', () => {
+    // given
+    /* Default store is not touched */
+
+    // when
+    store.dispatch("user/LOGOUT")
+
+    // then
+    expect(store.state.user.loggedIn).to.equal(false)
+
+    sinon.assert.calledOnce(routerStub);
+    //sinon.assert.calledOnce(i18nStub);
+    sinon.assert.calledOnce(notifyStub);
   })
 })

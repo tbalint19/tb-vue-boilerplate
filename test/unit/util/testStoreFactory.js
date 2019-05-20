@@ -11,5 +11,7 @@ export const testStore = () => {
   testStore.state.user = Object.assign({}, initialUserState)
   testStore.state.search = Object.assign({}, initialSearchState)
 
+  testStore.$app = { $router: { push: function() {} }, $t: function() {}, $notify: function() {} }
+
   return testStore
 }
