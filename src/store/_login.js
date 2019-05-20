@@ -1,6 +1,5 @@
 import API from '../api'
 import Vue from 'vue'
-import root from '../main'
 import { reportLoginSuccess, reportLoginClientError, reportLoginServerError } from '../util/notify'
 
 export default {
@@ -45,13 +44,13 @@ export default {
           if (response.status == 201) {
             context.commit('RESET_LOGIN_CREDENTIALS')
             context.commit('user/SET_USER', {}, { root: true })
-            reportLoginSuccess()
-            root.$router.push('/')
+            reportLoginSuccess(this.$app)
+            this.$app.$router.push('/')
           } else {
-            reportLoginClientError()
+            reportLoginClientError(this.$app)
           }
         })
-        .catch(err => reportLoginServerError())
+        .catch(err => reportLoginServerError(this.$app))
         .finally(() => context.commit('TOGGLE_LOADING', false))
     }
   }

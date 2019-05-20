@@ -36,10 +36,12 @@ Vue.config.devtools = process.env.NODE_ENV === 'development'
 
 // Init
 import App from './App'
-export default new Vue({
+const app = new Vue({
   components: { App },
   router,
   store,
   i18n,
   template: '<App/>'
 }).$mount('#app-container')
+
+store.$app = app
