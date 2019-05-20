@@ -1,9 +1,9 @@
 import TodoApi from './_todo.js'
 
-const API = (() => {
+const api = (() => {
   return {
     todo: new TodoApi()
   }
 })()
 
-export default API
+export default api

@@ -8,6 +8,7 @@ import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
 import router from './router'
 import store from './store'
+import api from './api'
 
 // Plugins
 Vue.use(BootstrapVue)
@@ -45,3 +46,4 @@ const app = new Vue({
 }).$mount('#app-container')
 
 store.$app = app
+store.$api = api

@@ -1,4 +1,3 @@
-import API from '../api'
 import Vue from 'vue'
 import { reportLoginSuccess, reportLoginClientError, reportLoginServerError } from '../util/notify'
 
@@ -39,7 +38,7 @@ export default {
   actions: {
     REQUEST_LOGIN (context) {
       context.commit('TOGGLE_LOADING', true)
-      API.todo.addTodo({ title: "a", text: "a" })
+      this.$api.todo.addTodo({ title: "a", text: "a" })
         .then(response => {
           if (response.status == 201) {
             context.commit('RESET_LOGIN_CREDENTIALS')
