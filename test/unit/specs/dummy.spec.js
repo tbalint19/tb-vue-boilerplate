@@ -6,15 +6,14 @@ import { unitTestMockTodo, applyMocks } from '../../../src/api/mock/todo-mock'
 describe('Store tests', () => {
 
   let store
+  let voidClosure = (...args) => { }
 
   beforeEach(() => {
     store = testStore()
 
-    store.$app.$router.push.callsFake((...args) => console.info("FAKE ROUTING!!!", args))
-
-    store.$app.$t.callsFake((...args) => console.info("FAKE LOCALIZATION!!!", args))
-
-    store.$app.$notify.callsFake((...args) => console.info("FAKE NOTIFICATION!!!", args))
+    store.$app.$router.push.callsFake(voidClosure)
+    store.$app.$t.callsFake(voidClosure)
+    store.$app.$notify.callsFake(voidClosure)
 
     applyMocks(unitTestMockTodo(store))
   })
