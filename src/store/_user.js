@@ -1,3 +1,5 @@
+import router from '../router'
+
 export default {
   state: {
     username: null,
@@ -29,6 +31,9 @@ export default {
   },
 
   actions: {
-    
+    LOGOUT(context) {
+      context.commit('RESET_USER')
+      router.push("/login")
+    }
   }
 }
