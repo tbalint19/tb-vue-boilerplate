@@ -1,37 +1,63 @@
-import login from '../../../src/store/_login'
 var sinon = require('sinon');
-import Vuex from 'vuex';
 
-describe('Test should run', () => {
+import { testStore } from '../util/testStoreFactory'
 
-  let state
-  let mutations
+describe('Store tests', () => {
+
   let store
+  let consoleLogStub
 
   beforeEach(() => {
-    mutations = login.mutations
-    state = {
-      username: ""
-    }
-    store = new Vuex.Store({state, mutations})
+    store = testStore()
 
-    sinon.stub(console, 'log')
+    consoleLogStub = sinon.stub(console, 'log')
     console.log.callsFake((...args) => {
       console.info("STUBBED!!!", args)
     });
   })
 
-  it('Dummy test works', () => {
+  afterEach(() => {
+    consoleLogStub.restore()
+  })
+
+  it('Should update username', () => {
     // given
-    /* nothing happens */
+    /* Default store is not touched */
 
     // when
-    store.commit("UPDATE_LOGIN_USERNAME", "bela")
+    store.commit("login/UPDATE_LOGIN_USERNAME", "bela")
+
+    // then
+    expect(store.state.login.username).to.equal("bela")
+    expect(store.getters["login/usernameIsValid"]).to.equal(false)
+  })
+
+  it('Should update username and getter for validation', () => {
+    // given
+    /* Default store is not touched */
+
+    // when
+    store.commit("login/UPDATE_LOGIN_USERNAME", "ottokar")
 
     // then
     sinon.assert.calledOnce(console.log);
-    sinon.assert.calledWith(console.log, "called", "bela");
+    sinon.assert.calledWith(console.log, "called", "ottokar");
 
-    expect(state.username).to.equal("bela")
+    expect(store.state.login.username).to.equal("ottokar")
+    expect(store.getters["login/usernameIsValid"]).to.equal(true)
+  })
+
+  it('Should update password', () => {
+    // given
+    /* Default store is not touched */
+
+    // when
+    store.commit("login/UPDATE_LOGIN_PASSWORD", "ottokarpw")
+
+    // then
+    expect(store.state.login.password).to.equal("ottokarpw")
+    expect(store.state.login.username).to.equal("")
+    expect(store.getters["login/passwordIsValid"]).to.equal(true)
+    expect(store.getters["login/usernameIsValid"]).to.equal(false)
   })
 })
