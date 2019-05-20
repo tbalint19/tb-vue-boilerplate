@@ -12,6 +12,7 @@ export default {
 
   mutations: {
     UPDATE_LOGIN_USERNAME (state, username) {
+      console.log("called", username)
       state.username = username
     },
 
