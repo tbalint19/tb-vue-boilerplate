@@ -41,7 +41,6 @@ export default {
         .then((response) => {
           if (response.status == 201) {
             context.commit('RESET_LOGIN_CREDENTIALS')
-            console.log(response)
             context.commit('user/SET_USER', response.data, { root: true })
             reportLoginSuccess(this.$app)
             this.$app.$router.push('/')
