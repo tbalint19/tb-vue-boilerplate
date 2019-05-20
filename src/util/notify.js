@@ -1,5 +1,3 @@
-import Vue from 'vue'
-
 const authNotification = (app, {title, text, type, to}) => app.$notify(
   { title: app.$t(title), text: app.$t(text), type: type, group: 'auth' }
 )

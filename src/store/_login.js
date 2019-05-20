@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import { reportLoginSuccess, reportLoginClientError, reportLoginServerError } from '../util/notify'
 
 export default {
