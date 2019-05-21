@@ -13,7 +13,19 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  created() {
+    /*
+      TODO
+        init store if necessary
+         - initialy api calls
+         - localstorage for "login"
+         this.$store.dispatch("INIT")
+         or nicer:
+         mapstate + this.init()
+       ...
+    */
+  }
 }
 </script>
 

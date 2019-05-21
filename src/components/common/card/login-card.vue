@@ -7,7 +7,7 @@
     @input="updateUsername"
     :disabled="isLoading"/>
   <b-form-input
-    type="text"
+    type="password"
     :placeholder="$t('login.password')"
     :value="password"
     @input="updatePassword"
