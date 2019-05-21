@@ -1,11 +1,12 @@
 var sinon = require('sinon');
 
 import { testStore } from '../util/testStoreFactory'
-import { unitTestMockTodo, applyMocks } from '../../../src/api/mock/todo-mock'
+import { unitTestMockTodo } from '../../../src/api/mock/todo-mock'
 
 describe('Store tests', () => {
 
   let store
+  let mockApi
   let voidClosure = (...args) => { }
 
   beforeEach(() => {
@@ -15,7 +16,7 @@ describe('Store tests', () => {
     store.$app.$t.callsFake(voidClosure)
     store.$app.$notify.callsFake(voidClosure)
 
-    applyMocks(unitTestMockTodo(store))
+    mockApi = unitTestMockTodo(store)
   })
 
   it('Should update username', () => {
@@ -51,9 +52,22 @@ describe('Store tests', () => {
 
     // then
     expect(store.state.login.password).to.equal("ottokarpw")
-    expect(store.state.login.username).to.equal("")
     expect(store.getters["login/passwordIsValid"]).to.equal(true)
-    expect(store.getters["login/usernameIsValid"]).to.equal(false)
+  })
+
+  it('Should login', () => {
+    // given
+    mockApi.onPost('/posts')
+      .reply(201, { username: "belaFromMock" })
+
+    // when
+    store.dispatch("login/REQUEST_LOGIN")
+
+    // then
+    .then(() => {
+      expect(store.state.user.loggedIn).to.equal(true)
+      expect(store.state.user.username).to.equal("belaFromMock")
+    })
   })
 
   it('Should logout', () => {
@@ -69,19 +83,5 @@ describe('Store tests', () => {
     sinon.assert.calledOnce(store.$app.$router.push);
     sinon.assert.calledOnce(store.$app.$notify);
     sinon.assert.callCount(store.$app.$t, 2);
-  })
-
-  it('Should mock login', () => {
-    // given
-    /* Default store is not touched */
-
-    // when
-    store.dispatch("login/REQUEST_LOGIN")
-
-    // then
-    .then(() => {
-      expect(store.state.user.loggedIn).to.equal(true)
-      expect(store.state.user.username).to.equal("belaFromMock")
-    })
   })
 })
