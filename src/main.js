@@ -20,6 +20,9 @@ Vue.component('navbar-top', require('@/components/common/navbar-top').default)
 Vue.component('login-card', require('@/components/common//card/login-card').default)
 Vue.component('landing-message', require('@/components/common/text/landing-message').default)
 Vue.component('navbar-bottom', require('@/components/common/navbar-bottom').default)
+
+Vue.component('grow-appear', require('@/components/transition/grow-appear').default)
+
 Vue.component('v-icon', Icon)
 
 // Language config
