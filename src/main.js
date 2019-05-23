@@ -22,6 +22,7 @@ Vue.component('landing-message', require('@/components/common/text/landing-messa
 Vue.component('navbar-bottom', require('@/components/common/navbar-bottom').default)
 
 Vue.component('grow-appear', require('@/components/transition/grow-appear').default)
+Vue.component('fade-appear-swap', require('@/components/transition/fade-appear-swap').default)
 
 Vue.component('v-icon', Icon)
 

@@ -13,14 +13,12 @@
         </login-card>
       </b-col>
     </b-row>
-    <button @click="shown = !shown">toggle</button>
   </b-container>
 </div>
 </template>
 
 <script>
 export default {
-  data() {return {shown: false}}
 }
 </script>
 

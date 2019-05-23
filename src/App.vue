@@ -2,7 +2,9 @@
   <div id="app">
     <navbar-top></navbar-top>
 
-    <router-view></router-view>
+    <fade-appear-swap>
+      <router-view></router-view>
+    </fade-appear-swap>
 
     <notifications group="auth" position="bottom center" width="75%"/>
     <notifications group="error" position="top right" classes="vue-notification with-margin"/>
