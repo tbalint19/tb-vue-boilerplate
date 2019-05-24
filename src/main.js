@@ -9,21 +9,25 @@ import Icon from 'vue-awesome/components/Icon'
 import router from './router'
 import store from './store'
 import api from './api'
+var VueTouch = require('vue-touch')
 
 // Plugins
 Vue.use(BootstrapVue)
 Vue.use(Notifications)
 Vue.use(VueI18n)
+Vue.use(VueTouch, {name: 'v-touch'})
 
 // Components
 Vue.component('navbar-top', require('@/components/common/navbar-top').default)
 Vue.component('login-card', require('@/components/common//card/login-card').default)
-Vue.component('landing-message', require('@/components/common/text/landing-message').default)
+Vue.component('landing-message-card', require('@/components/common/card/landing-message-card').default)
 Vue.component('navbar-bottom', require('@/components/common/navbar-bottom').default)
 
 Vue.component('grow-appear', require('@/components/transition/grow-appear').default)
 Vue.component('grow-appear-elements', require('@/components/transition/grow-appear-elements').default)
 Vue.component('fade-appear-swap', require('@/components/transition/fade-appear-swap').default)
+
+Vue.component('swipeable', require('@/components/util/swipeable').default)
 
 Vue.component('v-icon', Icon)
 
