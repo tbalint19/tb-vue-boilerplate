@@ -1,9 +1,3 @@
-import TodoApi from './_todo.js'
+import domains from './domains'
 
-const api = (() => {
-  return {
-    todo: new TodoApi()
-  }
-})()
-
-export default api
+export default domains

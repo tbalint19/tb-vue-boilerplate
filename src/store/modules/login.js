@@ -3,23 +3,25 @@ import { reportLoginSuccess, reportLoginClientError, reportLoginServerError } fr
 const namespaced = true
 
 const state = {
-  username: "",
-  password: "",
+  user: {
+    username: "",
+    password: ""
+  },
   isLoading: false
 }
 
 const mutations = {
   UPDATE_LOGIN_USERNAME (state, username) {
-    state.username = username
+    state.user.username = username
   },
 
   UPDATE_LOGIN_PASSWORD (state, password) {
-    state.password = password
+    state.user.password = password
   },
 
   RESET_LOGIN_CREDENTIALS (state) {
-    state.username = ""
-    state.password = ""
+    state.user.username = ""
+    state.user.password = ""
   },
 
   TOGGLE_LOADING (state, to) {
@@ -28,12 +30,12 @@ const mutations = {
 }
 
 const getters = {
-  username: state => state.username,
-  password: state => state.password,
+  username: state => state.user.username,
+  password: state => state.user.password,
   isLoading: state => state.isLoading,
   isActive: (state, getters) => !state.isLoading && getters.usernameIsValid && getters.passwordIsValid,
-  usernameIsValid: state => state.username.length > 5,
-  passwordIsValid: state => state.password.length > 5
+  usernameIsValid: state => state.user.username.length > 5,
+  passwordIsValid: state => state.user.password.length > 5
 }
 
 const actions = {
@@ -45,9 +47,9 @@ const actions = {
     context.commit('UPDATE_LOGIN_PASSWORD', value)
   },
 
-  login (context, todo={ title: "a", text: "a" }) {
+  login (context) {
     context.commit('TOGGLE_LOADING', true)
-    this.$api.todo.addTodo(todo)
+    this.$api.domain.login(context.state.user)
       .then(response =>
         handleLogin(this.$app, context, response))
       .catch(err =>

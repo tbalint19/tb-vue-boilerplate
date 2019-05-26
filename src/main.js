@@ -8,7 +8,7 @@ import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
 import router from './router'
 import store from './store'
-import api from './api'
+import domains from './api'
 
 // Plugins
 Vue.use(BootstrapVue)
@@ -51,7 +51,7 @@ const app = new Vue({
 }).$mount('#app-container')
 
 store.$app = app
-store.$api = api
+store.$api = domains
 
 // import { uiMockTodo, applyMocks } from './api/mock/todo-mock'
 // applyMocks(uiMockTodo(store))
