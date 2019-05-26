@@ -4,7 +4,7 @@ const state = {
   filterParam: ""
 }
 
-const methods = {
+const mutations = {
   SET_FILTER_PARAM (state, value) {
     state.filterParam = value
   }
