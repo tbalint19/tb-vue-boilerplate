@@ -25,25 +25,18 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapState('login', [
-      'username', 'password'
-    ]),
     ...mapGetters('login', [
-      'isLoading', 'isActive', 'usernameIsValid', 'passwordIsValid'
+      'username', 'password', 'isLoading', 'isActive', 'usernameIsValid', 'passwordIsValid'
     ])
   },
   methods: {
-    ...mapMutations('login', {
-      updateUsername: 'UPDATE_LOGIN_USERNAME',
-      updatePassword: 'UPDATE_LOGIN_PASSWORD'
-    }),
-    ...mapActions('login', {
-      login: 'REQUEST_LOGIN'
-    })
+    ...mapActions('login',[
+      'login', 'updateUsername', 'updatePassword'
+    ])
   }
 }
 </script>

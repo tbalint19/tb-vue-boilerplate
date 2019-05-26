@@ -13,18 +13,18 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapState('user', [
+    ...mapGetters('user', [
       "loggedIn"
     ])
   },
   methods: {
-    ...mapActions('user', {
-      logout: "LOGOUT"
-    })
+    ...mapActions('user', [
+      'logout'
+    ])
   }
 }
 </script>

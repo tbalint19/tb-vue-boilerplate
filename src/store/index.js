@@ -1,14 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import modules from './modules'
+
 Vue.use(Vuex)
 
-const store = new Vuex.Store({
-  modules: {
-    search: { namespaced: true, ...require('./_search.js').default },
-    user: { namespaced: true, ...require('./_user.js').default },
-    login: { namespaced: true, ...require('./_login.js').default }
-  }
+export default new Vuex.Store({
+  modules,
+  strict: process.env.NODE_ENV !== 'production'
 })
-
-export default store
