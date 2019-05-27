@@ -1,87 +1,72 @@
-var sinon = require('sinon');
-
 import { testStore } from '../util/testStoreFactory'
-import { unitTestMockTodo } from '../../../src/api/mock/todo-mock'
+import { to, by, expectRedirect, expectNotification } from '../util/sinonAssertions'
 
 describe('Store tests', () => {
 
   let store
-  let mockApi
-  let voidClosure = (...args) => { }
-
   beforeEach(() => {
     store = testStore()
-
-    store.$app.$router.push.callsFake(voidClosure)
-    store.$app.$t.callsFake(voidClosure)
-    store.$app.$notify.callsFake(voidClosure)
-
-    mockApi = unitTestMockTodo(store)
   })
 
   it('Should update username', () => {
     // given
-    /* Default store is not touched */
 
     // when
-    store.commit("login/UPDATE_LOGIN_USERNAME", "bela")
+    store.dispatch("login/updateUsername", "bela")
 
     // then
-    expect(store.state.login.username).to.equal("bela")
+    expect(store.getters["login/username"]).to.equal("bela")
     expect(store.getters["login/usernameIsValid"]).to.equal(false)
   })
 
   it('Should update username and getter for validation', () => {
     // given
-    /* Default store is not touched */
 
     // when
-    store.commit("login/UPDATE_LOGIN_USERNAME", "ottokar")
+    store.dispatch("login/updateUsername", "ottokar")
 
     // then
-    expect(store.state.login.username).to.equal("ottokar")
+    expect(store.getters["login/username"]).to.equal("ottokar")
     expect(store.getters["login/usernameIsValid"]).to.equal(true)
   })
 
   it('Should update password', () => {
     // given
-    /* Default store is not touched */
 
     // when
-    store.commit("login/UPDATE_LOGIN_PASSWORD", "ottokarpw")
+    store.dispatch("login/updatePassword", "ottokarpw")
 
     // then
-    expect(store.state.login.password).to.equal("ottokarpw")
+    expect(store.getters["login/password"]).to.equal("ottokarpw")
     expect(store.getters["login/passwordIsValid"]).to.equal(true)
   })
 
-  it('Should login', () => {
+  it('Should login', async () => {
     // given
-    mockApi.onPost('/posts')
+    store.adapters.domain.onPost('/posts')
       .reply(201, { username: "belaFromMock" })
 
-    // when
-    store.dispatch("login/REQUEST_LOGIN")
+    // then
+    await store.dispatch("login/login")
 
     // then
-    .then(() => {
-      expect(store.state.user.loggedIn).to.equal(true)
-      expect(store.state.user.username).to.equal("belaFromMock")
-    })
+    expect(store.getters["user/loggedIn"]).to.equal(true)
+    expect(store.getters["user/username"]).to.equal("belaFromMock")
+
+    expectRedirect(by(store), to("/"))
+    expectNotification(by(store))
   })
 
   it('Should logout', () => {
     // given
-    /* Default store is not touched */
 
     // when
-    store.dispatch("user/LOGOUT")
+    store.dispatch("user/logout")
 
     // then
-    expect(store.state.user.loggedIn).to.equal(false)
+    expect(store.getters["user/loggedIn"]).to.equal(false)
 
-    sinon.assert.calledOnce(store.$app.$router.push);
-    sinon.assert.calledOnce(store.$app.$notify);
-    sinon.assert.callCount(store.$app.$t, 2);
+    expectRedirect(by(store), to("/login"))
+    expectNotification(by(store))
   })
 })

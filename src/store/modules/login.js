@@ -47,15 +47,17 @@ const actions = {
     context.commit('UPDATE_LOGIN_PASSWORD', value)
   },
 
-  login (context) {
+  async login (context) {
     context.commit('TOGGLE_LOADING', true)
-    this.$api.domain.login(context.state.user)
-      .then(response =>
-        handleLogin(this.$app, context, response))
-      .catch(err =>
-        reportLoginServerError(this.$app))
-      .finally(() =>
-        context.commit('TOGGLE_LOADING', false))
+    try {
+      let response = await
+        this.$api.domain.login(context.state.user)
+      handleLogin(this.$app, context, response)
+    } catch (connectionError) {
+      reportLoginServerError(this.$app)
+    } finally {
+      context.commit('TOGGLE_LOADING', false)
+    }
   }
 }
 
@@ -69,9 +71,9 @@ export default {
 
 const handleLogin = (app, context, response) => {
   if (response.status == 201)
-  handleLoginSuccess(app, context, response)
+    handleLoginSuccess(app, context, response)
   else
-  reportLoginClientError(app)
+    reportLoginClientError(app)
 }
 
 const handleLoginSuccess = (app, context, response) => {

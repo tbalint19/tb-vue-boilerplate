@@ -1,27 +1,47 @@
 import Vuex from 'vuex';
-import api from '../../../src/api'
+var MockAdapter = require('axios-mock-adapter')
+import domains from '../../../src/api'
+var sinon = require('sinon');
 
-const initialLoginState = (require('../../../src/store/_login').default).state
-const initialUserState = (require('../../../src/store/_user').default).state
-const initialSearchState = (require('../../../src/store/_search').default).state
+const initialState = Object.assign({}, (require('../../../src/store').default).state)
+
+const voidClosure = (...args) => {}
 
 const stubApp = store => {
-  store.$app = { $router: { push: function() {} }, $t: function() {}, $notify: function() {} }
+  store.$app = {
+    $router: {
+      push: function() {}
+    },
+    $t: function() {},
+    $notify: function() {}
+  }
+
   sinon.stub(store.$app.$router, 'push')
+  store.$app.$router.push.callsFake(voidClosure)
+
   sinon.stub(store.$app, '$t')
+  store.$app.$t.callsFake(voidClosure)
+
   sinon.stub(store.$app, '$notify')
+  store.$app.$notify.callsFake(voidClosure)
+}
+
+const addAdapters = (store) => {
+  store.adapters = {}
+  const domains = Object.keys(store.$api)
+  domains.forEach(domain => {
+    store.adapters[domain] =  new MockAdapter(store.$api[domain].http, { delayResponse: 0 })
+  })
 }
 
 export const testStore = () => {
   const testStore = require('../../../src/store/').default
-
-  testStore.state.login = Object.assign({}, initialLoginState)
-  testStore.state.user = Object.assign({}, initialUserState)
-  testStore.state.search = Object.assign({}, initialSearchState)
-
-  testStore.$api = api
+  testStore.replaceState(Object.assign({}, initialState))
 
   stubApp(testStore)
+
+  testStore.$api = domains
+  addAdapters(testStore)
 
   return testStore
 }
