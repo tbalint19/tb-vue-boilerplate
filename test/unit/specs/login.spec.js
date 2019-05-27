@@ -46,7 +46,7 @@ describe('Store tests', () => {
     store.adapters.domain.onPost('/posts')
       .reply(201, { username: "belaFromMock" })
 
-    // then
+    // when
     await store.dispatch("login/login")
 
     // then
