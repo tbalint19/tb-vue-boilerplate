@@ -1,24 +1,17 @@
 var MockAdapter = require('axios-mock-adapter')
 
-const mockLogin = (adapter) => {
-  adapter.onPost('/posts').reply(201, { username: "belaFromMock" })
+export const applyDomainAdapter = (axios) => {
+  const adapter = new MockAdapter(axios, { delayResponse: 2500 })
+
+  mockLogin( on(adapter), use(true) )
 }
 
-const applyTo = (adapter) => {
-  mockLogin(adapter)
-  // ...
+const mockLogin = (adapter, use) => {
+  let call = adapter.onPost('/posts')
+  if (!use) { call.passThrough() } else {
+    call.reply(201, { username: "lajosFromMock" })
+  }
 }
 
-export const applyForUI = (domains) => {
-  const domain = domains["domain"]
-  const adapter = new MockAdapter(domain, { delayResponse: 3500 })
-
-  applyTo(adapter)
-}
-
-export const applyForUnit = (domains) => {
-  const domain = domains["domain"]
-  const adapter = new MockAdapter(domain, { delayResponse: 0 })
-
-  applyTo(adapter)
-}
+const on = adapter => adapter
+const use = bool => bool

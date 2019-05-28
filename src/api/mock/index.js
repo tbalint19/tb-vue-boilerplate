@@ -1,15 +1,8 @@
-const files = require.context('.', false, /\.js$/)
-const mocks = []
+import domains from '../domains'
+import { applyDomainAdapter } from './domain-mock'
 
-files.keys().forEach(key => {
-  if (key === './index.js') return
-  mocks.push(files(key).default)
-})
+export default (() => {
 
-export const applyUIMocks = (domains) => {
-  mocks.forEach(mock => mock.applyForUI(domains))
-}
+  applyDomainAdapter(domains["domain"].http)
 
-export const applyUnitMocks = (domains) => {
-  mocks.forEach(mock => mock.applyForUnit(domains))
-}
+})()

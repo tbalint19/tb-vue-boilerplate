@@ -1,6 +1,5 @@
 import domains from './domains'
 
-// import { applyMocks } from './mock'
-// applyMocks(domains)
+require('./mock')
 
 export default domains
