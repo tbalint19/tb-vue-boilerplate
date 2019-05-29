@@ -17,13 +17,14 @@ Vue.use(VueI18n)
 
 // Components
 Vue.component('navbar-top', require('@/components/common/navbar-top').default)
-Vue.component('login-card', require('@/components/common//card/login-card').default)
-Vue.component('landing-message', require('@/components/common/text/landing-message').default)
 Vue.component('navbar-bottom', require('@/components/common/navbar-bottom').default)
 
 Vue.component('grow-appear', require('@/components/transition/grow-appear').default)
 Vue.component('grow-appear-elements', require('@/components/transition/grow-appear-elements').default)
 Vue.component('fade-appear-swap', require('@/components/transition/fade-appear-swap').default)
+
+Vue.component('login-card', require('@/components/common//card/login-card').default)
+Vue.component('landing-message', require('@/components/common/text/landing-message').default)
 
 Vue.component('v-icon', Icon)
 
@@ -52,6 +53,3 @@ const app = new Vue({
 
 store.$app = app
 store.$api = domains
-
-// import { uiMockTodo, applyMocks } from './api/mock/todo-mock'
-// applyMocks(uiMockTodo(store))

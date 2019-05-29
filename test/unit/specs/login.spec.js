@@ -1,15 +1,13 @@
 import { testStore } from '../util/testStoreFactory'
-import { to, by, expectRedirect, expectNotification } from '../util/sinonAssertions'
+import {
+  to, by, expectRedirect, expectNotification, expectNoRedirection
+} from '../util/sinonAssertions'
 
 describe('Store tests', () => {
 
-  let store
-  beforeEach(() => {
-    store = testStore()
-  })
-
   it('Should update username', () => {
     // given
+    let store = testStore()
 
     // when
     store.dispatch("login/updateUsername", "bela")
@@ -21,6 +19,7 @@ describe('Store tests', () => {
 
   it('Should update username and getter for validation', () => {
     // given
+    let store = testStore()
 
     // when
     store.dispatch("login/updateUsername", "ottokar")
@@ -32,6 +31,7 @@ describe('Store tests', () => {
 
   it('Should update password', () => {
     // given
+    let store = testStore()
 
     // when
     store.dispatch("login/updatePassword", "ottokarpw")
@@ -41,8 +41,22 @@ describe('Store tests', () => {
     expect(store.getters["login/passwordIsValid"]).to.equal(true)
   })
 
+  it('Should start loading', async () => {
+    // given
+    let store = testStore()
+    store.adapters.domain.onPost('/posts')
+      .reply(201, { username: "belaFromMock" })
+
+    // when
+    store.dispatch("login/login")
+
+    // then
+    expect(store.getters["login/isLoading"]).to.equal(true)
+  })
+
   it('Should login', async () => {
     // given
+    let store = testStore()
     store.adapters.domain.onPost('/posts')
       .reply(201, { username: "belaFromMock" })
 
@@ -51,14 +65,34 @@ describe('Store tests', () => {
 
     // then
     expect(store.getters["user/loggedIn"]).to.equal(true)
+    expect(store.getters["login/isLoading"]).to.equal(false)
     expect(store.getters["user/username"]).to.equal("belaFromMock")
 
     expectRedirect(by(store), to("/"))
     expectNotification(by(store))
   })
 
+  it('Should not login for 401', async () => {
+    // given
+    let store = testStore()
+    store.adapters.domain.onPost('/posts')
+      .reply(401)
+
+    // when
+    await store.dispatch("login/login")
+
+    // then
+    expect(store.getters["user/loggedIn"]).to.equal(false)
+    expect(store.getters["login/isLoading"]).to.equal(false)
+    expect(store.getters["user/username"]).to.equal(null)
+
+    expectNoRedirection(by(store))
+    expectNotification(by(store))
+  })
+
   it('Should logout', () => {
     // given
+    let store = testStore()
 
     // when
     store.dispatch("user/logout")

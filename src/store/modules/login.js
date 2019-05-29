@@ -2,12 +2,13 @@ import { reportLoginSuccess, reportLoginClientError, reportLoginServerError } fr
 
 const namespaced = true
 
-const state = {
-  user: {
-    username: "",
-    password: ""
-  },
-  isLoading: false
+const state = () => { return {
+    user: {
+      username: "",
+      password: ""
+    },
+    isLoading: false
+  }
 }
 
 const mutations = {

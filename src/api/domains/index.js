@@ -1,4 +1,5 @@
 const files = require.context('.', false, /\.js$/)
+
 const domains = {}
 
 files.keys().forEach(key => {

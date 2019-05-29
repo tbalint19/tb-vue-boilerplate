@@ -2,11 +2,12 @@ import { reportLogout } from '../../util/notify'
 
 const namespaced = true
 
-const state = {
-  username: null,
-  loggedIn: false,
-  role: null,
-  permissions: []
+const state = () => { return {
+    username: null,
+    loggedIn: false,
+    role: null,
+    permissions: []
+  }
 }
 
 const mutations = {

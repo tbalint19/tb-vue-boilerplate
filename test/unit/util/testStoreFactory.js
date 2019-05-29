@@ -1,9 +1,12 @@
-import Vuex from 'vuex';
 var MockAdapter = require('axios-mock-adapter')
 import domains from '../../../src/api'
+import modules from '../../../src/store/modules'
 var sinon = require('sinon');
 
-const initialState = Object.assign({}, (require('../../../src/store').default).state)
+import { createLocalVue } from '@vue/test-utils'
+import Vuex from 'vuex'
+const localVue = createLocalVue()
+localVue.use(Vuex)
 
 const voidClosure = (...args) => {}
 
@@ -35,8 +38,7 @@ const addAdapters = (store) => {
 }
 
 export const testStore = () => {
-  const testStore = require('../../../src/store/').default
-  testStore.replaceState(Object.assign({}, initialState))
+  const testStore = new Vuex.Store({modules})
 
   stubApp(testStore)
 
