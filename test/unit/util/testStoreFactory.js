@@ -30,10 +30,10 @@ const stubApp = store => {
 }
 
 const addAdapters = (store) => {
-  store.adapters = {}
   const domains = Object.keys(store.$api)
   domains.forEach(domain => {
-    store.adapters[domain] =  new MockAdapter(store.$api[domain].http, { delayResponse: 0 })
+    const key = "$" + domain + "Mock"
+    store[key] =  new MockAdapter(store.$api[domain].http, { delayResponse: 0 })
   })
 }
 

@@ -5,17 +5,25 @@
     :placeholder="$t('login.username')"
     :value="username"
     @input="updateUsername"
-    :disabled="isLoading"/>
+    @blur="blurUsername"/>
+  <input-error
+    :condition="userNameErrorShown"
+    :localization="usernameErrorKey">
+  </input-error>
   <b-form-input
     type="password"
     :placeholder="$t('login.password')"
     :value="password"
     @input="updatePassword"
-    :disabled="isLoading"/>
+    @blur="blurPassword"/>
+  <input-error
+    :condition="passwordErrorShown"
+    :localization="passwordErrorKey">
+  </input-error>
   <hr>
   <b-button
     variant="outline-success btn-block"
-    :disabled="!isActive"
+    :disabled="isDisabled"
     @click="login">
     <v-icon v-if="!isLoading" name="user"/>
     <v-icon v-else name="spinner" :spin="true"/>
@@ -30,12 +38,16 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapGetters('login', [
-      'username', 'password', 'isLoading', 'isActive', 'usernameIsValid', 'passwordIsValid'
+      'username', 'password',
+      'usernameIsValid', 'passwordIsValid',
+      'userNameErrorShown', 'passwordErrorShown',
+      'usernameErrorKey', 'passwordErrorKey',
+      'isLoading', 'isDisabled'
     ])
   },
   methods: {
     ...mapActions('login',[
-      'login', 'updateUsername', 'updatePassword'
+      'login', 'updateUsername', 'updatePassword', 'blurUsername', 'blurPassword'
     ])
   }
 }

@@ -16,7 +16,17 @@
     "title": "Bejelentkezés",
     "username": "Felhasználónév",
     "password": "Jelszó",
-    "button": "Bejelentkezés"
+    "button": "Bejelentkezés",
+    "error": {
+      "username": {
+        "empty": "A felhasználónév nem maradhat üresen!",
+        "lessThen3": "A felhasználónév legalább 3 karaktert taralmaz!"
+      },
+      "password": {
+        "empty": "A jelszó nem maradhat üresen!",
+        "lessThen3": "A jelszó legalább 3 karaktert taralmaz!"
+      }
+    }
   },
 
   "notification": {

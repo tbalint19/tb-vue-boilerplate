@@ -16,7 +16,17 @@
     "title": "Login",
     "username": "Username",
     "password": "Password",
-    "button": "Login"
+    "button": "Login",
+    "error": {
+      "username": {
+        "empty": "Username can not be empty!",
+        "lessThen3": "Username should be at least 3 characters!"
+      },
+      "password": {
+        "empty": "Password can not be empty!",
+        "lessThen3": "Password should be at least 3 characters!"
+      }
+    }
   },
 
   "notification": {

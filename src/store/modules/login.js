@@ -1,4 +1,6 @@
 import { reportLoginSuccess, reportLoginClientError, reportLoginServerError } from '../../util/notify'
+import { getError } from '../../util/validate'
+const validations = require('../../../static/validations.json')
 
 const namespaced = true
 
@@ -7,6 +9,12 @@ const state = () => { return {
       username: "",
       password: ""
     },
+    validations: {
+      username: validations.username,
+      password: validations.password
+    },
+    usernameWasEdited: false,
+    passwordWasEdited: false,
     isLoading: false
   }
 }
@@ -20,9 +28,19 @@ const mutations = {
     state.user.password = password
   },
 
-  RESET_LOGIN_CREDENTIALS (state) {
+  BLUR_USERNAME (state) {
+    state.usernameWasEdited = true
+  },
+
+  BLUR_PASSWORD (state) {
+    state.passwordWasEdited = true
+  },
+
+  RESET_LOGIN_STATE (state) {
     state.user.username = ""
     state.user.password = ""
+    state.usernameWasEdited = false
+    state.passwordWasEdited = false
   },
 
   TOGGLE_LOADING (state, to) {
@@ -33,19 +51,32 @@ const mutations = {
 const getters = {
   username: state => state.user.username,
   password: state => state.user.password,
+  usernameErrorKey: state => getError(state.user.username, state.validations.username),
+  passwordErrorKey: state => getError(state.user.password, state.validations.password),
+  hasUsernameError: (state, getters) => getters.usernameErrorKey != null,
+  hasPasswordError: (state, getters) => getters.passwordErrorKey != null,
+  userNameErrorShown: (state, getters) => state.usernameWasEdited && getters.hasUsernameError,
+  passwordErrorShown: (state, getters) => state.passwordWasEdited && getters.hasPasswordError,
+  hasInputError: (state, getters) => getters.hasUsernameError || getters.hasPasswordError,
   isLoading: state => state.isLoading,
-  isActive: (state, getters) => !state.isLoading && getters.usernameIsValid && getters.passwordIsValid,
-  usernameIsValid: state => state.user.username.length > 5,
-  passwordIsValid: state => state.user.password.length > 5
+  isDisabled: (state, getters) => getters.isLoading || getters.hasInputError
 }
 
 const actions = {
-  updateUsername(context, value) {
-    context.commit('UPDATE_LOGIN_USERNAME', value)
+  updateUsername({ commit }, value) {
+    commit('UPDATE_LOGIN_USERNAME', value)
   },
 
-  updatePassword(context, value) {
-    context.commit('UPDATE_LOGIN_PASSWORD', value)
+  blurUsername({ commit }) {
+    commit('BLUR_USERNAME')
+  },
+
+  updatePassword({ commit }, value) {
+    commit('UPDATE_LOGIN_PASSWORD', value)
+  },
+
+  blurPassword({ commit }) {
+    commit('BLUR_PASSWORD')
   },
 
   login (context) {
@@ -76,7 +107,7 @@ const handleLogin = (app, context, response) => {
 }
 
 const handleLoginSuccess = (app, context, response) => {
-  context.commit('RESET_LOGIN_CREDENTIALS')
+  context.commit('RESET_LOGIN_STATE')
   context.commit('user/SET_USER', response.data, { root: true })
   reportLoginSuccess(app)
   app.$router.push('/')

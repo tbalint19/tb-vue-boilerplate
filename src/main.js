@@ -22,8 +22,10 @@ Vue.component('navbar-bottom', require('@/components/common/navbar-bottom').defa
 Vue.component('grow-appear', require('@/components/transition/grow-appear').default)
 Vue.component('grow-appear-elements', require('@/components/transition/grow-appear-elements').default)
 Vue.component('fade-appear-swap', require('@/components/transition/fade-appear-swap').default)
+Vue.component('slide-swap', require('@/components/transition/slide-swap').default)
 
-Vue.component('login-card', require('@/components/common//card/login-card').default)
+Vue.component('login-card', require('@/components/common/card/login-card').default)
+Vue.component('input-error', require('@/components/common/text/input-error').default)
 Vue.component('landing-message', require('@/components/common/text/landing-message').default)
 
 Vue.component('v-icon', Icon)

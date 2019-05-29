@@ -1,0 +1,24 @@
+{
+  "username": [
+    {
+      "errorKey": "login.error.username.empty",
+      "regex": "^(?!\\s*$).+"
+    },
+    {
+      "errorKey": "login.error.username.lessThen3",
+      "regex": "(?:\\w{3,}|[\\$\\@()+.])+"
+    }
+  ],
+
+  "password": [
+    {
+      "errorKey": "login.error.password.empty",
+      "regex": "^(?!\\s*$).+"
+    },
+    {
+      "errorKey": "login.error.password.lessThen3",
+      "regex": "(?:\\w{3,}|[\\$\\@()+.])+"
+    }
+  ]
+
+}

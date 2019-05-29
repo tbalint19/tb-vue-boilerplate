@@ -1,5 +1,3 @@
-var sinon = require('sinon');
-
 export const expectRedirect = (store, url) => {
   sinon.assert.calledOnce(store.$app.$router.push);
   sinon.assert.calledWith(store.$app.$router.push, url);
