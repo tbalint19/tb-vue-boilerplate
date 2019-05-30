@@ -37,7 +37,7 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters('login', [
+    ...mapGetters('auth', [
       'username', 'password',
       'usernameIsValid', 'passwordIsValid',
       'userNameErrorShown', 'passwordErrorShown',
@@ -46,9 +46,15 @@ export default {
     ])
   },
   methods: {
-    ...mapActions('login',[
-      'login', 'updateUsername', 'updatePassword', 'blurUsername', 'blurPassword'
+    ...mapActions('auth',[
+      'init',
+      'updateUsername', 'blurUsername',
+      'updatePassword', 'blurPassword',
+      'login'
     ])
+  },
+  created() {
+    this.init()
   }
 }
 </script>

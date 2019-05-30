@@ -1,5 +1,3 @@
-import { reportLogout } from '../../util/notify'
-
 const namespaced = true
 
 const state = () => { return {
@@ -11,14 +9,14 @@ const state = () => { return {
 }
 
 const mutations = {
-  SET_USER (state, user) {
+  SET (state, user) {
     state.loggedIn = true
     state.username = user.username
     state.role = user.role
     state.permissions = user.permissions
   },
 
-  RESET_USER (state) {
+  DEL (state) {
     state.username = null
     state.loggedIn = false
     state.role = null
@@ -34,10 +32,11 @@ const getters = {
 }
 
 const actions = {
-  logout(context) {
-    context.commit('RESET_USER')
-    this.$app.$router.push("/login")
-    reportLogout(this.$app)
+  set ({ commit }, user) {
+    if (user)
+      commit('SET', user)
+    else
+      commit('DEL')
   }
 }
 

@@ -1,17 +1,17 @@
-import { reportLoginSuccess, reportLoginClientError, reportLoginServerError } from '../../util/notify'
+import { reportLoginSuccess, reportLoginClientError, reportLoginServerError, reportLogout } from '../../util/notify'
 import { getError } from '../../util/validate'
-const validations = require('../../../static/validations.json')
+const validation = require('../../../static/validations.json')
 
 const namespaced = true
 
 const state = () => { return {
-    user: {
+    input: {
       username: "",
       password: ""
     },
-    validations: {
-      username: validations.username,
-      password: validations.password
+    validation: {
+      username: validation.username,
+      password: validation.password
     },
     usernameWasEdited: false,
     passwordWasEdited: false,
@@ -20,12 +20,20 @@ const state = () => { return {
 }
 
 const mutations = {
+  INIT (state) {
+    state.input.username = ""
+    state.input.password = ""
+    state.usernameWasEdited = false
+    state.passwordWasEdited = false
+    state.isLoading = false
+  },
+
   UPDATE_LOGIN_USERNAME (state, username) {
-    state.user.username = username
+    state.input.username = username
   },
 
   UPDATE_LOGIN_PASSWORD (state, password) {
-    state.user.password = password
+    state.input.password = password
   },
 
   BLUR_USERNAME (state) {
@@ -36,23 +44,16 @@ const mutations = {
     state.passwordWasEdited = true
   },
 
-  RESET_LOGIN_STATE (state) {
-    state.user.username = ""
-    state.user.password = ""
-    state.usernameWasEdited = false
-    state.passwordWasEdited = false
-  },
-
   TOGGLE_LOADING (state, to) {
     state.isLoading = to
   }
 }
 
 const getters = {
-  username: state => state.user.username,
-  password: state => state.user.password,
-  usernameErrorKey: state => getError(state.user.username, state.validations.username),
-  passwordErrorKey: state => getError(state.user.password, state.validations.password),
+  username: state => state.input.username,
+  password: state => state.input.password,
+  usernameErrorKey: state => getError(state.input.username, state.validation.username),
+  passwordErrorKey: state => getError(state.input.password, state.validation.password),
   hasUsernameError: (state, getters) => getters.usernameErrorKey != null,
   hasPasswordError: (state, getters) => getters.passwordErrorKey != null,
   userNameErrorShown: (state, getters) => state.usernameWasEdited && getters.hasUsernameError,
@@ -63,6 +64,10 @@ const getters = {
 }
 
 const actions = {
+  init({ commit }) {
+    commit('INIT')
+  },
+
   updateUsername({ commit }, value) {
     commit('UPDATE_LOGIN_USERNAME', value)
   },
@@ -81,13 +86,19 @@ const actions = {
 
   login (context) {
     context.commit('TOGGLE_LOADING', true)
-    return this.$api.domain.login(context.state.user)
+    return this.$api.domain.login(context.state.input)
       .then(response =>
         handleLogin(this.$app, context, response))
       .catch(connectionError =>
         reportLoginServerError(this.$app))
       .finally(() =>
         context.commit('TOGGLE_LOADING', false))
+  },
+
+  logout(context) {
+    context.dispatch('user/set', null, { root: true })
+    this.$app.$router.push("/login")
+    reportLogout(this.$app)
   }
 }
 
@@ -107,8 +118,7 @@ const handleLogin = (app, context, response) => {
 }
 
 const handleLoginSuccess = (app, context, response) => {
-  context.commit('RESET_LOGIN_STATE')
-  context.commit('user/SET_USER', response.data, { root: true })
+  context.dispatch('user/set', response.data, { root: true })
   reportLoginSuccess(app)
   app.$router.push('/')
 }

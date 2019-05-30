@@ -22,7 +22,7 @@ export default {
     ])
   },
   methods: {
-    ...mapActions('user', [
+    ...mapActions('auth', [
       'logout'
     ])
   }
