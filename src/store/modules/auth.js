@@ -97,7 +97,7 @@ const actions = {
 
   logout(context) {
     context.dispatch('user/set', null, { root: true })
-    this.$app.$notify('note.logout'
+    this.$app.$notify('note.logout')
     this.$app.$router.push("/login")
   }
 }
