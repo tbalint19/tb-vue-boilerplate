@@ -6,8 +6,13 @@
       <router-view></router-view>
     </fade-appear-swap>
 
-    <notifications group="auth" position="bottom center" width="75%"/>
-    <notifications group="error" position="top right" classes="vue-notification with-margin"/>
+    <notifications :duration="7000">
+      <custom-notification
+        slot="body"
+        slot-scope="props"
+        :props="props">
+      </custom-notification>
+    </notifications>
 
     <navbar-bottom></navbar-bottom>
   </div>

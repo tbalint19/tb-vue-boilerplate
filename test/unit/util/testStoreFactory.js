@@ -15,15 +15,11 @@ const stubApp = store => {
     $router: {
       push: function() {}
     },
-    $t: function() {},
     $notify: function() {}
   }
 
   sinon.stub(store.$app.$router, 'push')
   store.$app.$router.push.callsFake(voidClosure)
-
-  sinon.stub(store.$app, '$t')
-  store.$app.$t.callsFake(voidClosure)
 
   sinon.stub(store.$app, '$notify')
   store.$app.$notify.callsFake(voidClosure)

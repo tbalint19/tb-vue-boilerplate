@@ -9,7 +9,6 @@ export const expectNoRedirection = store => {
 
 export const expectNotification = store => {
   sinon.assert.calledOnce(store.$app.$notify);
-  sinon.assert.callCount(store.$app.$t, 2);
 }
 
 export const to = url => url

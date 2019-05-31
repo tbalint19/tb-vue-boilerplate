@@ -1,4 +1,3 @@
-import { reportLoginSuccess, reportLoginClientError, reportLoginServerError, reportLogout } from '../../util/notify'
 import { getError } from '../../util/validate'
 const validation = require('../../../static/validations.json')
 
@@ -86,19 +85,20 @@ const actions = {
 
   login (context) {
     context.commit('TOGGLE_LOADING', true)
-    return this.$api.domain.login(context.state.input)
-      .then(response =>
-        handleLogin(this.$app, context, response))
-      .catch(connectionError =>
-        reportLoginServerError(this.$app))
-      .finally(() =>
-        context.commit('TOGGLE_LOADING', false))
+    return this.$api.domain
+      .login(context.state.input)
+        .then(response =>
+          handleLogin(this.$app, context, response))
+        .catch(connectionError =>
+          this.$app.$notify('error.login.connection'))
+        .finally(() =>
+          context.commit('TOGGLE_LOADING', false))
   },
 
   logout(context) {
     context.dispatch('user/set', null, { root: true })
+    this.$app.$notify('note.logout'
     this.$app.$router.push("/login")
-    reportLogout(this.$app)
   }
 }
 
@@ -114,11 +114,11 @@ const handleLogin = (app, context, response) => {
   if (response.status == 201)
     handleLoginSuccess(app, context, response)
   else
-    reportLoginClientError(app)
+    app.$notify('error.login.wrongCredentials')
 }
 
 const handleLoginSuccess = (app, context, response) => {
   context.dispatch('user/set', response.data, { root: true })
-  reportLoginSuccess(app)
+  app.$notify('success.login')
   app.$router.push('/')
 }

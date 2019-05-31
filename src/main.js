@@ -28,6 +28,8 @@ Vue.component('login-card', require('@/components/common/card/login-card').defau
 Vue.component('input-error', require('@/components/common/text/input-error').default)
 Vue.component('landing-message', require('@/components/common/text/landing-message').default)
 
+Vue.component('custom-notification', require('@/components/common/notifications/custom-notification').default)
+
 Vue.component('v-icon', Icon)
 
 // Language config
