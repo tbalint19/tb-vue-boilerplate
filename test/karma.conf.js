@@ -3,7 +3,7 @@
 // we are also using it with karma-webpack
 //   https://github.com/webpack/karma-webpack
 
-var webpackConfig = require('../../build/webpack.test.conf')
+var webpackConfig = require('../build/webpack.test.conf')
 process.env.CHROME_BIN = require('puppeteer').executablePath()
 
 module.exports = function (config) {

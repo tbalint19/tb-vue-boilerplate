@@ -1,4 +1,4 @@
-import { parse } from '../../../../src/util/jwt'
+import { parse } from '@/util/jwt'
 var jwt = require('jsonwebtoken');
 
 describe('JWT tests', () => {

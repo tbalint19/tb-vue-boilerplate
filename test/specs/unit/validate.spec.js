@@ -1,4 +1,4 @@
-import { getError } from '../../../../src/util/validate'
+import { getError } from '@/util/validate'
 
 describe('Validation tests', () => {
 

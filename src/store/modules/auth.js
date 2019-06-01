@@ -1,5 +1,5 @@
-import { getError } from '../../util/validate'
-const validations = require('../../../static/validations.json')
+import { getError } from '@/util/validate'
+const validations = require('@/../static/validations.json')
 
 const namespaced = true
 
