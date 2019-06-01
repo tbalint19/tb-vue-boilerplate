@@ -3,7 +3,7 @@ import {
   to, by, expectRedirect, expectNotification, expectNoRedirection
 } from '../util/sinonAssertions'
 
-describe('Login tests', () => {
+describe('Auth tests', () => {
 
   it('Should initialize proper state')
 
@@ -77,11 +77,11 @@ describe('Login tests', () => {
 
     // then
     expect(store.getters["user/loggedIn"]).to.equal(true)
-    // expect(store.getters["auth/isLoading"]).to.equal(false)
-    // expect(store.getters["user/username"]).to.equal("belaFromMock")
-    //
-    // expectRedirect(by(store), to("/"))
-    // expectNotification(by(store))
+    expect(store.getters["auth/isLoading"]).to.equal(false)
+    expect(store.getters["user/username"]).to.equal("belaFromMock")
+
+    expectRedirect(by(store), to("/"))
+    //expectNotification(by(store), '')
   })
 
   it('Should not login for http401', async () => {
@@ -99,7 +99,7 @@ describe('Login tests', () => {
     expect(store.getters["user/username"]).to.equal(null)
 
     expectNoRedirection(by(store))
-    expectNotification(by(store))
+    //expectNotification(by(store), '')
   })
 
   it('Should update disabled getter')
@@ -121,7 +121,7 @@ describe('Login tests', () => {
     expect(store.getters["user/username"]).to.equal(null)
 
     expectNoRedirection(by(store))
-    expectNotification(by(store))
+    //expectNotification(by(store), '')
   })
 
   it('Should logout', () => {
@@ -135,6 +135,6 @@ describe('Login tests', () => {
     expect(store.getters["user/loggedIn"]).to.equal(false)
 
     expectRedirect(by(store), to("/login"))
-    expectNotification(by(store))
+    //expectNotification(by(store), '')
   })
 })

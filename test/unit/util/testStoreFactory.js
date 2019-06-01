@@ -1,7 +1,6 @@
 var MockAdapter = require('axios-mock-adapter')
 import domains from '../../../src/api'
 import modules from '../../../src/store/modules'
-var sinon = require('sinon');
 
 import { createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'

@@ -1,5 +1,5 @@
 import { getError } from '../../util/validate'
-const validation = require('../../../static/validations.json')
+const validations = require('../../../static/validations.json')
 
 const namespaced = true
 
@@ -9,8 +9,8 @@ const state = () => { return {
       password: ""
     },
     validation: {
-      username: validation.username,
-      password: validation.password
+      username: validations.username,
+      password: validations.password
     },
     usernameWasEdited: false,
     passwordWasEdited: false,
@@ -64,23 +64,23 @@ const getters = {
 
 const actions = {
   init({ commit }) {
-    commit('INIT')
+    return commit('INIT')
   },
 
   updateUsername({ commit }, value) {
-    commit('UPDATE_LOGIN_USERNAME', value)
+    return commit('UPDATE_LOGIN_USERNAME', value)
   },
 
   blurUsername({ commit }) {
-    commit('BLUR_USERNAME')
+    return commit('BLUR_USERNAME')
   },
 
   updatePassword({ commit }, value) {
-    commit('UPDATE_LOGIN_PASSWORD', value)
+    return commit('UPDATE_LOGIN_PASSWORD', value)
   },
 
   blurPassword({ commit }) {
-    commit('BLUR_PASSWORD')
+    return commit('BLUR_PASSWORD')
   },
 
   login (context) {
@@ -96,9 +96,9 @@ const actions = {
   },
 
   logout(context) {
-    context.dispatch('user/set', null, { root: true })
     this.$app.$notify('note.logout')
     this.$app.$router.push("/login")
+    return context.dispatch('user/set', null, { root: true })
   }
 }
 

@@ -7,8 +7,9 @@ export const expectNoRedirection = store => {
   sinon.assert.notCalled(store.$app.$router.push);
 }
 
-export const expectNotification = store => {
+export const expectNotification = (store, key) => {
   sinon.assert.calledOnce(store.$app.$notify);
+  sinon.assert.calledWith(store.$app.$notify, key);
 }
 
 export const to = url => url
