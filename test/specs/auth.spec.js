@@ -100,7 +100,7 @@ describe('Auth tests', () => {
   it('Should start loading when login request is sent', async () => {
     // given
     let store = testStore()
-    let token = jwt.sign({ username: "bela", role: "admin", permissions: ["doStuff", "doOtherStuff"] }, "secret-key");
+    let token = "asd"
     store.$domainMock.onPost('/posts')
       .reply(201, { token })
 

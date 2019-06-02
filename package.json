@@ -25,6 +25,11 @@
     "vuex": "^3.1.0"
   },
   "devDependencies": {
+    "@stryker-mutator/core": "^2.0.0",
+    "@stryker-mutator/html-reporter": "^2.0.0",
+    "@stryker-mutator/javascript-mutator": "^2.0.0",
+    "@stryker-mutator/karma-runner": "^2.0.0",
+    "@stryker-mutator/vue-mutator": "^2.0.0",
     "@vue/test-utils": "^1.0.0-beta.29",
     "autoprefixer": "^7.1.2",
     "axios-mock-adapter": "^1.16.0",
