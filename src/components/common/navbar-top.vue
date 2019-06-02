@@ -3,7 +3,7 @@
   <b-navbar-brand to="/">{{ $t("navbar.title") }}</b-navbar-brand>
   <b-navbar-nav class="ml-auto">
      <b-button
-      v-if="loggedIn"
+      v-if="isLoggedIn"
       variant="outline-secondary"
       @click="logout">
       {{ $t('navbar.logout.button') }}
@@ -18,7 +18,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapGetters('user', [
-      "loggedIn"
+      "isLoggedIn"
     ])
   },
   methods: {

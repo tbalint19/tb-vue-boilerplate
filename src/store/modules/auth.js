@@ -118,7 +118,7 @@ const handleLogin = (app, context, response) => {
 }
 
 const handleLoginSuccess = (app, context, response) => {
-  context.dispatch('user/set', response.data, { root: true })
+  context.dispatch('user/set', response.data.token, { root: true })
   app.$notify('success.login')
   app.$router.push('/')
 }

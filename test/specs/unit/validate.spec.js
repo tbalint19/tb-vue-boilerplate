@@ -12,7 +12,7 @@ describe('Validation tests', () => {
     "regex": "(?:\\w{3,}|[\\$\\@()+.])+"
   }
 
-  it('Should return null if related validations are missing', () => {
+  it('Should return null if related validations is empty list', () => {
     // given
     let validations = []
 

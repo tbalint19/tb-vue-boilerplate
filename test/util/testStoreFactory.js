@@ -33,7 +33,7 @@ const addAdapters = (store) => {
 }
 
 export const testStore = () => {
-  const testStore = new Vuex.Store({modules})
+  const testStore = new Vuex.Store({modules, strict:true})
 
   stubApp(testStore)
 

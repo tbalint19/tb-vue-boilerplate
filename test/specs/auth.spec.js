@@ -2,12 +2,32 @@ import { testStore } from '../util/testStoreFactory'
 import {
   to, by, expectRedirect, expectNotification, expectNoRedirection
 } from '../util/sinonAssertions'
+var jwt = require('jsonwebtoken');
 
 describe('Auth tests', () => {
 
-  it('Should initialize proper state')
+  it('should initialize proper state', () => {
+    // given
+    let store = testStore()
 
-  it('Should update username', () => {
+    // when
+    store.dispatch("auth/init")
+
+    // then
+    expect(store.getters["auth/username"]).to.equal("")
+    expect(store.getters["auth/password"]).to.equal("")
+    expect(store.getters["auth/usernameErrorKey"]).to.equal("login.error.username.empty")
+    expect(store.getters["auth/passwordErrorKey"]).to.equal("login.error.password.empty")
+    expect(store.getters["auth/hasUsernameError"]).to.equal(true)
+    expect(store.getters["auth/hasPasswordError"]).to.equal(true)
+    expect(store.getters["auth/userNameErrorShown"]).to.equal(false)
+    expect(store.getters["auth/passwordErrorShown"]).to.equal(false)
+    expect(store.getters["auth/hasInputError"]).to.equal(true)
+    expect(store.getters["auth/isLoading"]).to.equal(false)
+    expect(store.getters["auth/isDisabled"]).to.equal(true)
+  })
+
+  it('should update username', () => {
     // given
     let store = testStore()
 
@@ -16,7 +36,31 @@ describe('Auth tests', () => {
 
     // then
     expect(store.getters["auth/username"]).to.equal("a")
+  })
+
+  it('should not show error before blur', () => {
+    // given
+    let store = testStore()
+
+    // when
+    store.dispatch("auth/updateUsername", "a")
+
+    // then
+    expect(store.getters["auth/usernameErrorKey"]).to.equal("login.error.username.lessThen3")
     expect(store.getters["auth/hasUsernameError"]).to.equal(true)
+    expect(store.getters["auth/userNameErrorShown"]).to.equal(false)
+  })
+
+  it('should show username error after blur', () => {
+    // given
+    let store = testStore()
+    store.dispatch("auth/updateUsername", "a")
+
+    // when
+    store.dispatch("auth/blurUsername")
+
+    // then
+    expect(store.getters["auth/userNameErrorShown"]).to.equal(true)
   })
 
   it('Should update getter for validation with valid username', () => {
@@ -56,8 +100,9 @@ describe('Auth tests', () => {
   it('Should start loading when login request is sent', async () => {
     // given
     let store = testStore()
+    let token = jwt.sign({ username: "bela", role: "admin", permissions: ["doStuff", "doOtherStuff"] }, "secret-key");
     store.$domainMock.onPost('/posts')
-      .reply(201, { username: "belaFromMock" })
+      .reply(201, { token })
 
     // when
     store.dispatch("auth/login")
@@ -69,16 +114,17 @@ describe('Auth tests', () => {
   it('Should login for http200', async () => {
     // given
     let store = testStore()
+    let token = jwt.sign({ username: "bela", role: "admin", permissions: ["doStuff", "doOtherStuff"] }, "secret-key");
     store.$domainMock.onPost('/posts')
-      .reply(201, { username: "belaFromMock" })
+      .reply(201, { token })
 
     // when
     await store.dispatch("auth/login")
 
     // then
-    expect(store.getters["user/loggedIn"]).to.equal(true)
+    expect(store.getters["user/isLoggedIn"]).to.equal(true)
     expect(store.getters["auth/isLoading"]).to.equal(false)
-    expect(store.getters["user/username"]).to.equal("belaFromMock")
+    expect(store.getters["user/username"]).to.equal("bela")
 
     expectRedirect(by(store), to("/"))
     //expectNotification(by(store), '')
@@ -94,7 +140,7 @@ describe('Auth tests', () => {
     await store.dispatch("auth/login")
 
     // then
-    expect(store.getters["user/loggedIn"]).to.equal(false)
+    expect(store.getters["user/isLoggedIn"]).to.equal(false)
     expect(store.getters["auth/isLoading"]).to.equal(false)
     expect(store.getters["user/username"]).to.equal(null)
 
@@ -116,7 +162,7 @@ describe('Auth tests', () => {
     await store.dispatch("auth/login")
 
     // then
-    expect(store.getters["user/loggedIn"]).to.equal(false)
+    expect(store.getters["user/isLoggedIn"]).to.equal(false)
     expect(store.getters["auth/isLoading"]).to.equal(false)
     expect(store.getters["user/username"]).to.equal(null)
 
@@ -132,7 +178,7 @@ describe('Auth tests', () => {
     store.dispatch("auth/logout")
 
     // then
-    expect(store.getters["user/loggedIn"]).to.equal(false)
+    expect(store.getters["user/isLoggedIn"]).to.equal(false)
 
     expectRedirect(by(store), to("/login"))
     //expectNotification(by(store), '')
