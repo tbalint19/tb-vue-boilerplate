@@ -116,7 +116,7 @@ describe('Auth tests', () => {
     let store = testStore()
     let token = jwt.sign({ username: "bela", role: "admin", permissions: ["doStuff", "doOtherStuff"] }, "secret-key");
     store.$domainMock.onPost('/posts')
-      .reply(201, { token })
+      .reply(200, { token })
 
     // when
     await store.dispatch("auth/login")
