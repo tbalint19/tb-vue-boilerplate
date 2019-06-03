@@ -11,7 +11,7 @@ const mockLogin = (adapter, use) => {
   let call = adapter.onPost('/posts')
   let token = jwt.sign({ username: "bela", role: "admin", permissions: ["doStuff", "doOtherStuff"] }, "secret-key");
   if (!use) { call.passThrough() } else {
-    call.reply(201, { token })
+    call.reply(200, { token })
   }
 }
 

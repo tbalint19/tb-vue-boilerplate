@@ -111,7 +111,7 @@ export default {
 }
 
 const handleLogin = (app, context, response) => {
-  if (response.status == 201)
+  if (response.status == 200)
     handleLoginSuccess(app, context, response)
   else
     app.$notify('error.login.wrongCredentials')
