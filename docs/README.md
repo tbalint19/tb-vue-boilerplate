@@ -1,5 +1,132 @@
 # VueJS
 
+This boilerplate app uses VueJS and the recommended libraries to build scaleable SPAs (single page application) with it.
+
+## Overview:
+  - [Vuex](https://vuex.vuejs.org/) - state management
+  - [Axios](https://github.com/axios/axios) - promise based http client
+  - [Vue Router](https://router.vuejs.org/)
+  - [Vue I18n](http://kazupon.github.io/vue-i18n/started.html#html)
+  - [Bootstrap vue](https://bootstrap-vue.js.org/docs/)
+  - [Vue notifications](https://www.npmjs.com/package/vue-notification)
+  - [Vueawesome](https://github.com/Justineo/vue-awesome) - icons (Fontawesome)
+
+##### Testing:
+  - [Karma](https://karma-runner.github.io/0.8/index.html) - test runner/reporter
+  - [Mocha](https://mochajs.org/) - assertions
+  - [Sinon](https://sinonjs.org/) - mocking
+  - [Axios mock adapter](https://github.com/ctimmerm/axios-mock-adapter) - api mocking
+  - [Stryker](https://stryker-mutator.io/stryker/quickstart) - mutation testing
+  - [Selenium](https://medium.com/the-hitchhikers-guide-to-e2e-testing/part-i-e2e-testing-and-selenium-ef031978ee20) - e2e _(not frontend scope)_
+
+
+## State management with Vuex
+
+##### Overview
+_"Vuex is a state management pattern + library for Vue.js applications. It serves as a centralized store for all the components in an application, with rules ensuring that the state can only be mutated in a predictable fashion."_
+
+![](./vuex.png)
+
+Vuex is a tradeoff, which complicates simple VueJS solutions. These solutions remain valid for prototyping. It still worth it however, as it leads to the aforementioned predictable mutations, and with that comes the great testability and fewer bugs.
+
+##### Example - simple VueJS component:
+A single file is enough (_login-component.vue_)
+```html
+<template>
+  <input v-model="username">
+  <p v-if="username.length < 3">Too short!</p>
+</template>
+```
+```javascript
+export default {
+  data: {
+    username: ""
+  }
+}
+```
+
+##### Example - with Vuex:
+In a module of the store (_store/login.js_)
+```javascript
+const namespaced = true
+
+const state = () => { return {
+  username: ""
+}}
+
+const mutations = {
+  UPDATE_USERNAME(state, value) {
+    state.username = value
+  }
+}
+
+const getters = {
+  username: state => state.username,
+  usernameIsShort: state => state.username.length < 3
+}
+
+const actions = {
+  updateUsername({ commit }, value) {
+    return commit('UPDATE_USERNAME', value)
+  }
+}
+
+export default {
+  namespaced,
+  state,
+  mutations,
+  getters,
+  actions
+}
+```
+
+(Setup the store in main.js, register the module and...) ...in the component (_components/login-component.vue_)
+```html
+<template>
+  <input :value="username" @input="updateUsername">
+  <p v-if="usernameIsShort">Too short!</p>
+</template>
+```
+```javascript
+import { mapGetters, mapActions } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters('login', [
+      'username', 'usernameIsShort'
+    ])
+  },
+  methods: {
+    ...mapActions('login', [
+      'updateUsername'
+    ])
+  }
+}
+```
+These two examples do exactly the same. There are some huge differences however development-wise.
+The cons of vuex seems obvious:
+  - More files
+  - More code
+  - Less intuitive
+
+The pros come as the project grows:
+  
+
+Read more
+
+  - api: mapGetters, mapActions (to test)
+  - no mapState or mapMutations in components
+
+  usually no other data/methods/computed/watcher/props on component
+  exceptions:
+    v-model based third party component - two way computed property (computed with get/set)
+    notifications state
+    router state
+    i18n state
+    poc phase for complex third party lib
+
+  usually defined on component: create and destroy - lifecycle methods
+
 ## HTTP
 Axios
 Promise based
@@ -13,21 +140,6 @@ Both of them already set up - easy to toggle even partial
 ## Routing
 Vue router
 Guards - tested vuex getters - no direct test necessary
-
-## State management
-Vuex
-  - api: mapGetters, mapActions (to test)
-  - no mapState or mapMutations in components
-
-  usually no other data/methods/computed/watcher/props on component
-  exceptions:
-    v-model based third party component - two way computed property (computed with get/set)
-    notifications state
-    router state
-    i18n state
-    poc phase for complex third party lib
-
-  usually defined on component: create and destroy - lifecycle methods
 
 ## Util
 Common logic - to test
@@ -52,15 +164,9 @@ Functions:
 
 Statements & lines:
   - A missing line or statement _can_ mean an import or an export
-  - In certain (unlikely) edge cases this could mean proper coverage with lest then 50% (lots of - tested - imported utils and the export)
+  - In certain (unlikely) edge cases this could mean proper coverage with less then 50% (lots of - tested - imported utils and the export)
   - __Usually with the two previous breakpoints it reaches ~90%__
 
-#### Libraries
-[Mocha](https://mochajs.org/) - assertions
-
-[Sinon](https://sinonjs.org/) - mocking
-
-[Axios mock adapter](https://github.com/ctimmerm/axios-mock-adapter) - api mocking
 
 #### DEMO in boilerplate
 Setup made:
@@ -69,6 +175,7 @@ Setup made:
     - enables a clean start in every test
     - router is stubbed
     - notifications are stubbed
+    - axios mock adapter is set up
   - test/util/sinonAssertions.js
     - to test the number of routings
     - to test the destinations
@@ -217,5 +324,3 @@ Check for Vuex integration if multiple present
 JWT - payload - vuex - routing and hide-show
 JWT - localstorage/sessionstorage
 JWT - axios - sensitive data is unavailable without valid JWT
-
-![](./vuex.png)
