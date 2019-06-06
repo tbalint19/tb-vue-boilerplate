@@ -27,7 +27,7 @@ _"Vuex is a state management pattern + library for Vue.js applications. It serve
 
 ![](./vuex.png)
 
-Vuex is a tradeoff, which complicates simple VueJS solutions. These solutions remain valid for prototyping. It still worth it however, as it leads to the aforementioned predictable mutations, and with that comes the great testability and fewer bugs.
+Vuex is a tradeoff, which complicates simple VueJS solutions. These solutions remain valid for prototyping. It still worths it however, as it leads to the aforementioned predictable mutations, and with that comes the great testability and fewer bugs.
 
 ##### Example - simple VueJS component:
 A single file is enough (_login-component.vue_)
@@ -104,33 +104,55 @@ export default {
 }
 ```
 These two examples do exactly the same. There are some huge differences however development-wise.
+
 The cons of vuex seems obvious:
   - More files
   - More code
   - Less intuitive
 
 The pros come as the project grows:
-  
+  - parent-child communication
+
+    In first example
+
+  - sibling communication
+
+    In first example
+
+  - Debug options
+
+    Vue devtools
+
+  - Testability
+
+    Notice how in modules everything is a function without* depenedncies.
 
 Read more
 
-  - api: mapGetters, mapActions (to test)
-  - no mapState or mapMutations in components
+##### Best practices
+- api: mapGetters, mapActions (to test)
+- no mapState or mapMutations in components
+- usually no other data/methods/computed/watcher/props on component
+- local data/logic exceptions
+  - v-model based third party component
+  - two way computed property (computed with get/set)
+  - notifications state
+  - router state
+  - i18n state
+  - poc phase for complex third party lib
+- usually defined on component: create and destroy - lifecycle methods if needed
 
-  usually no other data/methods/computed/watcher/props on component
-  exceptions:
-    v-model based third party component - two way computed property (computed with get/set)
-    notifications state
-    router state
-    i18n state
-    poc phase for complex third party lib
+##### DEMO in boilerplate
+Setup made:
 
-  usually defined on component: create and destroy - lifecycle methods
+
+
 
 ## HTTP
 Axios
 Promise based
 defaults to JSON
+mock in prod - uncomment require, set true/false, add methods
 
 ## Mock
 Axios mock adapter
@@ -248,12 +270,11 @@ Notice that the following line
 ```javascript
 commit('ADD_TO_SMALL_NUMBERS', number)
 ```
-and its result was never actually tested.
+and its result was never actually tested - yet code coverage report __still__ shows 100%!
 
-This means 3 things:
+This means 2 things:
   - It is __not__ proved that the code is working properly
   - Later changes _can_ break the code __silently__
-  - Code coverage report __still__ shows 100%
 
 Solution:
 Mutation framework - [Stryker](https://stryker-mutator.io/stryker/index)
@@ -317,7 +338,6 @@ Already setup with static jsons
 
 ## Components and plugins
 Awesome vue - curated list
-Everything from Evan You, Linus
 Check for Vuex integration if multiple present
 
 ## Auth
