@@ -1,0 +1,54 @@
+{
+  "navbar": {
+    "title": "Boilerplate app",
+    "logout": {
+      "button": "Logout"
+    }
+  },
+
+  "welcome": {
+    "title": "Hello in english",
+    "p1": "This is the welcome message.",
+    "p2": "If you want to proceed, login."
+  },
+
+  "login": {
+    "title": "Login",
+    "username": "Username",
+    "password": "Password",
+    "button": "Login",
+    "error": {
+      "username": {
+        "empty": "Username can not be empty!",
+        "lessThen3": "Username should be at least 3 characters!"
+      },
+      "password": {
+        "empty": "Password can not be empty!",
+        "lessThen3": "Password should be at least 3 characters!"
+      }
+    }
+  },
+
+  "notification": {
+    "login": {
+      "error": {
+        "client": {
+          "title": "Unsuccessful attempt",
+          "text": "(Wrong username or password)"
+        },
+        "server": {
+          "title": "Unsuccessful attempt",
+          "text": "(Server error)"
+        }
+      },
+      "success": {
+        "title": "Successful login",
+        "text": "Welcome to the site!"
+      }
+    },
+    "logout": {
+      "title": "Logout complete",
+      "text": "Goodbye"
+    }
+  }
+}

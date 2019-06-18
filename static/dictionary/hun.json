@@ -1,0 +1,54 @@
+{
+  "navbar": {
+    "title": "Alap app",
+    "logout": {
+      "button": "Kijelentkezés"
+    }
+  },
+
+  "welcome": {
+    "title": "Hello magyarul",
+    "p1": "Ez egy üdvözlő üzenet.",
+    "p2": "Jelentkezz be a továbblépélshez."
+  },
+
+  "login": {
+    "title": "Bejelentkezés",
+    "username": "Felhasználónév",
+    "password": "Jelszó",
+    "button": "Bejelentkezés",
+    "error": {
+      "username": {
+        "empty": "A felhasználónév nem maradhat üresen!",
+        "lessThen3": "A felhasználónév legalább 3 karaktert taralmaz!"
+      },
+      "password": {
+        "empty": "A jelszó nem maradhat üresen!",
+        "lessThen3": "A jelszó legalább 3 karaktert taralmaz!"
+      }
+    }
+  },
+
+  "notification": {
+    "login": {
+      "error": {
+        "client": {
+          "title": "Sikertelen bejelentkezés!",
+          "text": "(Rossz felhasználónév vagy jelszó)"
+        },
+        "server": {
+          "title": "Sikertelen bejelentkezés!",
+          "text": "(Szerver hiba)"
+        }
+      },
+      "success": {
+        "title": "Sikeres bejelentkezés",
+        "text": "Üdvözölük az oldalon!"
+      }
+    },
+    "logout": {
+      "title": "Kijelentkezve",
+      "text": "Viszlát"
+    }
+  }
+}
