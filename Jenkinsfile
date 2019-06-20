@@ -7,7 +7,7 @@ node('linux') {
 
   try {
       checkEnv()
-      installDependencies
+      installDependencies()
       sendNotifications("SUCCESS")
   } catch (e) {
       echo 'Build failed with error: ' + e.toString()
