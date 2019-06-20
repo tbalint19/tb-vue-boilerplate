@@ -7,6 +7,7 @@ node('linux') {
 
   try {
       checkEnv()
+      installDependencies
       sendNotifications("SUCCESS")
   } catch (e) {
       echo 'Build failed with error: ' + e.toString()
@@ -27,6 +28,12 @@ def checkEnv() {
   stage('Check build environment') {
     sh 'node -v'
     sh 'npm -v'
+  }
+}
+
+def installDependencies() {
+  stage('Install dependencies') {
+    sh 'npm install'
   }
 }
 
