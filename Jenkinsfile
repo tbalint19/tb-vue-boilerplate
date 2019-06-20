@@ -8,6 +8,7 @@ node('linux') {
   try {
       checkEnv()
       installDependencies()
+      runUnitTests()
       sendNotifications("SUCCESS")
   } catch (e) {
       echo 'Build failed with error: ' + e.toString()
@@ -35,6 +36,12 @@ def installDependencies() {
   stage('Install dependencies') {
     sh 'rm -rf ./node_modules'
     sh 'npm install'
+  }
+}
+
+def runUnitTests() {
+  stage('Unit tests (utils)') {
+    sh 'npm run unit-tests'
   }
 }
 
