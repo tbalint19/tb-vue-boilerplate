@@ -22,7 +22,7 @@ describe('JWT tests', () => {
     let payload = parse(validJWT)
 
     // then
-    expect(payload["foo"]).to.equal("lofasz")
+    expect(payload["foo"]).to.equal("bar")
   })
 
 })
