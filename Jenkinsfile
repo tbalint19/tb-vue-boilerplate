@@ -52,6 +52,12 @@ def runStoreTests() {
   }
 }
 
+def validateTestCases() {
+  stage('Validate test cases (mutation testing)') {
+    sh 'npm run store-tests'
+  }
+}
+
 def sendNotifications(String status) {
     currentBuild.result = status
     notifyBitbucket()
