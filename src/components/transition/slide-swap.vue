@@ -1,12 +1,11 @@
 <template>
-<transition name="toLeft" mode="out-in">
-  <slot></slot>
-</transition>
+  <transition name="toLeft" mode="out-in">
+    <slot></slot>
+  </transition>
 </template>
 
 <script>
-export default {
-}
+export default {}
 </script>
 
 <style lang="css" scoped>

@@ -7,10 +7,7 @@
     </fade-appear-swap>
 
     <notifications :duration="7000">
-      <custom-notification
-        slot="body"
-        slot-scope="props"
-        :props="props">
+      <custom-notification slot="body" slot-scope="props" :props="props">
       </custom-notification>
     </notifications>
 
@@ -20,7 +17,7 @@
 
 <script>
 export default {
-  name: 'App',
+  name: "App",
   created() {
     /*
       TODO
@@ -32,7 +29,7 @@ export default {
          mapstate + this.init()
        ...
     */
-  }
+  },
 }
 </script>
 
