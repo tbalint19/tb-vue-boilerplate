@@ -1,14 +1,26 @@
 #!usr/bin/env groovy
 
 node('linux') {
+
+  branch = checkout(scm).GIT_BRANCH
+  commitHash = checkout(scm).GIT_COMMIT
+
   try {
       checkEnv()
+      sendNotifications("SUCCESS")
   } catch (e) {
       echo 'Build failed with error: ' + e.toString()
       sendNotifications("FAILURE")
   } finally {
 
   }
+}
+
+def checkout() {
+    stage('Checkout') {
+        checkout scm
+        notifyBitbucket()
+    }
 }
 
 def checkEnv() {
@@ -18,8 +30,23 @@ def checkEnv() {
   }
 }
 
+def sendNotifications(String status) {
+    currentBuild.result = status
+    notifyBitbucket()
+}
 
+def notifyBitbucket(String state) {
 
+    notifyBitbucket commitSha1: $ { commitHash },
+            credentialsId: '1af21bbb-b246-42b8-adf0-2c9df8698240',
+            disableInprogressNotification: false,
+            considerUnstableAsSuccess: true,
+            ignoreUnverifiedSSLPeer: true,
+            includeBuildNumberInKey: false,
+            prependParentProjectKey: false,
+            projectKey: '',
+            stashServerBaseUrl: 'http://itdevcrepo2:7990'
+}
 
 
 
