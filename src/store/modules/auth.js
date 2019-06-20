@@ -1,13 +1,13 @@
-import { getError } from "@/util/validate"
-const validations = require("@/../static/validations.json")
+import { getError } from '@/util/validate'
+const validations = require('@/../static/validations.json')
 
 const namespaced = true
 
 const state = () => {
   return {
     input: {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
     },
     validation: {
       username: validations.username,
@@ -21,8 +21,8 @@ const state = () => {
 
 const mutations = {
   INIT(state) {
-    state.input.username = ""
-    state.input.password = ""
+    state.input.username = ''
+    state.input.password = ''
     state.usernameWasEdited = false
     state.passwordWasEdited = false
     state.isLoading = false
@@ -50,11 +50,11 @@ const mutations = {
 }
 
 const getters = {
-  username: state => state.input.username,
-  password: state => state.input.password,
-  usernameErrorKey: state =>
+  username: (state) => state.input.username,
+  password: (state) => state.input.password,
+  usernameErrorKey: (state) =>
     getError(state.input.username, state.validation.username),
-  passwordErrorKey: state =>
+  passwordErrorKey: (state) =>
     getError(state.input.password, state.validation.password),
   hasUsernameError: (state, getters) => getters.usernameErrorKey != null,
   hasPasswordError: (state, getters) => getters.passwordErrorKey != null,
@@ -64,44 +64,44 @@ const getters = {
     state.passwordWasEdited && getters.hasPasswordError,
   hasInputError: (state, getters) =>
     getters.hasUsernameError || getters.hasPasswordError,
-  isLoading: state => state.isLoading,
+  isLoading: (state) => state.isLoading,
   isDisabled: (state, getters) => getters.isLoading || getters.hasInputError,
 }
 
 const actions = {
   init({ commit }) {
-    return commit("INIT")
+    return commit('INIT')
   },
 
   updateUsername({ commit }, value) {
-    return commit("UPDATE_LOGIN_USERNAME", value)
+    return commit('UPDATE_LOGIN_USERNAME', value)
   },
 
   blurUsername({ commit }) {
-    return commit("BLUR_USERNAME")
+    return commit('BLUR_USERNAME')
   },
 
   updatePassword({ commit }, value) {
-    return commit("UPDATE_LOGIN_PASSWORD", value)
+    return commit('UPDATE_LOGIN_PASSWORD', value)
   },
 
   blurPassword({ commit }) {
-    return commit("BLUR_PASSWORD")
+    return commit('BLUR_PASSWORD')
   },
 
   login(context) {
-    context.commit("TOGGLE_LOADING", true)
+    context.commit('TOGGLE_LOADING', true)
     return this.$api.domain
       .login(context.state.input)
-      .then(response => handleLogin(this.$app, context, response))
-      .catch(connectionError => this.$app.$notify("error.login.connection"))
-      .finally(() => context.commit("TOGGLE_LOADING", false))
+      .then((response) => handleLogin(this.$app, context, response))
+      .catch((connectionError) => this.$app.$notify('error.login.connection'))
+      .finally(() => context.commit('TOGGLE_LOADING', false))
   },
 
   logout(context) {
-    this.$app.$notify("note.logout")
-    this.$app.$router.push("/login")
-    return context.dispatch("user/set", null, { root: true })
+    this.$app.$notify('note.logout')
+    this.$app.$router.push('/login')
+    return context.dispatch('user/set', null, { root: true })
   },
 }
 
@@ -115,11 +115,11 @@ export default {
 
 const handleLogin = (app, context, response) => {
   if (response.status == 200) handleLoginSuccess(app, context, response)
-  else app.$notify("error.login.wrongCredentials")
+  else app.$notify('error.login.wrongCredentials')
 }
 
 const handleLoginSuccess = (app, context, response) => {
-  context.dispatch("user/set", response.data.token, { root: true })
-  app.$notify("success.login")
-  app.$router.push("/")
+  context.dispatch('user/set', response.data.token, { root: true })
+  app.$notify('success.login')
+  app.$router.push('/')
 }

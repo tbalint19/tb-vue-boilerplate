@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  props: ["localization", "condition"],
+  props: ['localization', 'condition'],
 }
 </script>
 

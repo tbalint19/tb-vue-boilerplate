@@ -1,4 +1,4 @@
-import { parse } from "@/util/jwt"
+import { parse } from '@/util/jwt'
 
 const namespaced = true
 
@@ -28,17 +28,17 @@ const mutations = {
 }
 
 const getters = {
-  username: state => state.username,
-  isLoggedIn: state => state.isLoggedIn,
-  is: state => role => state.role == role,
-  can: state => permission => state.permissions.includes(permission),
+  username: (state) => state.username,
+  isLoggedIn: (state) => state.isLoggedIn,
+  is: (state) => (role) => state.role == role,
+  can: (state) => (permission) => state.permissions.includes(permission),
 }
 
 const actions = {
   set({ commit }, jwt) {
     let user = parse(jwt)
-    if (user) commit("SET", user)
-    else commit("DEL")
+    if (user) commit('SET', user)
+    else commit('DEL')
   },
 }
 

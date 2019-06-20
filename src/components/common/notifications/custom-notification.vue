@@ -10,13 +10,13 @@
 
 <script>
 export default {
-  props: ["props"],
+  props: ['props'],
   methods: {
     is(type) {
-      return this.props.item.text.split(".")[0] == type
+      return this.props.item.text.split('.')[0] == type
     },
     isNeither() {
-      return !this.is("success") && !this.is("error")
+      return !this.is('success') && !this.is('error')
     },
   },
   computed: {
@@ -24,12 +24,12 @@ export default {
       let type = this.props.item.type
       return {
         card: true,
-        "m-2": true,
-        "w-shadow": true,
-        "text-white": true,
-        "bg-success": this.is("success"),
-        "bg-danger": this.is("error"),
-        "bg-secondary": this.isNeither(),
+        'm-2': true,
+        'w-shadow': true,
+        'text-white': true,
+        'bg-success': this.is('success'),
+        'bg-danger': this.is('error'),
+        'bg-secondary': this.isNeither(),
       }
     },
   },

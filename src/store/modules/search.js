@@ -2,7 +2,7 @@ const namespaced = true
 
 const state = () => {
   return {
-    filterParam: "",
+    filterParam: '',
   }
 }
 
@@ -13,12 +13,12 @@ const mutations = {
 }
 
 const getters = {
-  filterParam: state => state.filterParam,
+  filterParam: (state) => state.filterParam,
 }
 
 const actions = {
   filter(context, value) {
-    context.commit("SET_FILTER_PARAM", value)
+    context.commit('SET_FILTER_PARAM', value)
   },
 }
 

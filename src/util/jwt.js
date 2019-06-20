@@ -1,6 +1,6 @@
-export const parse = token => {
+export const parse = (token) => {
   try {
-    return JSON.parse(atob(token.split(".")[1]))
+    return JSON.parse(atob(token.split('.')[1]))
   } catch (e) {
     return null
   }

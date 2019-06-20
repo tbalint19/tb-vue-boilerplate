@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import Velocity from "velocity-animate"
+import Velocity from 'velocity-animate'
 export default {
   methods: {
     beforeEnter: function(el) {
@@ -22,7 +22,7 @@ export default {
     enter: function(el, done) {
       var delay = el.dataset.index * 150
       setTimeout(function() {
-        Velocity(el, { opacity: 1, height: "1.6em" }, { complete: done })
+        Velocity(el, { opacity: 1, height: '1.6em' }, { complete: done })
       }, delay)
     },
     leave: function(el, done) {

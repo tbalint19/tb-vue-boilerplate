@@ -32,37 +32,37 @@
     >
       <v-icon v-if="!isLoading" name="user" />
       <v-icon v-else name="spinner" :spin="true" />
-      {{ $t("login.button") }}
+      {{ $t('login.button') }}
     </b-button>
   </b-card>
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex"
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapGetters("auth", [
-      "username",
-      "password",
-      "usernameIsValid",
-      "passwordIsValid",
-      "userNameErrorShown",
-      "passwordErrorShown",
-      "usernameErrorKey",
-      "passwordErrorKey",
-      "isLoading",
-      "isDisabled",
+    ...mapGetters('auth', [
+      'username',
+      'password',
+      'usernameIsValid',
+      'passwordIsValid',
+      'userNameErrorShown',
+      'passwordErrorShown',
+      'usernameErrorKey',
+      'passwordErrorKey',
+      'isLoading',
+      'isDisabled',
     ]),
   },
   methods: {
-    ...mapActions("auth", [
-      "init",
-      "updateUsername",
-      "blurUsername",
-      "updatePassword",
-      "blurPassword",
-      "login",
+    ...mapActions('auth', [
+      'init',
+      'updateUsername',
+      'blurUsername',
+      'updatePassword',
+      'blurPassword',
+      'login',
     ]),
   },
   created() {

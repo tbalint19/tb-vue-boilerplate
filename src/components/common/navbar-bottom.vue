@@ -14,10 +14,10 @@
 export default {
   data() {
     return {
-      selected: "en",
+      selected: 'en',
       options: [
-        { value: "hu", text: "Magyar" },
-        { value: "en", text: "English" },
+        { value: 'hu', text: 'Magyar' },
+        { value: 'en', text: 'English' },
       ],
     }
   },
