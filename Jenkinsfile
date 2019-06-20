@@ -10,6 +10,7 @@ node('linux') {
       installDependencies()
       runUnitTests()
       runStoreTests()
+      validateTestCases()
       sendNotifications("SUCCESS")
   } catch (e) {
       echo 'Build failed with error: ' + e.toString()
@@ -54,7 +55,7 @@ def runStoreTests() {
 
 def validateTestCases() {
   stage('Validate test cases (mutation testing)') {
-    sh 'npm run store-tests'
+    sh 'npm run mutate'
   }
 }
 
