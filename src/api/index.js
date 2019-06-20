@@ -1,5 +1,5 @@
-import domains from './domains'
+import domains from "./domains"
 
-require('./mock')
+require("./mock")
 
 export default domains

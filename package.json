@@ -14,7 +14,9 @@
     "store-coverage": "./node_modules/http-server/bin/http-server ./reports/coverage/store/lcov-report/ --cors -a localhost -p 8088",
     "tests": "npm run unit-tests && npm run store-tests",
     "mutate": "./node_modules/@stryker-mutator/core/bin/stryker run",
-    "mutation-report": "./node_modules/http-server/bin/http-server ./reports/mutation/html/ --cors -a localhost -p 8089"
+    "mutation-report": "./node_modules/http-server/bin/http-server ./reports/mutation/html/ --cors -a localhost -p 8089",
+    "format": "./node_modules/.bin/prettier --write 'src/**/*'",
+    "format-check": "./node_modules/.bin/prettier --check 'src/**/*.js'"
   },
   "dependencies": {
     "axios": ">=0.19.0",

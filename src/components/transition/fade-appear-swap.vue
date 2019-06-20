@@ -1,12 +1,11 @@
 <template lang="html">
-<transition name="fadeAppear" mode="out-in">
-  <slot></slot>
-</transition>
+  <transition name="fadeAppear" mode="out-in">
+    <slot></slot>
+  </transition>
 </template>
 
 <script>
-export default {
-}
+export default {}
 </script>
 
 <style lang="css" scoped>
