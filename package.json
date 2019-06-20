@@ -13,7 +13,7 @@
     "store-tests": "cross-env BABEL_ENV=test karma start test/store/karma.conf.js --single-run",
     "store-coverage": "./node_modules/http-server/bin/http-server ./reports/coverage/store/lcov-report/ --cors -a localhost -p 8088",
     "tests": "npm run unit-tests && npm run store-tests",
-    "mutate": "./node_modules/@stryker-mutator/core/bin/stryker run",
+    "mutate": "./node_modules/@stryker-mutator/core/bin/stryker run --fileLogLevel trace --logLevel debug",
     "mutation-report": "./node_modules/http-server/bin/http-server ./reports/mutation/html/ --cors -a localhost -p 8089"
   },
   "dependencies": {

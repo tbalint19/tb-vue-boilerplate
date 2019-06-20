@@ -8,9 +8,11 @@ node('linux') {
   try {
       checkEnv()
       installDependencies()
+      checkCodeFormat()
       runUnitTests()
       runStoreTests()
       validateTestCases()
+      sonar()
       sendNotifications("SUCCESS")
   } catch (e) {
       echo 'Build failed with error: ' + e.toString()
@@ -41,6 +43,12 @@ def installDependencies() {
   }
 }
 
+def checkCodeFormat() {
+  stage('Code format check') {
+
+  }
+}
+
 def runUnitTests() {
   stage('Unit tests (utils)') {
     sh 'npm run unit-tests'
@@ -56,6 +64,18 @@ def runStoreTests() {
 def validateTestCases() {
   stage('Validate test cases (mutation testing)') {
     sh 'npm run mutate'
+  }
+}
+
+def sonar() {
+  stage('Static code analysis (sonarqube)') {
+    
+  }
+}
+
+def build() {
+  stage('Build') {
+    sh 'npm run build'
   }
 }
 
