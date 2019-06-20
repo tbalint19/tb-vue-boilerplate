@@ -13,6 +13,7 @@ node('linux') {
       runStoreTests()
       validateTestCases()
       sonar()
+      build()
       sendNotifications("SUCCESS")
   } catch (e) {
       echo 'Build failed with error: ' + e.toString()
@@ -69,7 +70,7 @@ def validateTestCases() {
 
 def sonar() {
   stage('Static code analysis (sonarqube)') {
-    
+
   }
 }
 
