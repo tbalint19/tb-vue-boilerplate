@@ -8,10 +8,12 @@
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
-    "unit": "cross-env BABEL_ENV=test karma start test/karma.conf.js --single-run",
-    "test": "npm run unit",
+    "unit-tests": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
+    "unit-coverage": "./node_modules/http-server/bin/http-server ./reports/coverage/unit/lcov-report/ --cors -a localhost -p 8088",
+    "store-tests": "cross-env BABEL_ENV=test karma start test/store/karma.conf.js --single-run",
+    "store-coverage": "./node_modules/http-server/bin/http-server ./reports/coverage/store/lcov-report/ --cors -a localhost -p 8088",
+    "tests": "npm run unit-tests && npm run store-tests",
     "mutate": "./node_modules/@stryker-mutator/core/bin/stryker run",
-    "coverage-report": "./node_modules/http-server/bin/http-server ./reports/coverage/lcov-report/ --cors -a localhost -p 8088",
     "mutation-report": "./node_modules/http-server/bin/http-server ./reports/mutation/html/ --cors -a localhost -p 8089"
   },
   "dependencies": {
