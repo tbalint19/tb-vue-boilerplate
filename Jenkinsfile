@@ -33,6 +33,7 @@ def checkEnv() {
 
 def installDependencies() {
   stage('Install dependencies') {
+    sh 'rm -rf ./node_modules'
     sh 'npm install'
   }
 }
