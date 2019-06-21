@@ -14,11 +14,11 @@
     "store-tests": "cross-env BABEL_ENV=test karma start test/store/karma.conf.js --single-run",
     "store-coverage": "./node_modules/http-server/bin/http-server ./reports/coverage/store/lcov-report/ --cors -a localhost -p 8088",
     "tests": "npm run unit-tests && npm run store-tests",
-    "coverage-check": "node scripts/coverage.js",
+    "coverage-check": "node CI/scripts/coverage.js",
     "mutate": "./node_modules/@stryker-mutator/core/bin/stryker run",
     "mutation-report": "./node_modules/http-server/bin/http-server ./reports/mutation/html/ --cors -a localhost -p 8089",
-    "mutate-kill-rate-check": "node scripts/mutateRate.js",
-    "sonar-check": "node scripts/sonar.js",
+    "mutate-kill-rate-check": "node CI/scripts/mutateRate.js",
+    "sonar-check": "node CI/scripts/sonar.js",
     "build": "node build/build.js"
   },
   "dependencies": {
@@ -109,29 +109,5 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ],
-  "pipeline": {
-    "coverage": {
-      "util": {
-        "lines": 80,
-        "statements": 80,
-        "functions": 80,
-        "branches": 80
-      },
-      "store": {
-        "lines": 80,
-        "statements": 80,
-        "functions": 80,
-        "branches": 80
-      }
-    },
-    "mutates": {
-      "killRate": 80
-    },
-    "sonar": {
-      "url": "http://sonarqube.vodafone.hu:9000",
-      "maxIssues": 15,
-      "maxDuplications": 0
-    }
-  }
+  ]
 }

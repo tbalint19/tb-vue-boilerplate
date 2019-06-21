@@ -1,4 +1,3 @@
-// THIS IS A FUCKING JOKE
 var fs = require('fs')
 
 module.exports = () => {

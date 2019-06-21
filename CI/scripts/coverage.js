@@ -1,10 +1,12 @@
-var asJson = require('./asJson.js')
-var tresholds = require('../package.json').pipeline.coverage
+var asJson = require('../util/coverageReportAsJson.js')
+var config = require('../config.json')
+
+var coverage = config.pipeline.coverage
 
 var checkTresholds = function(report, name) {
   for (var key in report) {
-    if (report[key] < tresholds[name][key])
-      throw "" + tresholds[name][key] + "% not passed for " + key + " at " + name + " tests!"
+    if (report[key] < coverage[name][key])
+      throw "" + coverage[name][key] + "% not passed for " + key + " at " + name + " tests!"
   }
 }
 

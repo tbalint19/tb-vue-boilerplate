@@ -1,4 +1,3 @@
-// THIS IS A FUCKING JOKE
 var fs = require('fs')
 
 module.exports = (fileWithPath) => {
@@ -25,4 +24,3 @@ module.exports = (fileWithPath) => {
 
   return coverageData
 }
-// ANYWAY, COVERAGE REPORT CAN BE USED

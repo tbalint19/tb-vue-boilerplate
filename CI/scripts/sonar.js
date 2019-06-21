@@ -1,7 +1,7 @@
 var sonarqubeScanner = require('sonarqube-scanner');
 var request = require('request');
 
-var packageJson = require('../package.json')
+var packageJson = require('../config.json')
 
 var projectName = packageJson.name
 var serverUrl = packageJson.pipeline.sonar.url
