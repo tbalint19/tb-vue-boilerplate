@@ -12,7 +12,7 @@ node('linux') {
       runUnitTests()
       runStoreTests()
       validateTestCases()
-      sonar()
+      sonar(branch)
       build()
       sendNotifications("SUCCESS")
   } catch (e) {
@@ -64,18 +64,19 @@ def runStoreTests() {
 
 def validateTestCases() {
   stage('Validate test cases (mutation testing)') {
+    sh 'rm -rf ./.stryker-tmp'
     sh 'npm run mutate'
   }
 }
 
 def sonar(String branch) {
   stage('Static code analysis (sonarqube)') {
-    def jobName = "${env.JOB_NAME}"
-    def localBranch = branch.replaceFirst("origin/", "")
-    def sonarBranchKey = localBranch
-    def project = sonarBranchKey == "master" ? jobName : "${jobName}:${sonarBranchKey}"
-    def sanitizedSonarProjectName = project.replaceAll("/", "-")
-    gradlew "sonarqube -Dsonar.projectName=${sanitizedSonarProjectName} -Dsonar.projectKey=${sanitizedSonarProjectName}"
+    // def jobName = "${env.JOB_NAME}"
+    // def localBranch = branch.replaceFirst("origin/", "")
+    // def sonarBranchKey = localBranch
+    // def project = sonarBranchKey == "master" ? jobName : "${jobName}:${sonarBranchKey}"
+    // def sanitizedSonarProjectName = project.replaceAll("/", "-")
+    // gradlew "sonarqube -Dsonar.projectName=${sanitizedSonarProjectName} -Dsonar.projectKey=${sanitizedSonarProjectName}"
   }
 }
 
