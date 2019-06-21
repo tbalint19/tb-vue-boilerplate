@@ -8,7 +8,13 @@ module.exports = function(config) {
     karma: {
       configFile: "test/store/karma.conf.js",
       config: {
-        browsers: ["ChromeHeadless"]
+        browsers: ['chromeHeadlessNoSandbox'],
+        customLaunchers: {
+          chromeHeadlessNoSandbox: {
+            base: 'ChromeHeadless',
+            flags: ['--no-sandbox'],
+          },
+        }
       }
     },
     reporters: ["progress", "clear-text", "html"],
