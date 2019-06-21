@@ -130,7 +130,7 @@
     },
     "sonar": {
       "url": "http://172.17.64.60:9004",
-      "maxIssues": 10,
+      "maxIssues": 15,
       "maxDuplications": 0
     }
   }

@@ -65,7 +65,7 @@ def runStoreTests() {
 }
 
 def checkCoverage() {
-  stage('Check coverage reports)') {
+  stage('Check coverage reports') {
     sh 'npm run coverage-check'
   }
 }
