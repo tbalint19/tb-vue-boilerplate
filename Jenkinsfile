@@ -12,6 +12,7 @@ node('linux') {
       checkCodeFormat()
       runUnitTests()
       runStoreTests()
+      checkCoverage()
       validateTestCases()
       sonar(branch)
       build()
@@ -63,16 +64,23 @@ def runStoreTests() {
   }
 }
 
+def checkCoverage() {
+  stage('Check coverage reports)') {
+    sh 'npm run coverage-check'
+  }
+}
+
 def validateTestCases() {
   stage('Validate test cases (mutation testing)') {
     sh 'rm -rf ./.stryker-tmp'
     sh 'npm run mutate'
+    sh 'npm run mutate-kill-rate-check'
   }
 }
 
 def sonar(String branch) {
   stage('Static code analysis (sonarqube)') {
-    sh 'npm run sonar'
+    sh 'npm run sonar-check'
   }
 }
 

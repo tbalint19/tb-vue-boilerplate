@@ -1,9 +1,13 @@
 var sonarqubeScanner = require('sonarqube-scanner');
 var request = require('request');
 
-var projectName = require('./package.json')["name"]
-var serverUrl = "http://172.17.64.60:9004"
+var packageJson = require('../package.json')
+
+var projectName = packageJson.name
+var serverUrl = packageJson.pipeline.sonar.url
 var resultUrl = serverUrl + "/api/issues/search?id=" + projectName
+
+var maxIssues = packageJson.pipeline.sonar.maxIssues
 
 var sonarJob = function(callback) {
   sonarqubeScanner({
@@ -14,8 +18,8 @@ var sonarJob = function(callback) {
 var sonarAnalysis = function() {
   request(resultUrl, function (error, response, body) {
     var issues = JSON.parse(body)["issues"]
-    if (issues)
-      throw "Sonar found " + issues.length + " issues"
+    if (issues.length > maxIssues)
+      throw "Sonar found " + issues.length + " issues (only " + maxIssues + " is acceptable)"
   })
 }
 

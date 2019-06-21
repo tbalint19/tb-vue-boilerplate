@@ -21,7 +21,6 @@ export default {
   },
   computed: {
     compClass() {
-      let type = this.props.item.type
       return {
         card: true,
         'm-2': true,
