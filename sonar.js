@@ -1,3 +1,3 @@
 setTimeout(function log() {
-  console.log("Done")
+  throw "error on purpose"
 }, 10000)
