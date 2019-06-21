@@ -7,6 +7,7 @@ node('linux') {
 
   try {
       checkEnv()
+      checkout()
       installDependencies()
       checkCodeFormat()
       runUnitTests()
@@ -24,7 +25,7 @@ node('linux') {
 }
 
 def checkout() {
-    stage('Checkout') {
+    stage('Checkout source branch') {
         checkout scm
         notifyBitbucket()
     }
@@ -71,11 +72,12 @@ def validateTestCases() {
 
 def sonar(String branch) {
   stage('Static code analysis (sonarqube)') {
-    // def jobName = "${env.JOB_NAME}"
-    // def localBranch = branch.replaceFirst("origin/", "")
-    // def sonarBranchKey = localBranch
-    // def project = sonarBranchKey == "master" ? jobName : "${jobName}:${sonarBranchKey}"
-    // def sanitizedSonarProjectName = project.replaceAll("/", "-")
+    def jobName = "${env.JOB_NAME}"
+    def localBranch = branch.replaceFirst("origin/", "")
+    def sonarBranchKey = localBranch
+    def project = sonarBranchKey == "master" ? jobName : "${jobName}:${sonarBranchKey}"
+    def sanitizedSonarProjectName = project.replaceAll("/", "-")
+    sh 'npm run sonar'
     // gradlew "sonarqube -Dsonar.projectName=${sanitizedSonarProjectName} -Dsonar.projectKey=${sanitizedSonarProjectName}"
   }
 }
