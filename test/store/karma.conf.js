@@ -33,8 +33,12 @@ module.exports = function(config) {
       dir: '../../reports/coverage/store',
       reporters: [
         { type: 'lcov', subdir: '.' },
-        { type: 'text-summary', dir: '../../reports/coverage/store/text-report/', file: '../coverage.txt' },
+        {
+          type: 'text-summary',
+          dir: '../../reports/coverage/store/text-report/',
+          file: '../coverage.txt',
+        },
       ],
-    }
+    },
   })
 }
