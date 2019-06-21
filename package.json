@@ -129,7 +129,7 @@
       "killRate": 80
     },
     "sonar": {
-      "url": "http://172.17.64.60:9004",
+      "url": "http://sonarqube.vodafone.hu:9000",
       "maxIssues": 15,
       "maxDuplications": 0
     }
