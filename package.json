@@ -126,7 +126,7 @@
       }
     },
     "mutates": {
-      "killRate": 100
+      "killRate": 80
     },
     "sonar": {
       "url": "http://172.17.64.60:9004",
