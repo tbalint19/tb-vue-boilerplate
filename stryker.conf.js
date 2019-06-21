@@ -17,7 +17,7 @@ module.exports = function(config) {
         }
       }
     },
-    reporters: ["progress", "clear-text", "html"],
+    reporters: ["progress", "clear-text", "html", "dots"],
     coverageAnalysis: "off"
   });
 };
