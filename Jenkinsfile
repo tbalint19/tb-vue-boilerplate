@@ -33,7 +33,7 @@ def checkout() {
 }
 
 def checkEnv() {
-  stage('Check build environment') {
+  stage('Build environment check') {
     sh 'node -v'
     sh 'npm -v'
   }
@@ -53,25 +53,25 @@ def checkCodeFormat() {
 }
 
 def runUnitTests() {
-  stage('Unit tests (utils)') {
+  stage('Run unit tests') {
     sh 'npm run unit-tests'
   }
 }
 
 def runStoreTests() {
-  stage('Integration tests (store modules)') {
+  stage('Run module-integration tests') {
     sh 'npm run store-tests'
   }
 }
 
 def checkCoverage() {
-  stage('Check coverage reports') {
+  stage('Code coverage check') {
     sh 'npm run coverage-check'
   }
 }
 
 def validateTestCases() {
-  stage('Validate test cases (mutation testing)') {
+  stage('Validate test cases') {
     sh 'rm -rf ./.stryker-tmp'
     sh 'npm run mutate'
     sh 'npm run mutate-kill-rate-check'
@@ -79,7 +79,7 @@ def validateTestCases() {
 }
 
 def sonar(String branch) {
-  stage('Static code analysis (sonarqube)') {
+  stage('Static code analysis') {
     sh 'npm run sonar-check'
   }
 }
