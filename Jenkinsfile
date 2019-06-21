@@ -72,13 +72,7 @@ def validateTestCases() {
 
 def sonar(String branch) {
   stage('Static code analysis (sonarqube)') {
-    def jobName = "${env.JOB_NAME}"
-    def localBranch = branch.replaceFirst("origin/", "")
-    def sonarBranchKey = localBranch
-    def project = sonarBranchKey == "master" ? jobName : "${jobName}:${sonarBranchKey}"
-    def sanitizedSonarProjectName = project.replaceAll("/", "-")
     sh 'npm run sonar'
-    // gradlew "sonarqube -Dsonar.projectName=${sanitizedSonarProjectName} -Dsonar.projectKey=${sanitizedSonarProjectName}"
   }
 }
 

@@ -24,6 +24,7 @@
     "bootstrap": "^4.0.0-beta.2",
     "bootstrap-vue": "latest",
     "lodash": "^4.17.10",
+    "request": "^2.88.0",
     "velocity-animate": "^2.0.5",
     "vue": "^2.5.2",
     "vue-awesome": "^3.5.1",
