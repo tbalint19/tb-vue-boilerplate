@@ -1,4 +1,4 @@
-var asJson = require('../util/coverageReportAsJson.js')
+var asJson = require('../util/coverageReportAsObj.js')
 var config = require('../config.json')
 
 var coverage = config.pipeline.coverage
