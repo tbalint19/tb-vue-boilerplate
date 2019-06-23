@@ -1,7 +1,7 @@
 var asJson = require('../util/coverageReportAsObj.js')
 var config = require('../config.json')
 
-var coverage = config.pipeline.coverage
+var coverage = config.coverage
 
 var checkTresholds = function(report, name) {
   for (var key in report) {
