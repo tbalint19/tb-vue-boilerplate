@@ -19,7 +19,9 @@ var sonarJob = function(callback) {
 var sonarAnalysis = function() {
   request(resultUrl, function (error, response, body) {
     var issues = JSON.parse(body)["issues"]
-    var relevantIssues = issues.filter(issue => issue.component.startsWith(name + ":src"))
+    var relevantIssues = issues.filter(issue => issue.component.startsWith(projectName + ":src"))
+    console.log("Issues: ", relevantIssues.length)
+    console.log(relevantIssues)
     if (relevantIssues.length > maxIssues)
       throw "Sonar found " + issues.length + " issues (only " + maxIssues + " is acceptable)"
   })
