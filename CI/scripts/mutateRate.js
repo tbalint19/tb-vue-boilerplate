@@ -1,7 +1,7 @@
 var asJson = require('../util/mutationReportAsObj.js')
 var config = require('../config.json')
 
-var killRate = config.pipeline.mutates.killRate
+var killRate = config.mutates.killRate
 
 var report = asJson()
 

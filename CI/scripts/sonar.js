@@ -4,10 +4,10 @@ var request = require('request');
 var packageJson = require('../config.json')
 
 var projectName = packageJson.name
-var serverUrl = packageJson.pipeline.sonar.url
+var serverUrl = packageJson.sonar.url
 var resultUrl = serverUrl + "/api/issues/search?id=" + projectName
 
-var maxIssues = packageJson.pipeline.sonar.maxIssues
+var maxIssues = packageJson.sonar.maxIssues
 
 var sonarJob = function(callback) {
   sonarqubeScanner({
