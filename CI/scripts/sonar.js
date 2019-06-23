@@ -1,13 +1,14 @@
 var sonarqubeScanner = require('sonarqube-scanner');
 var request = require('request');
 
-var packageJson = require('../config.json')
+var config = require('../config.json')
+var packageJson = require('../../package.json')
 
 var projectName = packageJson.name
-var serverUrl = packageJson.sonar.url
+var serverUrl = config.sonar.url
 var resultUrl = serverUrl + "/api/issues/search?id=" + projectName
 
-var maxIssues = packageJson.sonar.maxIssues
+var maxIssues = config.sonar.maxIssues
 
 var sonarJob = function(callback) {
   sonarqubeScanner({
