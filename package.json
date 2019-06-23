@@ -16,7 +16,7 @@
     "tests": "npm run unit-tests && npm run store-tests",
     "coverage-check": "node CI/scripts/coverage.js",
     "mutate": "./node_modules/@stryker-mutator/core/bin/stryker run",
-    "mutation-report": "./node_modules/http-server/bin/http-server ./reports/mutation/html/ --cors -a localhost -p 8089",
+    "mutation-report-ui": "./node_modules/http-server/bin/http-server ./reports/mutation/html/ --cors -a localhost -p 8089",
     "mutate-kill-rate-check": "node CI/scripts/mutateRate.js",
     "sonar-check": "node CI/scripts/sonar.js",
     "build": "node build/build.js"
