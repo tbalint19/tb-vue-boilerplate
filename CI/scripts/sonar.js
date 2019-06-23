@@ -6,7 +6,7 @@ var packageJson = require('../../package.json')
 
 var projectName = packageJson.name
 var serverUrl = config.sonar.url
-var resultUrl = serverUrl + "/api/issues/search?id=" + projectName
+var resultUrl = serverUrl + "/api/issues/search?componentRoots=" + projectName + "&pageSize=-1"
 
 var maxIssues = config.sonar.maxIssues
 
@@ -19,7 +19,8 @@ var sonarJob = function(callback) {
 var sonarAnalysis = function() {
   request(resultUrl, function (error, response, body) {
     var issues = JSON.parse(body)["issues"]
-    if (issues.length > maxIssues)
+    var relevantIssues = issues.filter(issue => issue.component.startsWith(name + ":src"))
+    if (relevantIssues.length > maxIssues)
       throw "Sonar found " + issues.length + " issues (only " + maxIssues + " is acceptable)"
   })
 }
