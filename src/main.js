@@ -10,54 +10,37 @@ import router from './router'
 import store from './store'
 import domains from './api'
 
-// Plugins
+// 3rd party
 Vue.use(BootstrapVue)
 Vue.use(Notifications)
 Vue.use(VueI18n)
+Vue.component('v-icon', Icon)
 
 // Components
-Vue.component('navbar-top', require('@/components/common/navbar-top').default)
-Vue.component(
-  'navbar-bottom',
-  require('@/components/common/navbar-bottom').default
-)
+const register = (Vue) => (path) => {
+  const name = (path) => path.split('/')[path.split('/').length-1]
+  const component = (path) => require('@/components/' + path + '.vue').default
+  Vue.component( name(path), component(path) )
+}
 
-Vue.component(
-  'grow-appear',
-  require('@/components/transition/grow-appear').default
-)
-Vue.component(
-  'grow-appear-elements',
-  require('@/components/transition/grow-appear-elements').default
-)
-Vue.component(
-  'fade-appear-swap',
-  require('@/components/transition/fade-appear-swap').default
-)
-Vue.component(
-  'slide-swap',
-  require('@/components/transition/slide-swap').default
-)
+var components = [
+  'common/navbar-top',
+  'common/navbar-bottom',
 
-Vue.component(
-  'login-card',
-  require('@/components/common/card/login-card').default
-)
-Vue.component(
-  'input-error',
-  require('@/components/common/text/input-error').default
-)
-Vue.component(
-  'landing-message',
-  require('@/components/common/text/landing-message').default
-)
+  'common/card/login-card',
 
-Vue.component(
-  'custom-notification',
-  require('@/components/common/notifications/custom-notification').default
-)
+  'common/text/landing-message',
+  'common/text/input-error',
 
-Vue.component('v-icon', Icon)
+  'common/notifications/custom-notification',
+
+  'transition/grow-appear',
+  'transition/grow-appear-elements',
+  'transition/fade-appear-swap',
+  'transition/slide-swap',
+]
+components.forEach(register(Vue))
+
 
 // Language config
 const i18n = new VueI18n({
