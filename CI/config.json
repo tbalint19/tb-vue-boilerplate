@@ -18,7 +18,7 @@
   },
   "sonar": {
     "url": "http://sonarqube.vodafone.hu:9000",
-    "maxIssues": 15,
+    "maxIssues": 0,
     "maxDuplications": 0
   }
 }
