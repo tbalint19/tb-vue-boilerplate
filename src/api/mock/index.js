@@ -1,4 +1,4 @@
-import domains from '../domains'
+import domains from '../client'
 import { applyDomainAdapter } from './domain-mock'
 
 export default (() => {
