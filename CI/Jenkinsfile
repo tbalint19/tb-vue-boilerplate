@@ -14,7 +14,7 @@ node('linux') {
       // runStoreTests()
       // checkCoverage()
       // validateTestCases()
-      // sonar(branch)
+      sonar(branch)
       build()
       sendNotifications("SUCCESS")
   } catch (e) {
