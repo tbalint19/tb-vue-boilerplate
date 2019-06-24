@@ -12,7 +12,8 @@ var maxIssues = config.sonar.maxIssues
 
 var sonarJob = function(callback) {
   sonarqubeScanner({
-    serverUrl
+    serverUrl,
+    sonarScmExclusionsDisabled: false
   }, callback);
 }
 
