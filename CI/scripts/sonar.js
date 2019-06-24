@@ -15,8 +15,8 @@ var sonarJob = function(callback) {
     serverUrl,
     options: {
       'sonar.sources': 'src,test',
-      'sonar.scm.forceReloadAll': true,
-      'sonar.scm.exclusions.disabled': false
+      'sonar.scm.forceReloadAll': 'true',
+      'sonar.scm.exclusions.disabled': 'false'
     }
   }, callback);
 }
