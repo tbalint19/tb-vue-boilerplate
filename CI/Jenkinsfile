@@ -80,7 +80,7 @@ def validateTestCases() {
 
 def sonar(String branch) {
   stage('Static code analysis') {
-    sh 'npm run sonar-check'
+    sh 'npm --branch=${branch} run sonar-check'
   }
 }
 

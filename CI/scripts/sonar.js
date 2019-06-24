@@ -4,6 +4,9 @@ var request = require('request');
 var config = require('../config.json')
 var packageJson = require('../../package.json')
 
+var branch = process.env.npm_config_branch
+console.log("BRANCH:::::::::", branch)
+
 var projectName = packageJson.name
 var serverUrl = config.sonar.url
 var resultUrl = serverUrl + "/api/issues/search?componentRoots=" + projectName + "&pageSize=-1"
@@ -16,7 +19,9 @@ var sonarJob = function(callback) {
     options: {
       'sonar.sources': 'src',
       'sonar.scm.forceReloadAll': 'true',
-      'sonar.scm.exclusions.disabled': 'false'
+      'sonar.scm.exclusions.disabled': 'false',
+      'sonar.projectName': branch,
+      'sonar.projectKey': branch
     }
   }, callback);
 }
