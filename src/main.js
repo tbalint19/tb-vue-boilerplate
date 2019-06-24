@@ -18,9 +18,9 @@ Vue.component('v-icon', Icon)
 
 // Components
 const register = (Vue) => (path) => {
-  const name = (path) => path.split('/')[path.split('/').length-1]
+  const name = (path) => path.split('/')[path.split('/').length - 1]
   const component = (path) => require('@/components/' + path + '.vue').default
-  Vue.component( name(path), component(path) )
+  Vue.component(name(path), component(path))
 }
 
 var components = [
@@ -40,7 +40,6 @@ var components = [
   'transition/slide-swap',
 ]
 components.forEach(register(Vue))
-
 
 // Language config
 const i18n = new VueI18n({
