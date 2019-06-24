@@ -4,7 +4,7 @@ var request = require('request');
 var config = require('../config.json')
 var packageJson = require('../../package.json')
 
-var projectName = process.env.npm_config_branch
+var projectName = process.env.npm_config_branch.split('IntDev/')[1]
 var serverUrl = config.sonar.url
 var resultUrl = serverUrl + "/api/issues/search?componentRoots=" + projectName + "&pageSize=-1"
 

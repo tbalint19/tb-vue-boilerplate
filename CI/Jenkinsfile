@@ -81,15 +81,10 @@ def validateTestCases() {
 def sonar(String branch) {
   stage('Static code analysis') {
     def jobName = "${env.JOB_NAME}"
-    echo "${jobName}"
     def localBranch = branch.replaceFirst("origin/", "")
-    echo "${localBranch}"
     def sonarBranchKey = localBranch
-    echo "${sonarBranchKey}"
     def project = sonarBranchKey == "master" ? jobName : "${jobName}:${sonarBranchKey}"
-    echo "${project}"
     def sanitizedSonarProjectName = project.replaceAll("/", "-")
-    echo "${sanitizedSonarProjectName}"
     sh "npm --branch=${sanitizedSonarProjectName} run sonar-check"
   }
 }
