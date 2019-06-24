@@ -141,7 +141,7 @@ describe('Auth tests', () => {
     expect(store.getters['user/username']).to.equal('bela')
 
     expectRedirect(by(store), to('/'))
-    //expectNotification(by(store), '')
+    expectNotification(by(store), 'success.login')
   })
 
   it('Should not login for http401', async () => {
@@ -158,7 +158,7 @@ describe('Auth tests', () => {
     expect(store.getters['user/username']).to.equal(null)
 
     expectNoRedirection(by(store))
-    //expectNotification(by(store), '')
+    expectNotification(by(store), 'error.login.connection')
   })
 
   it('Should update disabled getter')
@@ -179,7 +179,7 @@ describe('Auth tests', () => {
     expect(store.getters['user/username']).to.equal(null)
 
     expectNoRedirection(by(store))
-    //expectNotification(by(store), '')
+    expectNotification(by(store), 'error.login.connection')
   })
 
   it('Should logout', () => {
@@ -193,6 +193,6 @@ describe('Auth tests', () => {
     expect(store.getters['user/isLoggedIn']).to.equal(false)
 
     expectRedirect(by(store), to('/login'))
-    //expectNotification(by(store), '')
+    expectNotification(by(store), 'note.logout')
   })
 })
