@@ -21,7 +21,7 @@ node('linux') {
       echo 'Build failed with error: ' + e.toString()
       sendNotifications("FAILURE")
   } finally {
-
+      cleanUp()
   }
 }
 
@@ -92,6 +92,12 @@ def sonar(String branch) {
 def build() {
   stage('Build') {
     sh 'npm run build'
+  }
+}
+
+def cleanUp() {
+  stage('Cleanup') {
+    sh 'rm -rf ./node_modules'
   }
 }
 
