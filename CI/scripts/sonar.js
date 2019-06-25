@@ -32,7 +32,7 @@ var bugAnalysis = function() {
   request(bugUrl, function (error, response, body) {
     var issues = JSON.parse(body)["issues"]
     var relevantIssues = issues.filter(issue => issue.component.startsWith(projectName))
-    var openRelevantIssues = relevantIssues.filter(issue => !issue.resolution == 'FIXED' || !issue.status == 'CLOSED')
+    var openRelevantIssues = relevantIssues.filter(issue => ((issue.resolution != 'FIXED') || (issue.status != 'CLOSED')))
 
     console.log("\n------------ Issues -------------------")
     console.log("Fetched: ", bugUrl)
@@ -40,7 +40,7 @@ var bugAnalysis = function() {
     console.log("Issues: ", openRelevantIssues.length)
     console.log(openRelevantIssues)
     console.log("---------------------------------------\n")
-    
+
     if (openRelevantIssues.length > maxIssues)
       throw "Sonar found " + issues.length + " issues (only " + maxIssues + " is acceptable)"
   })
