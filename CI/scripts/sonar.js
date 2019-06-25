@@ -8,7 +8,7 @@ var projectName = process.env.npm_config_branch
 var serverUrl = config.sonar.url
 var bugUrl = serverUrl + "/api/issues/search?componentRoots=" + projectName + "&pageSize=-1&p=1"
 // http://sonarqube.vodafone.hu:9000/api/issues/search?componentRoots=projectKey&pageSize=500&p=1
-var duplicationsUrl = serverUrl + "/api/measures/component_tree?baseComponentKey=" + projectName + "&metricKeys=duplicated_lines&pageSize=-1&p=1"
+var duplicationsUrl = serverUrl + "/api/measures/component_tree?baseComponentKey=" + projectName + "&metricKeys=duplicated_lines&pageSize=500&p=1"
 // http://sonarqube.vodafone.hu:9000/api/measures/component_tree?baseComponentKey=projectKey&metricKeys=duplicated_lines&p=1
 // as projects grow, p=2, p=3... might be neeeded (page=2, page=3, if 1000, 1500 files are examined)
 
@@ -33,7 +33,7 @@ var bugAnalysis = function() {
     var issues = JSON.parse(body)["issues"]
     var relevantIssues = issues.filter(issue => issue.component.startsWith(projectName))
     var openRelevantIssues = relevantIssues.filter(issue => !issue.resolution == 'FIXED' || !issue.status == 'CLOSED')
-    console.log("Fetched: ", resultUrl)
+    console.log("Fetched: ", bugUrl)
     console.log("Project: ", projectName)
     console.log("Issues: ", openRelevantIssues.length)
     console.log(openRelevantIssues)
@@ -47,10 +47,10 @@ var duplicationAnalysis = function() {
     var response = JSON.parse(body)
     var filesWithDuplications = response["components"]
       .map(c => { return { file: c.name, duplicatedLines: c.measures[0].value } })
-      .filter(res => res.lines > 0)
-    filesWithDuplications.forEach(console.log)
+      .filter(res => res.duplicatedLines > 0)
+    filesWithDuplications.forEach(f=> console.log(f))
     if (filesWithDuplications.length > 0)
-      throw "Sonar found duplications in" + filesWithDuplications.length + " (only " + maxDuplications + " is acceptable)"
+      throw "Sonar found duplications in " + filesWithDuplications.length + " files (only " + maxDuplications + " is acceptable)"
   })
 }
 
