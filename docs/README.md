@@ -463,19 +463,40 @@ It is already set up in the Spring boot boilerplate app, thus its documentation 
 
 ## Design - TODO
 Vue transitions
+
 Bootstrap vue
+
 Vueawesome (Fontawesome)
+
 no "designer" - at least for internal
-projects - skilled designer (in web technologies) for fast development (familiar with standards, libs, frameworks)
+projects
+
+skilled designer for customer-facing apps (in web technologies) for fast development (familiar with standards, libs, frameworks)
 
 ## I18n - TODO
 Already setup with static jsons
 
 ## Components and plugins - TODO
 Awesome vue - curated list
+
 Check for Vuex integration if multiple present
 
 ## Auth - TODO
 JWT - payload - vuex - routing and hide-show
+
 JWT - localstorage/sessionstorage
+
 JWT - axios - sensitive data is unavailable without valid JWT
+
+## CI/CD - TODO
+Format
+
+Tests
+
+Coverage
+
+Mutation
+
+Sonar
+
+Build
