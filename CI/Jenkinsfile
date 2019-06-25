@@ -6,14 +6,14 @@ node('linux') {
   commitHash = checkout(scm).GIT_COMMIT
 
   try {
-      // checkEnv()
-      // checkout()
-      // installDependencies()
-      // checkCodeFormat()
-      // runUnitTests()
-      // runStoreTests()
-      // checkCoverage()
-      // validateTestCases()
+      checkEnv()
+      checkout()
+      installDependencies()
+      checkCodeFormat()
+      runUnitTests()
+      runStoreTests()
+      checkCoverage()
+      validateTestCases()
       sonar(branch)
       build()
       sendNotifications("SUCCESS")
