@@ -19,7 +19,7 @@ var sonarJob = function(callback) {
   sonarqubeScanner({
     serverUrl,
     options: {
-      'sonar.sources': 'src',
+      'sonar.sources': 'src,test',
       'sonar.scm.forceReloadAll': 'true',
       'sonar.scm.exclusions.disabled': 'false',
       'sonar.projectName': projectName,
