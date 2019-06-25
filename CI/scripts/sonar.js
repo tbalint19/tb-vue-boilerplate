@@ -7,12 +7,13 @@ var packageJson = require('../../package.json')
 var projectName = process.env.npm_config_branch
 var serverUrl = config.sonar.url
 var bugUrl = serverUrl + "/api/issues/search?componentRoots=" + projectName + "&pageSize=-1"
+// http://sonarqube.vodafone.hu:9000/api/issues/search?componentRoots=projectKey&pageSize=500&p=1
 var duplicationsUrl = serverUrl + "/api/measures/component_tree?baseComponentKey=" + projectName + "&metricKeys=duplicated_lines&pageSize=-1"
+// http://sonarqube.vodafone.hu:9000/api/measures/component_tree?baseComponentKey=projectKey&metricKeys=duplicated_lines&p=1
+// as projects grow, p=2, p=3... might be neeeded (page=2, page=3, if 1000, 1500 files are examined)
 
 var maxIssues = config.sonar.maxIssues
 var maxDuplications = config.sonar.maxDuplications
-
-//http://sonarqube.vodafone.hu:9000/api/measures/component_tree?baseComponentKey=IntDev-vue-frontend-kitchensink-app:feature-NMA-761-frontend-pipeline-check-duplications-sonar&metricKeys=duplicated_lines
 
 var sonarJob = function(callback) {
   sonarqubeScanner({
