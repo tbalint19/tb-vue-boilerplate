@@ -7,7 +7,7 @@ var packageJson = require('../../package.json')
 var projectName = process.env.npm_config_branch
 var serverUrl = config.sonar.url
 var bugUrl = serverUrl + "/api/issues/search?componentRoots=" + projectName + "&pageSize=-1"
-var duplicationsUrl = serverUrl + "/api/measures/component_tree?baseComponentKey=" + projectKey + "&metricKeys=duplicated_lines&pageSize=-1"
+var duplicationsUrl = serverUrl + "/api/measures/component_tree?baseComponentKey=" + projectName + "&metricKeys=duplicated_lines&pageSize=-1"
 
 var maxIssues = config.sonar.maxIssues
 var maxDuplications = config.sonar.maxDuplications
