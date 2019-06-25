@@ -27,7 +27,7 @@ var sonarAnalysis = function() {
   request(resultUrl, function (error, response, body) {
     var issues = JSON.parse(body)["issues"]
     var relevantIssues = issues.filter(issue => issue.component.startsWith(projectName))
-    var openRelevantIssues = relevantIssues.filter(issue => !(issue.resolution == 'FIXED' && issue.status == 'CLOSED'))
+    var openRelevantIssues = relevantIssues.filter(issue => !issue.resolution == 'FIXED' || !issue.status == 'CLOSED')
     console.log("Fetched: ", resultUrl)
     console.log("Project: ", projectName)
     console.log("Issues: ", openRelevantIssues.length)
