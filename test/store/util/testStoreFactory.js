@@ -9,12 +9,12 @@ localVue.use(Vuex)
 
 const voidClosure = (...args) => {}
 
-const stubApp = store => {
+const stubApp = (store) => {
   store.$app = {
     $router: {
-      push: function() {}
+      push: function() {},
     },
-    $notify: function() {}
+    $notify: function() {},
   }
 
   sinon.stub(store.$app.$router, 'push')
@@ -26,14 +26,14 @@ const stubApp = store => {
 
 const addAdapters = (store) => {
   const domains = Object.keys(store.$api)
-  domains.forEach(domain => {
-    const key = "$" + domain + "Mock"
-    store[key] =  new MockAdapter(store.$api[domain].http, { delayResponse: 0 })
+  domains.forEach((domain) => {
+    const key = '$' + domain + 'Mock'
+    store[key] = new MockAdapter(store.$api[domain].http, { delayResponse: 0 })
   })
 }
 
 export const testStore = () => {
-  const testStore = new Vuex.Store({modules, strict:true})
+  const testStore = new Vuex.Store({ modules, strict: true })
 
   stubApp(testStore)
 

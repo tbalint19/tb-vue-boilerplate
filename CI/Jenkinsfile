@@ -1,0 +1,114 @@
+#!usr/bin/env groovy
+
+node('linux') {
+
+  branch = checkout(scm).GIT_BRANCH
+  commitHash = checkout(scm).GIT_COMMIT
+
+  try {
+      checkEnv()
+      checkout()
+      installDependencies()
+      checkCodeFormat()
+      runUnitTests()
+      runStoreTests()
+      checkCoverage()
+      validateTestCases()
+      sonar(branch)
+      build()
+      sendNotifications("SUCCESS")
+  } catch (e) {
+      echo 'Build failed with error: ' + e.toString()
+      sendNotifications("FAILURE")
+  } finally {
+
+  }
+}
+
+def checkout() {
+    stage('Checkout source branch') {
+        checkout scm
+        notifyBitbucket()
+    }
+}
+
+def checkEnv() {
+  stage('Build environment check') {
+    sh 'node -v'
+    sh 'npm -v'
+  }
+}
+
+def installDependencies() {
+  stage('Install dependencies') {
+    sh 'rm -rf ./node_modules'
+    sh 'npm install'
+  }
+}
+
+def checkCodeFormat() {
+  stage('Code format check') {
+    sh 'npm run format-check'
+  }
+}
+
+def runUnitTests() {
+  stage('Run unit tests') {
+    sh 'npm run unit-tests'
+  }
+}
+
+def runStoreTests() {
+  stage('Run module-integration tests') {
+    sh 'npm run store-tests'
+  }
+}
+
+def checkCoverage() {
+  stage('Code coverage check') {
+    sh 'npm run coverage-check'
+  }
+}
+
+def validateTestCases() {
+  stage('Validate test cases') {
+    sh 'rm -rf ./.stryker-tmp'
+    sh 'npm run mutate'
+    sh 'npm run mutate-kill-rate-check'
+  }
+}
+
+def sonar(String branch) {
+  stage('Static code analysis') {
+    def jobName = "${env.JOB_NAME}"
+    def localBranch = branch.replaceFirst("origin/", "")
+    def sonarBranchKey = localBranch
+    def project = sonarBranchKey == "master" ? jobName : "${jobName}:${sonarBranchKey}"
+    def sanitizedSonarProjectName = project.replaceAll("/", "-")
+    sh "npm --branch=${sanitizedSonarProjectName} run sonar-check"
+  }
+}
+
+def build() {
+  stage('Build') {
+    sh 'npm run build'
+  }
+}
+
+def sendNotifications(String status) {
+    currentBuild.result = status
+    notifyBitbucket()
+}
+
+def notifyBitbucket(String state) {
+
+    notifyBitbucket commitSha1: $ { commitHash },
+            credentialsId: '1af21bbb-b246-42b8-adf0-2c9df8698240',
+            disableInprogressNotification: false,
+            considerUnstableAsSuccess: true,
+            ignoreUnverifiedSSLPeer: true,
+            includeBuildNumberInKey: false,
+            prependParentProjectKey: false,
+            projectKey: '',
+            stashServerBaseUrl: 'http://itdevcrepo2:7990'
+}

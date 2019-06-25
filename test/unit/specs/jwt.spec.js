@@ -1,11 +1,10 @@
 import { parse } from '@/util/jwt'
-var jwt = require('jsonwebtoken');
+var jwt = require('jsonwebtoken')
 
 describe('JWT tests', () => {
-
   it('Should return null for invalid JWT', () => {
     // given
-    let invalidJWT = "abc"
+    let invalidJWT = 'abc'
 
     // when
     let payload = parse(invalidJWT)
@@ -16,13 +15,12 @@ describe('JWT tests', () => {
 
   it('Should parse valid JWT', () => {
     // given
-    let validJWT = jwt.sign({ foo: "bar" }, "secret-key");
+    let validJWT = jwt.sign({ foo: 'bar' }, 'secret-key')
 
     // when
     let payload = parse(validJWT)
 
     // then
-    expect(payload["foo"]).to.equal("bar")
+    expect(payload['foo']).to.equal('bar')
   })
-
 })

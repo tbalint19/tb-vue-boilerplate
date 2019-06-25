@@ -3,63 +3,69 @@ const validations = require('@/../static/validations.json')
 
 const namespaced = true
 
-const state = () => { return {
+const state = () => {
+  return {
     input: {
-      username: "",
-      password: ""
+      username: '',
+      password: '',
     },
     validation: {
       username: validations.username,
-      password: validations.password
+      password: validations.password,
     },
     usernameWasEdited: false,
     passwordWasEdited: false,
-    isLoading: false
+    isLoading: false,
   }
 }
 
 const mutations = {
-  INIT (state) {
-    state.input.username = ""
-    state.input.password = ""
+  INIT(state) {
+    state.input.username = ''
+    state.input.password = ''
     state.usernameWasEdited = false
     state.passwordWasEdited = false
     state.isLoading = false
   },
 
-  UPDATE_LOGIN_USERNAME (state, username) {
+  UPDATE_LOGIN_USERNAME(state, username) {
     state.input.username = username
   },
 
-  UPDATE_LOGIN_PASSWORD (state, password) {
+  UPDATE_LOGIN_PASSWORD(state, password) {
     state.input.password = password
   },
 
-  BLUR_USERNAME (state) {
+  BLUR_USERNAME(state) {
     state.usernameWasEdited = true
   },
 
-  BLUR_PASSWORD (state) {
+  BLUR_PASSWORD(state) {
     state.passwordWasEdited = true
   },
 
-  TOGGLE_LOADING (state, to) {
+  TOGGLE_LOADING(state, to) {
     state.isLoading = to
-  }
+  },
 }
 
 const getters = {
-  username: state => state.input.username,
-  password: state => state.input.password,
-  usernameErrorKey: state => getError(state.input.username, state.validation.username),
-  passwordErrorKey: state => getError(state.input.password, state.validation.password),
+  username: (state) => state.input.username,
+  password: (state) => state.input.password,
+  usernameErrorKey: (state) =>
+    getError(state.input.username, state.validation.username),
+  passwordErrorKey: (state) =>
+    getError(state.input.password, state.validation.password),
   hasUsernameError: (state, getters) => getters.usernameErrorKey != null,
   hasPasswordError: (state, getters) => getters.passwordErrorKey != null,
-  userNameErrorShown: (state, getters) => state.usernameWasEdited && getters.hasUsernameError,
-  passwordErrorShown: (state, getters) => state.passwordWasEdited && getters.hasPasswordError,
-  hasInputError: (state, getters) => getters.hasUsernameError || getters.hasPasswordError,
-  isLoading: state => state.isLoading,
-  isDisabled: (state, getters) => getters.isLoading || getters.hasInputError
+  userNameErrorShown: (state, getters) =>
+    state.usernameWasEdited && getters.hasUsernameError,
+  passwordErrorShown: (state, getters) =>
+    state.passwordWasEdited && getters.hasPasswordError,
+  hasInputError: (state, getters) =>
+    getters.hasUsernameError || getters.hasPasswordError,
+  isLoading: (state) => state.isLoading,
+  isDisabled: (state, getters) => getters.isLoading || getters.hasInputError,
 }
 
 const actions = {
@@ -83,23 +89,20 @@ const actions = {
     return commit('BLUR_PASSWORD')
   },
 
-  login (context) {
+  login(context) {
     context.commit('TOGGLE_LOADING', true)
     return this.$api.domain
       .login(context.state.input)
-        .then(response =>
-          handleLogin(this.$app, context, response))
-        .catch(connectionError =>
-          this.$app.$notify('error.login.connection'))
-        .finally(() =>
-          context.commit('TOGGLE_LOADING', false))
+      .then((response) => handleLogin(this.$app, context, response))
+      .catch((connectionError) => this.$app.$notify('error.login.connection'))
+      .finally(() => context.commit('TOGGLE_LOADING', false))
   },
 
   logout(context) {
     this.$app.$notify('note.logout')
-    this.$app.$router.push("/login")
+    this.$app.$router.push('/login')
     return context.dispatch('user/set', null, { root: true })
-  }
+  },
 }
 
 export default {
@@ -107,14 +110,12 @@ export default {
   state,
   getters,
   mutations,
-  actions
+  actions,
 }
 
 const handleLogin = (app, context, response) => {
-  if (response.status == 200)
-    handleLoginSuccess(app, context, response)
-  else
-    app.$notify('error.login.wrongCredentials')
+  if (response.status == 200) handleLoginSuccess(app, context, response)
+  else app.$notify('error.login.wrongCredentials')
 }
 
 const handleLoginSuccess = (app, context, response) => {

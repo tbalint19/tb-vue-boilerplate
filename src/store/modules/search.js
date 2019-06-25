@@ -1,24 +1,25 @@
 const namespaced = true
 
-const state = () => { return {
-    filterParam: ""
+const state = () => {
+  return {
+    filterParam: '',
   }
 }
 
 const mutations = {
-  SET_FILTER_PARAM (state, value) {
+  SET_FILTER_PARAM(state, value) {
     state.filterParam = value
-  }
+  },
 }
 
 const getters = {
-  filterParam: state => state.filterParam
+  filterParam: (state) => state.filterParam,
 }
 
 const actions = {
   filter(context, value) {
     context.commit('SET_FILTER_PARAM', value)
-  }
+  },
 }
 
 export default {
@@ -26,5 +27,5 @@ export default {
   state,
   getters,
   mutations,
-  actions
+  actions,
 }
