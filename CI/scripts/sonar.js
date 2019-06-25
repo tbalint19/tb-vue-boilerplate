@@ -12,6 +12,10 @@ var duplicationsUrl = serverUrl + "/api/measures/component_tree?baseComponentKey
 // http://sonarqube.vodafone.hu:9000/api/measures/component_tree?baseComponentKey=projectKey&metricKeys=duplicated_lines&p=1
 // as projects grow, p=2, p=3... might be neeeded (page=2, page=3, if 1000, 1500 files are examined)
 
+console.log("---------------------------------")
+console.log("Sonar project: ", projectName)
+console.log("---------------------------------")
+
 var maxIssues = config.sonar.maxIssues
 var maxDuplications = config.sonar.maxDuplications
 
@@ -19,7 +23,7 @@ var sonarJob = function(callback) {
   sonarqubeScanner({
     serverUrl,
     options: {
-      'sonar.sources': 'src',
+      'sonar.sources': 'src,test',
       'sonar.scm.forceReloadAll': 'true',
       'sonar.scm.exclusions.disabled': 'false',
       'sonar.projectName': projectName,
