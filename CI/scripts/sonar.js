@@ -6,9 +6,9 @@ var packageJson = require('../../package.json')
 
 var projectName = process.env.npm_config_branch
 var serverUrl = config.sonar.url
-var bugUrl = serverUrl + "/api/issues/search?componentRoots=" + projectName + "&pageSize=-1"
+var bugUrl = serverUrl + "/api/issues/search?componentRoots=" + projectName + "&pageSize=-1&p=1"
 // http://sonarqube.vodafone.hu:9000/api/issues/search?componentRoots=projectKey&pageSize=500&p=1
-var duplicationsUrl = serverUrl + "/api/measures/component_tree?baseComponentKey=" + projectName + "&metricKeys=duplicated_lines&pageSize=-1"
+var duplicationsUrl = serverUrl + "/api/measures/component_tree?baseComponentKey=" + projectName + "&metricKeys=duplicated_lines&pageSize=-1&p=1"
 // http://sonarqube.vodafone.hu:9000/api/measures/component_tree?baseComponentKey=projectKey&metricKeys=duplicated_lines&p=1
 // as projects grow, p=2, p=3... might be neeeded (page=2, page=3, if 1000, 1500 files are examined)
 
@@ -48,7 +48,7 @@ var duplicationAnalysis = function() {
     var filesWithDuplications = response["components"]
       .map(c => { return { file: c.name, duplicatedLines: c.measures[0].value } })
       .filter(res => res.lines > 0)
-    filesWithDuplications.forEach(fileData => console.log(fileData))
+    filesWithDuplications.forEach(console.log)
     if (filesWithDuplications.length > 0)
       throw "Sonar found duplications in" + filesWithDuplications.length + " (only " + maxDuplications + " is acceptable)"
   })
