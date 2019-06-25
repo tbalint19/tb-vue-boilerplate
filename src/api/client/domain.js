@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export default class akarmi {
+export default class Domain {
   constructor() {
     this.http = axios.create({
       baseURL: 'https://jsonplaceholder.typicode.com',
