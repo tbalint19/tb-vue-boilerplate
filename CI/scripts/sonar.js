@@ -32,7 +32,9 @@ var bugAnalysis = function() {
   request(bugUrl, function (error, response, body) {
     var issues = JSON.parse(body)["issues"]
     var relevantIssues = issues.filter(issue => issue.component.startsWith(projectName))
-    var openRelevantIssues = relevantIssues.filter(issue => ((issue.resolution != 'FIXED') || (issue.status != 'CLOSED')))
+    var openRelevantIssues = relevantIssues
+      .filter(issue => ((issue.resolution != 'FIXED') || (issue.status != 'CLOSED')))
+      .map(issue => { return { file: issue.component.split[projectName][1], message: issue.message }})
 
     console.log("\n------------ Issues -------------------")
     console.log("Fetched: ", bugUrl)
