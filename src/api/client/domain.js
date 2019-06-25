@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export default class Domain {
+export default class LOfasz {
   constructor() {
     this.http = axios.create({
       baseURL: 'https://jsonplaceholder.typicode.com',
