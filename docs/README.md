@@ -285,26 +285,21 @@ Setup made:
 
 In the boilerplate data is only modified in store, with the login card component being the best example of who thin a layer can be (with only presenting data and capturing event) even for sophisticated journeys.
 
-
-
-
-## HTTP
+## HTTP - TODO
 Axios
 Promise based
 defaults to JSON
 mock in prod - uncomment require, set true/false, add methods
+Todo - Vue3 - coming soon - better typescript support - swagger-typescript-axios code gen
 
-## Mock
+## Mock - TODO
 Axios mock adapter
 For testing and ui
 Both of them already set up - easy to toggle even partial
 
-## Routing
+## Routing - TODO
 Vue router
 Guards - tested vuex getters - no direct test necessary
-
-## Util
-Common logic - to test
 
 ## Testing
 
@@ -466,21 +461,21 @@ End-to-end testing is achieved with [Selenium](https://medium.com/the-hitchhiker
 
 It is already set up in the Spring boot boilerplate app, thus its documentation is not part of this guide.
 
-## Design
+## Design - TODO
 Vue transitions
 Bootstrap vue
 Vueawesome (Fontawesome)
 no "designer" - at least for internal
-todo - skilled designer (in web technologies) for fast development (familiar with standards, libs, frameworks)
+projects - skilled designer (in web technologies) for fast development (familiar with standards, libs, frameworks)
 
-## I18n
+## I18n - TODO
 Already setup with static jsons
 
-## Components and plugins
+## Components and plugins - TODO
 Awesome vue - curated list
 Check for Vuex integration if multiple present
 
-## Auth
+## Auth - TODO
 JWT - payload - vuex - routing and hide-show
 JWT - localstorage/sessionstorage
 JWT - axios - sensitive data is unavailable without valid JWT
