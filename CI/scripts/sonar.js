@@ -19,7 +19,7 @@ var sonarJob = function(callback) {
   sonarqubeScanner({
     serverUrl,
     options: {
-      'sonar.sources': 'src,test',
+      'sonar.sources': 'src',
       'sonar.scm.forceReloadAll': 'true',
       'sonar.scm.exclusions.disabled': 'false',
       'sonar.projectName': projectName,
@@ -44,7 +44,7 @@ var bugAnalysis = function() {
     console.log("---------------------------------------\n")
 
     if (openRelevantIssues.length > maxIssues)
-      throw "Sonar found " + issues.length + " issues (only " + maxIssues + " is acceptable)"
+      throw "Sonar found " + openRelevantIssues.length + " issues (only " + maxIssues + " is acceptable)"
   })
 }
 
