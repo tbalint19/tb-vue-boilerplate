@@ -72,4 +72,4 @@ var sonarAnalysis = function() {
   duplicationAnalysis()
 }
 
-sonarJob(sonarAnalysis)
+sonarJob(() => sonarJob(sonarAnalysis))
