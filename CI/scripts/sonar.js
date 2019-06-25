@@ -34,7 +34,7 @@ var bugAnalysis = function() {
     var relevantIssues = issues.filter(issue => issue.component.startsWith(projectName))
     var openRelevantIssues = relevantIssues
       .filter(issue => ((issue.resolution != 'FIXED') || (issue.status != 'CLOSED')))
-      .map(issue => { return { file: issue.component.split[projectName][1], message: issue.message }})
+      .map(issue => { return { file: issue.component.split(projectName)[1], message: issue.message }})
 
     console.log("\n------------ Issues -------------------")
     console.log("Fetched: ", bugUrl)
