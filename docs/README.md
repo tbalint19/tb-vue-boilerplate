@@ -80,7 +80,7 @@ export default {
 }
 ```
 
-(Setup the store in main.js, register the module and...) ...in the component (_components/login-component.vue_)
+(Setup the store in main.js, register the module and... ...in the component (_components/login-component.vue_)
 ```html
 <template>
   <input :value="username" @input="updateUsername">
@@ -107,27 +107,165 @@ These two examples do exactly the same. There are some huge differences however 
 
 The cons of vuex seems obvious:
   - More files
-  - More code
+  - More code (at the beginning)
   - Less intuitive
 
 The pros come as the project grows:
-  - parent-child communication
+  - parent-child / sibling communication
 
-    In first example
+    Usually, a variable should be used in more than one component.
+    Vue provides a way for this: passing _props_ from parent to child components, and listening to _events_, emitted by child on parents components. In simple prototypes it might work just fine, however as the app gets bigger, and more nested components are created, this means that a component might receive props/events only to pass them towards. Also, it is not necessarily obvious, where some piece of data should be stored (on which component).
 
-  - sibling communication
+    Example ("siblings")
 
-    In first example
+    ```html
+    <!-- container.vue -->
+    <div class="my-container">
+      <custom-input-component
+        :username="username">
+      </custom-input-component>
+      <custom-label-component
+        :usernameErrorExists="usernameErrorExists">
+      </custom-label-component>
+    </div>
+
+    <!-- We may define username on the common parents -->
+    <!-- This "pattern" leads to defining all data and methods on the "root" component -->
+    ```
+
+    Example ("grandchild-grandparent"):
+
+    ```html
+    <!-- container.vue -->
+    <div class="my-container">
+      <custom-input-component
+        :username="username"
+        :usernameErrorExists="usernameErrorExists">
+      </custom-input-component>
+    </div>
+
+    <!-- If we DO define some data on the root component -->
+    <!-- Username is defined in this component in data -->
+    <!-- usernameErrorExists is defined in this component in computed -->
+    ```
+
+    ```html
+    <!-- input.vue -->
+    <div class="my-input">
+      <input type="text" :value="username">
+      <custom-label-component
+        :usernameErrorExists="usernameErrorExists">
+      </custom-label-component>
+    </div>
+
+    <!-- Receives username as prop because it is needed here -->
+    <!-- Receives usernameErrorExists as prop - ONLY TO PASS IT TOWARDS -->
+    ```
+
+    ```html
+    <!-- label.vue -->
+    <div class="my-label">
+      <p v-if="usernameErrorExists">Not good!</p>
+      <p v-else>Good!</p>
+    </div>
+
+    <!-- Receives usernameErrorExists as prop from input -->
+    ```
+
+    Example ("event bus")
+
+    ```js
+    // main.js
+
+    export const eventBus = new Vue()
+    ```
+
+    ```html
+    <!-- input.vue template -->
+    <div class="my-input">
+      <input type="text" v-model="username" @input="emitUsernameChange">
+    </div>
+    ```
+
+    ```js
+    // input.vue script
+    import { eventBus } from '@/main.js'
+
+    export default {
+      data() {
+        return {
+          username: ""
+        }
+      },
+      methods: {
+        emitUsernameChange(value) {
+          eventBus.emit("usernameChanged", value)
+        }
+      }
+    }
+    ```
+
+    ```html
+    <!-- label.vue template -->
+    <div class="my-label">
+      <p v-if="usernameErrorExists">Not good!</p>
+      <p v-else>Good!</p>
+    </div>
+    ```
+
+    ```js
+    // label.vue script
+    import { eventBus } from '@/main.js'
+
+    export default {
+      data() {
+        return {
+          usernameErrorExists: false
+        }
+      },
+      created() {
+        eventBus.on("usernameChanged", (value) => this.usernameErrorExists = value.length > 3)
+      }
+    }
+    ```
+
+    ```html
+    <!-- container.vue -->
+    <div class="my-input">
+      <custom-input-component>
+      </custom-input-component>
+      <custom-label-component>
+      </custom-label-component>
+    </div>
+
+    <!-- Here we do not need to define anything on parent -->
+    ```
+
+    All these previous examples are valid ways to pass __data__ around in the application. They can work together, creating an awful mess, and also, similarly you can even pass around __events__ and __methods__ as well.
+
+    When all these "patterns" are applied randomly, a larger app will soon be almost impossible to debug and for sure impossible to build upon. Soon it will be hard to reason about why a particular data/method was described on a particular component, and even to find where exactly some property was defined.
+
+    This is the problem that Vuex's pattern - which __is__ a pattern, see [flux](https://facebook.github.io/flux/docs/in-depth-overview.html) - aims to solve with its unidirectional data flow.
+
 
   - Debug options
 
-    Vue devtools
+    While the usual way of "debugging" is console.log everything in the browser (...) Vue provides awesome devtools for Vuex.
+
+    ![](./devtools.png)
+
+    - Every single mutation is tracked
+    - "Time travelling" is possible
+    - State and getters can be checked for every mutation
+
 
   - Testability
 
-    Notice how in modules everything is a function without* depenedncies.
+    Vue components shall be thins layers above store, responsible only to capture user interactions and presenting data. With mapState and mapGetters, one can easily observe changes on data in any component, and emit events form anywhere.
 
-Read more
+    The store is where the business logic is implemented, and by properly testing (see below) actions and getters the app will not be error prone.
+
+Read more about Vuex at its [site](https://vuex.vuejs.org/).
 
 ##### Best practices
 - api: mapGetters, mapActions (to test)
@@ -144,6 +282,8 @@ Read more
 
 ##### DEMO in boilerplate
 Setup made:
+
+In the boilerplate data is only modified in store, with the login card component being the best example of who thin a layer can be (with only presenting data and capturing event) even for sophisticated journeys.
 
 
 
