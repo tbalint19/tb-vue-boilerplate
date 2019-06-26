@@ -7,7 +7,7 @@ node('linux && docker') {
   commitHash = checkout(scm).GIT_COMMIT
   projectName = sanitizeProjectName(branch)
 
-  sh "echo Branch: ${branch} | Commit hash: ${commitHash} | Project name: ${projectName} | Build id: ${env.BUILD_ID}"
+  sh "echo Branch: ${branch}, Commit hash: ${commitHash}, Project name: ${projectName}, Build id: ${env.BUILD_ID}"
 
   try {
       checkEnv()
