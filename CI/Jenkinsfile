@@ -6,7 +6,7 @@ node('linux && docker') {
   branch = checkout(scm).GIT_BRANCH
   commitHash = checkout(scm).GIT_COMMIT
   projectName = sanitizeProjectName(branch)
-  versionedProjectName = "${projectName}-${env.BUILD_ID}".replaceAll(":", "-")
+  versionedProjectName = "${projectName}-${env.BUILD_ID}".replaceAll(":", "-").toLowerCase()
 
   sh "echo Branch: ${branch}"
   sh "echo Commit hash: ${commitHash}"
