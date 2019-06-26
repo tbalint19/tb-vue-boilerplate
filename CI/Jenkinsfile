@@ -5,14 +5,9 @@ node('linux && docker') {
 
   branch = checkout(scm).GIT_BRANCH
   commitHash = checkout(scm).GIT_COMMIT
-  projectName = sanitizeProjectName(branch).toLowerCase()
-  versionedProjectName = "${projectName}-${env.BUILD_ID}".replaceAll(":", "-").toLowerCase()
+  projectName = sanitizeProjectName(branch)
 
-  sh "echo Branch: ${branch}"
-  sh "echo Commit hash: ${commitHash}"
-  sh "echo Project name: ${projectName}"
-  sh "echo Build id: ${env.BUILD_ID}"
-  sh "echo Building ${versionedProjectName}"
+  sh "echo Branch: ${branch} | Commit hash: ${commitHash} | Project name: ${projectName} | Build id: ${env.BUILD_ID}"
 
   try {
       checkEnv()
@@ -26,7 +21,7 @@ node('linux && docker') {
       sonar(projectName)
       build()
       dockerize(projectName)
-      artifactoryUpload(projectName, versionedProjectName)
+      artifactoryUpload(projectName)
       sendNotifications("SUCCESS")
   } catch (e) {
       echo 'Build failed with error: ' + e.toString()
@@ -41,7 +36,7 @@ def sanitizeProjectName(String branch) {
   def localBranch = branch.replaceFirst("origin/", "")
   def sonarBranchKey = localBranch
   def project = sonarBranchKey == "master" ? jobName : "${jobName}:${sonarBranchKey}"
-  def sanitizedSonarProjectName = project.replaceAll("/", "-")
+  def sanitizedSonarProjectName = project.replaceAll("/", "-").toLowerCase()
   return sanitizedSonarProjectName
 }
 
@@ -116,7 +111,7 @@ def dockerize(String projectName) {
   }
 }
 
-def artifactoryUpload(String projectName, String versionedProjectName, String version) {
+def artifactoryUpload(String projectName) {
   stage('Upload to artifactory') {
     if (isMaster(branch)) {
       def registry = "repository.vodafone.hu/docker-nma"
