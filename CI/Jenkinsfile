@@ -12,7 +12,7 @@ node('linux && docker') {
   sh "echo Commit hash: ${commitHash}"
   sh "echo Project name: ${projectName}"
   sh "echo Build id: ${env.BUILD_ID}"
-  sh "echo Building ${env.versionedProjectName}"
+  sh "echo Building ${versionedProjectName}"
 
   try {
       checkEnv()
@@ -133,7 +133,7 @@ def sendNotifications(String status) {
     notifyBitbucket()
 }
 
-def notifyBitbucket() {
+def notifyBitbucket(String state) {
     notifyBitbucket commitSha1: $ { commitHash },
             credentialsId: '1af21bbb-b246-42b8-adf0-2c9df8698240',
             disableInprogressNotification: false,
