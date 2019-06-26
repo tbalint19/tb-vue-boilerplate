@@ -120,8 +120,8 @@ def artifactoryUpload(String projectName, String versionedProjectName) {
   stage('Upload to artifactory') {
     if (isMaster(branch)) {
       def registry = "repository.vodafone.hu/docker-nma"
-      sh "docker tag ${versionedProjectName} ${registry}/${versionedProjectName}"
-      sh "docker push ${registry}/${versionedProjectName}"
+      sh "docker tag ${projectName} ${registry}/${versionedProjectName}"
+      sh "docker push ${registry}/${projectName}"
     } else {
       Utils.markStageSkippedForConditional(env.STAGE_NAME)
     }
