@@ -5,7 +5,7 @@ node('linux && docker') {
 
   branch = checkout(scm).GIT_BRANCH
   commitHash = checkout(scm).GIT_COMMIT
-  projectName = sanitizeProjectName(branch)
+  projectName = sanitizeProjectName(branch).toLowerCase()
   versionedProjectName = "${projectName}-${env.BUILD_ID}".replaceAll(":", "-").toLowerCase()
 
   sh "echo Branch: ${branch}"
@@ -120,7 +120,7 @@ def artifactoryUpload(String projectName, String versionedProjectName) {
   stage('Upload to artifactory') {
     if (isMaster(branch)) {
       def registry = "repository.vodafone.hu/docker-nma"
-      sh "docker tag ${projectName} ${registry}/${versionedProjectName}"
+      sh "docker tag ${projectName} ${registry}/${projectName}"
       sh "docker push ${registry}/${projectName}"
     } else {
       Utils.markStageSkippedForConditional(env.STAGE_NAME)
