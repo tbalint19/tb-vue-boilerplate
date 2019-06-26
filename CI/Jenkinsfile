@@ -25,7 +25,7 @@ node('linux && docker') {
       validateTestCases()
       sonar(projectName)
       build()
-      dockerize(versionedProjectName)
+      dockerize(projectName)
       artifactoryUpload(projectName, versionedProjectName)
       sendNotifications("SUCCESS")
   } catch (e) {
@@ -110,18 +110,18 @@ def build() {
   }
 }
 
-def dockerize(String versionedProjectName) {
+def dockerize(String projectName) {
   stage('Dockerize') {
-    sh "docker build . -t ${versionedProjectName}"
+    sh "docker build . -t ${projectName}"
   }
 }
 
-def artifactoryUpload(String projectName, String versionedProjectName) {
+def artifactoryUpload(String projectName, String versionedProjectName, String version) {
   stage('Upload to artifactory') {
     if (isMaster(branch)) {
       def registry = "repository.vodafone.hu/docker-nma"
       sh "docker tag ${projectName} ${registry}/${projectName}"
-      sh "docker push ${registry}/${projectName}"
+      sh "docker push ${registry}/${projectName}:${env.BUILD_ID}"
     } else {
       Utils.markStageSkippedForConditional(env.STAGE_NAME)
     }
