@@ -3,6 +3,8 @@ import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 
 node('linux && docker') {
 
+  sh 'docker -v'
+
   branch = checkout(scm).GIT_BRANCH
   commitHash = checkout(scm).GIT_COMMIT
   projectName = sanitizeProjectName(branch)
