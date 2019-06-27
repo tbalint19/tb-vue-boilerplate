@@ -1,6 +1,6 @@
 FROM nginx
 
-RUN chmod -R 777 /var/cache
+RUN chmod -R 777 /etc
 
 RUN mkdir /app
 COPY ./dist /app
