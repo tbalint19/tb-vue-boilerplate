@@ -8,5 +8,6 @@ RUN mkdir /app
 RUN chmod -R 777 /app
 COPY ./dist /app
 COPY CD/nginx.conf /etc/nginx/nginx.conf
+RUN chmod -R 777 /etc/nginx/nginx.conf
 
 EXPOSE 18000
