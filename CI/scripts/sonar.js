@@ -34,6 +34,12 @@ var sonarJob = function(callback) {
 
 var bugAnalysis = function() {
   request(bugUrl, function (error, response, body) {
+    if (error) {
+      console.log('error:', error)
+      console.log('statusCode:', response && response.statusCode)
+      console.log('body:', body)
+    }
+
     var issues = JSON.parse(body)["issues"]
     var relevantIssues = issues.filter(issue => issue.component.startsWith(projectName))
     var openRelevantIssues = relevantIssues
@@ -54,6 +60,12 @@ var bugAnalysis = function() {
 
 var duplicationAnalysis = function() {
   request(duplicationsUrl, function (error, response, body) {
+    if (error) {
+      console.log('error:', error)
+      console.log('statusCode:', response && response.statusCode)
+      console.log('body:', body)
+    }
+
     var response = JSON.parse(body)
     var filesWithDuplications = response["components"]
       .map(c => { return { file: c.name, duplicatedLines: c.measures[0].value } })

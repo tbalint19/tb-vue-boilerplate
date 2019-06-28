@@ -27,3 +27,5 @@ npm run build
 # run unit tests
 npm run unit
 ```
+
+repository.vodafone.hu/docker-nma/intdev-vue-frontend-kitchensink-app:137

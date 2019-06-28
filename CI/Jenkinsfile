@@ -1,9 +1,13 @@
 #!usr/bin/env groovy
+import org.jenkinsci.plugins.pipeline.modeldefinition.Utils
 
-node('linux') {
+node('linux && docker') {
 
   branch = checkout(scm).GIT_BRANCH
   commitHash = checkout(scm).GIT_COMMIT
+  projectName = sanitizeProjectName(branch)
+
+  sh "echo Branch: ${branch}, Commit hash: ${commitHash}, Project name: ${projectName}, Build id: ${env.BUILD_ID}"
 
   try {
       checkEnv()
@@ -14,15 +18,26 @@ node('linux') {
       runStoreTests()
       checkCoverage()
       validateTestCases()
-      sonar(branch)
+      sonar(projectName)
       build()
+      dockerize(projectName)
+      artifactoryUpload(projectName)
       sendNotifications("SUCCESS")
   } catch (e) {
       echo 'Build failed with error: ' + e.toString()
       sendNotifications("FAILURE")
   } finally {
-      cleanUp()
+
   }
+}
+
+def sanitizeProjectName(String branch) {
+  def jobName = "${env.JOB_NAME}"
+  def localBranch = branch.replaceFirst("origin/", "")
+  def sonarBranchKey = localBranch
+  def project = sonarBranchKey == "master" ? jobName : "${jobName}:${sonarBranchKey}"
+  def sanitizedSonarProjectName = project.replaceAll("/", "-").toLowerCase()
+  return sanitizedSonarProjectName
 }
 
 def checkout() {
@@ -78,14 +93,9 @@ def validateTestCases() {
   }
 }
 
-def sonar(String branch) {
+def sonar(String projectName) {
   stage('Static code analysis') {
-    def jobName = "${env.JOB_NAME}"
-    def localBranch = branch.replaceFirst("origin/", "")
-    def sonarBranchKey = localBranch
-    def project = sonarBranchKey == "master" ? jobName : "${jobName}:${sonarBranchKey}"
-    def sanitizedSonarProjectName = project.replaceAll("/", "-")
-    sh "npm --branch=${sanitizedSonarProjectName} run sonar-check"
+    sh "npm --branch=${projectName} run sonar-check"
   }
 }
 
@@ -95,9 +105,21 @@ def build() {
   }
 }
 
-def cleanUp() {
-  stage('Cleanup') {
-    sh 'rm -rf ./node_modules'
+def dockerize(String projectName) {
+  stage('Dockerize') {
+    sh "docker build . -t ${projectName}"
+  }
+}
+
+def artifactoryUpload(String projectName) {
+  stage('Upload to artifactory') {
+    if (isMaster(branch)) {
+      def registry = "repository.vodafone.hu/docker-nma"
+      sh "docker tag ${projectName} ${registry}/${projectName}:${env.BUILD_ID}"
+      sh "docker push ${registry}/${projectName}"
+    } else {
+      Utils.markStageSkippedForConditional(env.STAGE_NAME)
+    }
   }
 }
 
@@ -107,7 +129,6 @@ def sendNotifications(String status) {
 }
 
 def notifyBitbucket(String state) {
-
     notifyBitbucket commitSha1: $ { commitHash },
             credentialsId: '1af21bbb-b246-42b8-adf0-2c9df8698240',
             disableInprogressNotification: false,
@@ -117,4 +138,9 @@ def notifyBitbucket(String state) {
             prependParentProjectKey: false,
             projectKey: '',
             stashServerBaseUrl: 'http://itdevcrepo2:7990'
+}
+
+def isMaster(String branch) {
+    def localBranch = branch.replaceFirst("origin/", "")
+    localBranch == "master"
 }
