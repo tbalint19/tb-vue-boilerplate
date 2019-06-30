@@ -9,20 +9,23 @@ export const applyDomainAdapter = (axios) => {
 
 const mockLogin = (adapter, use) => {
   let call = adapter.onPost('/posts')
-  let token = jwt.sign(
-    {
-      username: 'bela',
-      role: 'admin',
-      permissions: ['doStuff', 'doOtherStuff'],
-    },
-    'secret-key'
-  )
   if (!use) {
     call.passThrough()
   } else {
-    call.reply(200, { token })
+    call.reply(config => {
+      console.log(config)
+      return [200, { token: token(JSON.parse(config.data).title) }]
+    })
   }
 }
 
 const on = (adapter) => adapter
 const use = (bool) => bool
+const token = username => jwt.sign(
+  {
+    username: username,
+    role: 'admin',
+    permissions: ['doStuff', 'doOtherStuff'],
+  },
+  'secret-key'
+)
