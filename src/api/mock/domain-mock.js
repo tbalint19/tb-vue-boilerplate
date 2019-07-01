@@ -12,7 +12,7 @@ const mockLogin = (adapter, use) => {
   if (!use) {
     call.passThrough()
   } else {
-    call.reply(config => {
+    call.reply((config) => {
       console.log(config)
       return [200, { token: token(JSON.parse(config.data).title) }]
     })
@@ -21,11 +21,12 @@ const mockLogin = (adapter, use) => {
 
 const on = (adapter) => adapter
 const use = (bool) => bool
-const token = username => jwt.sign(
-  {
-    username: username,
-    role: 'admin',
-    permissions: ['doStuff', 'doOtherStuff'],
-  },
-  'secret-key'
-)
+const token = (username) =>
+  jwt.sign(
+    {
+      username: username,
+      role: 'admin',
+      permissions: ['doStuff', 'doOtherStuff'],
+    },
+    'secret-key'
+  )
