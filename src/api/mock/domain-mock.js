@@ -12,10 +12,7 @@ const mockLogin = (adapter, use) => {
   if (!use) {
     call.passThrough()
   } else {
-    call.reply((config) => {
-      console.log(config)
-      return [200, { token: token(JSON.parse(config.data).title) }]
-    })
+    call.reply(request => ([200, { token: token(JSON.parse(request.data).title) }]))
   }
 }
 

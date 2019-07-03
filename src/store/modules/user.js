@@ -2,14 +2,12 @@ import { parse } from '@/util/jwt'
 
 const namespaced = true
 
-const state = () => {
-  return {
-    username: null,
-    isLoggedIn: false,
-    role: null,
-    permissions: [],
-  }
-}
+const state = () => ({
+  username: null,
+  isLoggedIn: false,
+  role: null,
+  permissions: [],
+})
 
 const mutations = {
   SET(state, user) {

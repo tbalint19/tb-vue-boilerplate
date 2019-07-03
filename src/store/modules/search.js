@@ -1,10 +1,8 @@
 const namespaced = true
 
-const state = () => {
-  return {
-    filterParam: '',
-  }
-}
+const state = () => ({
+  filterParam: '',
+})
 
 const mutations = {
   SET_FILTER_PARAM(state, value) {

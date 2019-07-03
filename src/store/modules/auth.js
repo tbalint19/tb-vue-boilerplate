@@ -3,21 +3,19 @@ const validations = require('@/../static/validations.json')
 
 const namespaced = true
 
-const state = () => {
-  return {
-    input: {
-      username: '',
-      password: '',
-    },
-    validation: {
-      username: validations.username,
-      password: validations.password,
-    },
-    usernameWasEdited: false,
-    passwordWasEdited: false,
-    isLoading: false,
-  }
-}
+const state = () => ({
+  input: {
+    username: '',
+    password: '',
+  },
+  validation: {
+    username: validations.username,
+    password: validations.password,
+  },
+  usernameWasEdited: false,
+  passwordWasEdited: false,
+  isLoading: false,
+})
 
 const mutations = {
   INIT(state) {
