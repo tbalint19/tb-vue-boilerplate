@@ -1,6 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import routes from './routes'
+
+const files = require.context('./routes', false, /\.js$/)
+const routes = []
+
+files.keys().forEach((key) => {
+  if (key === './index.js') return
+  routes.push(files(key).default)
+})
 
 Vue.use(Router)
 
