@@ -603,7 +603,7 @@ It is already set up in the Spring boot boilerplate app, thus its documentation 
 
 ## Auth
 
-SPA auth is achieved only on the frontend - backend call is not needed for new page.
+SPA auth can be done on the frontend - backend call is not needed for new page for example.
 The base of routing on the frontend is the JWT, and its payload.
 It should not be validated (with the secret key), only decoded.
 If the user "hacks" the frontend app, no sensitive data is shown to him however - it all comes from the backed, where the JWT __is__ validated.
@@ -631,7 +631,7 @@ Once login is completed:
 ```html
 <!-- In any template -->
 <button :disabled="!$can('crud_something')">
-  This paragraphs is only active for those who can "crud_something"
+  This button is only active for those who can "crud_something"
 </button>
 ```
 
@@ -653,8 +653,16 @@ Check for Vuex integration if multiple solutions are present!
 ## CI/CD - TODO
 
 - Format
+```bash
+# package.json
+npm run format
+```
 
 - Tests
+```bash
+# package.json
+npm run unit-test
+```
 
 - Coverage
 
