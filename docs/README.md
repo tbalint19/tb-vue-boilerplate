@@ -397,8 +397,7 @@ Vue router is the standard, battle tested way to handle routing in Vue SPAs.
   <router-view></router-view>
 </fade-appear-swap>
 ```
-
-Guards should be tested vuex getters - no direct test necessary.
+- 'angular-like' guards are also supported they should be tested vuex getters - no direct test necessary.
 
 Read more about Vue router at its [site](https://router.vuejs.org/).
 
@@ -562,17 +561,6 @@ End-to-end testing is achieved with [Selenium](https://medium.com/the-hitchhiker
 
 It is already set up in the Spring boot boilerplate app, thus its documentation is not part of this guide.
 
-## Design - TODO
-Vue transitions
-
-Bootstrap vue
-
-Vueawesome (Fontawesome)
-
-no "designer" - at least for internal projects
-
-skilled designer for customer-facing apps (in web technologies) for fast development (familiar with standards, libs, frameworks)
-
 ## I18n - TODO
 Already setup with static jsons
 
@@ -587,6 +575,15 @@ JWT - payload - vuex - routing and hide-show
 JWT - localstorage/sessionstorage
 
 JWT - axios - sensitive data is unavailable without valid JWT
+
+## Design
+For efficient development it is required to have an internal "developer-designer", who is familiar with standards, libs, frameworks.
+
+Requirements for a designer:
+- At least HTML+CSS(SASS)+Javascript, advanced in CSS transitions, animations, keyframes
+- Animations, transitions: [Vue transitions](https://vuejs.org/v2/guide/transitions)
+- Design, layout: [Bootstrap](https://getbootstrap.com/)/[Bootstrap-vue](https://vuejs.org/v2/guide/transitions)
+- Icons: [Vueawesome](https://github.com/Justineo/vue-awesome) [(Fontawesome)](https://fontawesome.com/)
 
 ## CI/CD - TODO
 Format
