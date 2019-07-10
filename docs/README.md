@@ -50,9 +50,9 @@ In a module of the store (_store/login.js_)
 ```javascript
 const namespaced = true
 
-const state = () => { return {
+const state = () => ({
   username: ""
-}}
+})
 
 const mutations = {
   UPDATE_USERNAME(state, value) {
@@ -245,7 +245,7 @@ The pros come as the project grows:
 
     When all these "patterns" are applied randomly, a larger app will soon be almost impossible to debug and for sure impossible to build upon. Soon it will be hard to reason about why a particular data/method was described on a particular component, and even to find where exactly some property was defined.
 
-    This is the problem that Vuex's pattern - which __is__ a pattern, see [flux](https://facebook.github.io/flux/docs/in-depth-overview.html) - aims to solve with its unidirectional data flow.
+    This is the problem that Vuex's pattern - which __is__ a pattern, see [flux](https://facebook.github.io/flux/docs/in-depth-overview) - aims to solve with its unidirectional data flow.
 
 
   - Debug options
@@ -261,9 +261,9 @@ The pros come as the project grows:
 
   - Testability
 
-    Vue components shall be thins layers above store, responsible only to capture user interactions and presenting data. With mapState and mapGetters, one can easily observe changes on data in any component, and emit events form anywhere.
+    Vue components shall be thins layers above the store, responsible only to capture user interactions and presenting data. With mapState and mapGetters, one can easily observe changes on data in any component, and emit events form anywhere.
 
-    The store is where the business logic is implemented, and by properly testing (see below) actions and getters the app will not be error prone.
+    The store is where the business logic is implemented, and by properly testing (see below) actions and getters the number of bugs can be minimized.
 
 Read more about Vuex at its [site](https://vuex.vuejs.org/).
 
@@ -285,21 +285,122 @@ Setup made:
 
 In the boilerplate data is only modified in store, with the login card component being the best example of who thin a layer can be (with only presenting data and capturing event) even for sophisticated journeys.
 
-## HTTP - TODO
-Axios
-Promise based
-defaults to JSON
-mock in prod - uncomment require, set true/false, add methods
-Todo - Vue3 - coming soon - better typescript support - swagger-typescript-axios code gen
+## HTTP
+- Axios - http client inspired by angular
+- Promise based
+- defaults to JSON
+- mock in prod - uncomment require, set true/false, add methods (see more about mock below)
+- Todo - Vue3 - coming soon - better typescript support - swagger-typescript-axios code gen
 
-## Mock - TODO
-Axios mock adapter
-For testing and ui
-Both of them already set up - easy to toggle even partial
+Read more about axios at its [site](https://github.com/axios/axios).
 
-## Routing - TODO
-Vue router
-Guards - tested vuex getters - no direct test necessary
+## Mock
+- Axios mock adapter
+- For testing and ui
+- Both of them already set up - easy to toggle even partial
+
+#### UI
+
+Toggle mocking
+```js
+// api/index.js
+import domains from './client'
+
+require('./mock') // comment this line for backend calls
+
+export default domains
+```
+
+Toggle just one domain
+```js
+// api/mock/index.js
+import domains from '../client'
+import { applyDomainAdapter } from './domain-mock'
+
+export default (() => {
+  applyDomainAdapter(domains['domain'].http) // comment this line to call endpoints of this domain
+})()
+```
+
+
+Toggle just one endpoint
+```js
+// api/mock/domain-mock.js
+
+export const applyDomainAdapter = (axios) => {
+  const adapter = new MockAdapter(axios, { delayResponse: 2500 })
+
+  mockLogin(on(adapter), use(true)) // use(false) to call endpoint
+}
+```
+
+More domains and endpoints can be mocked based on the existing mock
+
+Mock business logic:
+```js
+const mockDb = [ ]
+
+const mockLogic = (adapter, use) => {
+  let call = adapter.onPost('/stuff')
+  if (!use) {
+    call.passThrough()
+  } else {
+
+    // request object is an axios request
+    call.reply(request => {
+      let payload = JSON.parse(request.data)
+      // business logic mock
+      let someCondition = payload.someProperty > 5
+      if (someCondition) {
+        mockDb.push(payload)
+        return [200, { someKey: 'someValue' }]
+      }
+      return [409, {  }]
+    })
+
+  }
+}
+```
+Note: Write the least possible backend logic in mocks! Usually these lines are not tested and not maintained, thus lead to misunderstandings.
+
+#### Tests
+Test store is already set up with http mock
+
+Note for tests with mocked http calls:
+```js
+it('Should load posts', async () => { // async function! even mock call is async
+  // given
+  let store = testStore()
+  store.$domainMock.onGet('/posts').reply(200, [
+    { id: 1, title: "hello" },
+    { id: 2, title: "bye" },
+  ])
+
+  // when
+  await store.dispatch('post/loadAll') // await - for the response
+
+  // then
+  expect(store.getters['post/count']).to.equal(2) // without await would be 0
+})
+```
+
+Read more about axios mock adapter at its [site](https://github.com/ctimmerm/axios-mock-adapter).
+
+## Routing
+Vue router is the standard, battle tested way to handle routing in Vue SPAs.
+
+- supports history
+- supports query params
+- supports Vue transitions (a basic one already set up in App.vue)
+```html
+<fade-appear-swap>
+  <router-view></router-view>
+</fade-appear-swap>
+```
+
+Guards should be tested vuex getters - no direct test necessary.
+
+Read more about Vue router at its [site](https://router.vuejs.org/).
 
 ## Testing
 
@@ -468,8 +569,7 @@ Bootstrap vue
 
 Vueawesome (Fontawesome)
 
-no "designer" - at least for internal
-projects
+no "designer" - at least for internal projects
 
 skilled designer for customer-facing apps (in web technologies) for fast development (familiar with standards, libs, frameworks)
 
