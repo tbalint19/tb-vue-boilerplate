@@ -389,15 +389,26 @@ Read more about axios mock adapter at its [site](https://github.com/ctimmerm/axi
 ## Routing
 Vue router is the standard, battle tested way to handle routing in Vue SPAs.
 
-- supports history
-- supports query params
-- supports Vue transitions (a basic one already set up in App.vue)
+Already set up in store:
+```js
+// in any module
+
+myAction(context, data) {
+  context.commit('MY_MUTATION', data)
+  this.$app.$router.push('/new-page')
+}
+```
+
+Also supports:
+- history
+- query params
+- Vue transitions (a basic one already set up in App.vue)
 ```html
 <fade-appear-swap>
   <router-view></router-view>
 </fade-appear-swap>
 ```
-- 'angular-like' guards are also supported they should be tested vuex getters - no direct test necessary.
+- 'angular-like' guards - they should be tested vuex getters - no direct test necessary then.
 
 Read more about Vue router at its [site](https://router.vuejs.org/).
 
@@ -421,6 +432,12 @@ In any component:
   <p>{{ $t("navbar.title") }}</p>
 </div>
 ```
+
+Also supports:
+- interpolation
+- date/time localization
+- number localization
+- pluralization
 
 Read more about VueI18n at its [site](http://kazupon.github.io/vue-i18n/)
 
@@ -584,12 +601,39 @@ End-to-end testing is achieved with [Selenium](https://medium.com/the-hitchhiker
 
 It is already set up in the Spring boot boilerplate app, thus its documentation is not part of this guide.
 
-## Auth - TODO
-JWT - payload - vuex - routing and hide-show
+## Auth
 
-JWT - localstorage/sessionstorage
+SPA auth is achieved only on the frontend - backend call is not needed for new page.
+The base of routing on the frontend is the JWT, and its payload.
+It should not be validated (with the secret key), only decoded.
+If the user "hacks" the frontend app, no sensitive data is shown to him however - it all comes from the backed, where the JWT __is__ validated.
 
-JWT - axios - sensitive data is unavailable without valid JWT
+In the demo:
+
+Expected JWT payload:
+```json
+{
+  "username": "bela",
+  "role": "admin",
+  "permissions": [ "crud_something", "crud_other_something" ]
+}
+```
+
+Once login is completed:
+```html
+<!-- In any template -->
+<div v-if="$is('admin')">
+  <p>This paragraphs are only shown to:</p>
+  <p>ADMIN</p>
+</div>
+```
+
+```html
+<!-- In any template -->
+<button :disabled="!$can('crud_something')">
+  This paragraphs is only active for those who can "crud_something"
+</button>
+```
 
 ## Design
 For efficient development it is required to have an internal "developer-designer", who is familiar with standards, libs, frameworks.
