@@ -401,6 +401,29 @@ Vue router is the standard, battle tested way to handle routing in Vue SPAs.
 
 Read more about Vue router at its [site](https://router.vuejs.org/).
 
+## I18n
+Already setup with static jsons.
+
+Easy to use:
+```json
+# static/dictionary/eng.json
+
+{
+  "navbar": {
+    "title": "Hello"
+  }
+}
+```
+
+In any component:
+```html
+<div id="navbar">
+  <p>{{ $t("navbar.title") }}</p>
+</div>
+```
+
+Read more about VueI18n at its [site](http://kazupon.github.io/vue-i18n/)
+
 ## Testing
 
 ### Unit testing
@@ -561,14 +584,6 @@ End-to-end testing is achieved with [Selenium](https://medium.com/the-hitchhiker
 
 It is already set up in the Spring boot boilerplate app, thus its documentation is not part of this guide.
 
-## I18n - TODO
-Already setup with static jsons
-
-## Components and plugins - TODO
-Awesome vue - curated list
-
-Check for Vuex integration if multiple present
-
 ## Auth - TODO
 JWT - payload - vuex - routing and hide-show
 
@@ -585,15 +600,26 @@ Requirements for a designer:
 - Design, layout: [Bootstrap](https://getbootstrap.com/)/[Bootstrap-vue](https://vuejs.org/v2/guide/transitions)
 - Icons: [Vueawesome](https://github.com/Justineo/vue-awesome) [(Fontawesome)](https://fontawesome.com/)
 
+## Components and plugins
+
+[Awesome vue](https://github.com/vuejs/awesome-vue) is a curated list of battle tested, maintained components and plugins.
+
+Check for Vuex integration if multiple solutions are present!
+
 ## CI/CD - TODO
-Format
 
-Tests
+- Format
 
-Coverage
+- Tests
 
-Mutation
+- Coverage
 
-Sonar
+- Mutation
 
-Build
+- Sonar
+
+- Build
+
+- Dockerization
+
+- Publish to artifactory (if master)
