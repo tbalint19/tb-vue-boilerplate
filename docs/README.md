@@ -1,6 +1,6 @@
 # VueJS
 
-This boilerplate app uses VueJS and the recommended libraries to build scaleable SPAs (single page application) with it.
+This boilerplate app uses VueJS and the recommended libraries to build scalable SPAs (single page application) with it.
 
 ## Overview:
   - [Vuex](https://vuex.vuejs.org/) - state management
@@ -623,7 +623,7 @@ Once login is completed:
 ```html
 <!-- In any template -->
 <div v-if="$is('admin')">
-  <p>This paragraphs are only shown to:</p>
+  <p>These paragraphs are only shown to:</p>
   <p>ADMIN</p>
 </div>
 ```
