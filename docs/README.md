@@ -652,26 +652,86 @@ Check for Vuex integration if multiple solutions are present!
 
 ## CI/CD - TODO
 
-- Format
+- Format ([prettier](https://prettier.io/))
 ```bash
-# package.json
+# configure in .prettierrc.json
+# use .prettierignore to ignore files and folders
+
+# run manually
 npm run format
 ```
 
 - Tests
 ```bash
-# package.json
+# run manually
 npm run unit-test
+# or
+npm run store-test
+# or
+npm run tests
 ```
 
 - Coverage
+```bash
+# configure in CI/config.json
 
-- Mutation
+# run tests first
+# report is read from gitignored reports/coverage
+# uses CI/scripts/coverage.js
+
+# run manually
+npm run coverage-check
+
+# not part of the pipeline
+npm run unit-coverage-ui    # -> http://localhost:8088
+# and
+npm run store-coverage-ui   # -> http://localhost:8088
+```
+
+- Mutation ([Stryker](https://stryker-mutator.io/stryker/quickstart))
+```bash
+# configure in CI/config.json
+
+# run manually
+npm run mutate
+
+# run mutation tests first
+# report is read from gitignored reports/mutation
+# uses CI/scripts/mutateRate.js
+# Check mutant kill ratio
+npm run mutate-kill-rate-check
+
+# not part of the pipeline
+npm run mutation-report-ui    # -> http://localhost:8089
+```
 
 - Sonar
+```bash
+# configure in CI/config.json
+# uses CI/scripts/sonar.js
+
+# run manually - use a unique project name
+npm --branch=${projectName} run sonar-check
+```
 
 - Build
+```bash
+# run manually
+npm run build
+```
 
 - Dockerization
+```bash
+# requirement: docker
 
-- Publish to artifactory (if master)
+# run manually
+docker build . -t appname
+```
+
+- Publish to artifactory
+```bash
+# ONLY IF MASTER BRANCH
+
+# run manually - don't
+# Basically a docker push, but versioning is managed by CI/Jenkinsfile
+```
