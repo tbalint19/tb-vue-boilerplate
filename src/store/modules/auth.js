@@ -68,23 +68,23 @@ const getters = {
 
 const actions = {
   init({ commit }) {
-    return commit('INIT')
+    commit('INIT')
   },
 
   updateUsername({ commit }, value) {
-    return commit('UPDATE_LOGIN_USERNAME', value)
+    commit('UPDATE_LOGIN_USERNAME', value)
   },
 
   blurUsername({ commit }) {
-    return commit('BLUR_USERNAME')
+    commit('BLUR_USERNAME')
   },
 
   updatePassword({ commit }, value) {
-    return commit('UPDATE_LOGIN_PASSWORD', value)
+    commit('UPDATE_LOGIN_PASSWORD', value)
   },
 
   blurPassword({ commit }) {
-    return commit('BLUR_PASSWORD')
+    commit('BLUR_PASSWORD')
   },
 
   login(context) {
