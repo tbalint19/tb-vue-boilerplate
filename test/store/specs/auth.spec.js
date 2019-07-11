@@ -165,7 +165,7 @@ describe('Auth tests', () => {
 
   it('Should update active getter')
 
-  it('Should not notify user about network error', async () => {
+  it('Should notify user about network error', async () => {
     // given
     let store = testStore()
     store.$domainMock.onPost('/posts').networkError()
