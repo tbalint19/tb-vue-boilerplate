@@ -12,4 +12,5 @@ for (var fileName in report.files) {
   var killed = mutants.filter(mutant => mutant.status == 'Killed').length
   var killRate = killed / all * 100
   if (killRate < requiredKillRate) throw "Tests were not precise enough (" + killRate + "%)!"
+  else console.log("" + parseInt(killRate) + "% of mutates were killed.");
 }

@@ -7,6 +7,8 @@ var checkTresholds = function(report, name) {
   for (var key in report) {
     if (report[key] < coverage[name][key])
       throw "" + coverage[name][key] + "% not passed for " + key + " at " + name + " tests! (" + report[key] + "%)"
+    else
+      console.log("" + name + "/" + key + " - passed (" + report[key] + "%)");
   }
 }
 

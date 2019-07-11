@@ -12,7 +12,10 @@ const mockLogin = (adapter, use) => {
   if (!use) {
     call.passThrough()
   } else {
-    call.reply(request => ([200, { token: token(JSON.parse(request.data).title) }]))
+    call.reply((request) => [
+      200,
+      { token: token(JSON.parse(request.data).title) },
+    ])
   }
 }
 
