@@ -67,24 +67,24 @@ const getters = {
 }
 
 const actions = {
-  init({ commit }) {
-    commit('INIT')
+  init(context) {
+    context.commit('INIT')
   },
 
-  updateUsername({ commit }, payload) {
-    commit('UPDATE_LOGIN_USERNAME', payload.value)
+  updateUsername(context, payload) {
+    context.commit('UPDATE_LOGIN_USERNAME', payload.value)
   },
 
-  blurUsername({ commit }) {
-    commit('BLUR_USERNAME')
+  blurUsername(context) {
+    context.commit('BLUR_USERNAME')
   },
 
-  updatePassword({ commit }, payload) {
-    commit('UPDATE_LOGIN_PASSWORD', payload.value)
+  updatePassword(context, payload) {
+    context.commit('UPDATE_LOGIN_PASSWORD', payload.value)
   },
 
-  blurPassword({ commit }) {
-    commit('BLUR_PASSWORD')
+  blurPassword(context) {
+    context.commit('BLUR_PASSWORD')
   },
 
   login(context) {
