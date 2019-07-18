@@ -4,8 +4,8 @@
       type="text"
       :placeholder="$t('login.username')"
       :value="username"
-      @input="updateUsername"
-      @blur="blurUsername"
+      @input="updateUsername({ value: $event })"
+      @blur="blurUsername()"
     />
     <input-error
       :condition="userNameErrorShown"
@@ -16,8 +16,8 @@
       type="password"
       :placeholder="$t('login.password')"
       :value="password"
-      @input="updatePassword"
-      @blur="blurPassword"
+      @input="updatePassword({ value: $event })"
+      @blur="blurPassword()"
     />
     <input-error
       :condition="passwordErrorShown"
@@ -28,7 +28,7 @@
     <b-button
       variant="outline-success btn-block"
       :disabled="isDisabled"
-      @click="login"
+      @click="login()"
     >
       <v-icon v-if="!isLoading" name="user" />
       <v-icon v-else name="spinner" :spin="true" />

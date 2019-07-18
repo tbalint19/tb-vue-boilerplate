@@ -71,16 +71,16 @@ const actions = {
     commit('INIT')
   },
 
-  updateUsername({ commit }, value) {
-    commit('UPDATE_LOGIN_USERNAME', value)
+  updateUsername({ commit }, payload) {
+    commit('UPDATE_LOGIN_USERNAME', payload.value)
   },
 
   blurUsername({ commit }) {
     commit('BLUR_USERNAME')
   },
 
-  updatePassword({ commit }, value) {
-    commit('UPDATE_LOGIN_PASSWORD', value)
+  updatePassword({ commit }, payload) {
+    commit('UPDATE_LOGIN_PASSWORD', payload.value)
   },
 
   blurPassword({ commit }) {
