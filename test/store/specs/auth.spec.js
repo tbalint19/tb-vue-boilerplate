@@ -100,7 +100,7 @@ describe('Auth tests', () => {
     let store = testStore()
 
     // when
-    store.dispatch('auth/updatePassword',  { value: 'ottokarpw' })
+    store.dispatch('auth/updatePassword', { value: 'ottokarpw' })
 
     // then
     expect(store.getters['auth/hasPasswordError']).to.equal(false)
