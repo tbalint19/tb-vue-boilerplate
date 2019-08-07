@@ -23,7 +23,7 @@ export default {
     compClass() {
       return {
         'custom-notification': true,
-        'card': true,
+        card: true,
         'm-2': true,
         'w-shadow': true,
         'text-white': true,
