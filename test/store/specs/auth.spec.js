@@ -110,7 +110,7 @@ describe('Auth tests', () => {
     // given
     let store = testStore()
     let token = 'asd'
-    store.$domainMock.onPost('/posts').reply(201, { token })
+    store.$domainMock.onPost('/api/login').reply(201, { token })
 
     // when
     store.dispatch('auth/login')
@@ -130,7 +130,7 @@ describe('Auth tests', () => {
       },
       'secret-key'
     )
-    store.$domainMock.onPost('/posts').reply(200, { token })
+    store.$domainMock.onPost('/api/login').reply(200, { token })
 
     // when
     await store.dispatch('auth/login')
@@ -147,7 +147,7 @@ describe('Auth tests', () => {
   it('Should not login for http401', async () => {
     // given
     let store = testStore()
-    store.$domainMock.onPost('/posts').reply(401)
+    store.$domainMock.onPost('/api/login').reply(401)
 
     // when
     await store.dispatch('auth/login')
@@ -168,7 +168,7 @@ describe('Auth tests', () => {
   it('Should notify user about network error', async () => {
     // given
     let store = testStore()
-    store.$domainMock.onPost('/posts').networkError()
+    store.$domainMock.onPost('/api/login').networkError()
 
     // when
     await store.dispatch('auth/login')

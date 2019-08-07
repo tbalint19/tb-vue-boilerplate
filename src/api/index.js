@@ -1,5 +1,5 @@
 import domains from './client'
 
-require('./mock')
+// require('./mock')
 
 export default domains
