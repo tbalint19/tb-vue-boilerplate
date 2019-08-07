@@ -1,6 +1,7 @@
 <template lang="html">
   <div id="landing-page">
     <b-container>
+      <p>New content</p>
       <b-row class="justify-content-md-center">
         <b-col s="12" md="6">
           <landing-message> </landing-message>
