@@ -1,11 +1,12 @@
 <template lang="html">
   <b-card :header="$t('login.title')">
     <b-form-input
+      id="login-username-input"
       type="text"
       :placeholder="$t('login.username')"
       :value="username"
-      @input="updateUsername"
-      @blur="blurUsername"
+      @input="updateUsername({ value: $event })"
+      @blur="blurUsername()"
     />
     <input-error
       :condition="userNameErrorShown"
@@ -13,11 +14,12 @@
     >
     </input-error>
     <b-form-input
+      id="login-password-input"
       type="password"
       :placeholder="$t('login.password')"
       :value="password"
-      @input="updatePassword"
-      @blur="blurPassword"
+      @input="updatePassword({ value: $event })"
+      @blur="blurPassword()"
     />
     <input-error
       :condition="passwordErrorShown"
@@ -26,9 +28,10 @@
     </input-error>
     <hr />
     <b-button
+      id="login-button"
       variant="outline-success btn-block"
       :disabled="isDisabled"
-      @click="login"
+      @click="login()"
     >
       <v-icon v-if="!isLoading" name="user" />
       <v-icon v-else name="spinner" :spin="true" />

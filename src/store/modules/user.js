@@ -33,10 +33,10 @@ const getters = {
 }
 
 const actions = {
-  set({ commit }, jwt) {
+  set(context, jwt) {
     let user = parse(jwt)
-    if (user) commit('SET', user)
-    else commit('DEL')
+    if (user) context.commit('SET', user)
+    else context.commit('DEL')
   },
 }
 
