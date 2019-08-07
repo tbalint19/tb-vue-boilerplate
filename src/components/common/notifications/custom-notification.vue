@@ -22,7 +22,8 @@ export default {
   computed: {
     compClass() {
       return {
-        card: true,
+        'custom-notification': true,
+        'card': true,
         'm-2': true,
         'w-shadow': true,
         'text-white': true,

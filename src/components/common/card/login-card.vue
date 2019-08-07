@@ -1,6 +1,7 @@
 <template lang="html">
   <b-card :header="$t('login.title')">
     <b-form-input
+      id="login-username-input"
       type="text"
       :placeholder="$t('login.username')"
       :value="username"
@@ -13,6 +14,7 @@
     >
     </input-error>
     <b-form-input
+      id="login-password-input"
       type="password"
       :placeholder="$t('login.password')"
       :value="password"
@@ -26,6 +28,7 @@
     </input-error>
     <hr />
     <b-button
+      id="login-button"
       variant="outline-success btn-block"
       :disabled="isDisabled"
       @click="login()"
