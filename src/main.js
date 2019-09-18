@@ -41,6 +41,12 @@ var components = [
 ]
 components.forEach(register(Vue))
 
+// API interceptors
+const {
+  addLoggerInterceptor,
+  addConnectionNotifictaionInterceptor
+} = require('./api/interceptor').default
+
 // Language config
 const i18n = new VueI18n({
   locale: 'en',
@@ -48,6 +54,7 @@ const i18n = new VueI18n({
     en: require('../static/dictionary/eng.json'),
     hu: require('../static/dictionary/hun.json'),
   },
+  silentTranslationWarn: true,
 })
 
 // Dev config
@@ -66,3 +73,7 @@ const app = new Vue({
 
 store.$app = app
 store.$api = domains
+Object.values(domains)
+  .forEach(addConnectionNotifictaionInterceptor(app))
+Object.values(domains)
+  .forEach(addLoggerInterceptor)
