@@ -43,11 +43,11 @@ const actions = {
       context.commit('DEL')
     if (user) {
       window.localStorage.setItem("sessionToken", sessionToken)
-      API.service.http.defaults.headers.common['Authorization'] = sessionToken;
+      API.service.authorize(sessionToken)
     }
     else {
       window.localStorage.removeItem("sessionToken")
-      delete API.service.http.defaults.headers.common['Authorization']
+      API.service.unauthorize()
     }
     if (redirect)
       router.push(redirect)

@@ -12,4 +12,12 @@ export default class Service {
       authorizationCode,
     })
   }
+
+  authorize(sessionToken) {
+    this.http.defaults.headers.common['Authorization'] = sessionToken;
+  }
+
+  unauthorize() {
+    delete this.http.defaults.headers.common['Authorization']
+  }
 }
