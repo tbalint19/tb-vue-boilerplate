@@ -33,10 +33,38 @@ const getters = {
 }
 
 const actions = {
-  set(context, jwt) {
-    let user = parse(jwt)
-    if (user) context.commit('SET', user)
-    else context.commit('DEL')
+  set(context, { sessionToken, redirect }) {
+    let user = parse(sessionToken)
+    if (user)
+      context.commit('SET', user)
+    else
+      context.commit('DEL')
+    if (user) {
+      window.localStorage.setItem("sessionToken", sessionToken)
+      this.$api.service.http.defaults.headers.common['Authorization'] = sessionToken;
+    }
+    else {
+      window.localStorage.removeItem("sessionToken")
+      delete this.$api.service.http.defaults.headers.common['Authorization']
+    }
+    if (redirect)
+      this.$app.$router.push(redirect)
+  },
+
+  async login(context, idToken) {
+    try {
+      const loginResponse = await this.$api.service.login({ idToken })
+      const sessionToken = loginResponse.data.sessionToken
+      context.dispatch('set', { sessionToken, redirect: '/home' })
+      this.$app.$notify('success.login')
+    } catch (e) {
+    } finally {
+    }
+  },
+
+  logout(context) {
+    this.$app.$notify('note.logout')
+    this.$app.$router.push('/auth')
   },
 }
 

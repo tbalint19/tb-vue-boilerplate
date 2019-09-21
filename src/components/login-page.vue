@@ -1,14 +1,9 @@
 <template lang="html">
-  <div id="landing-page">
-    <b-container>
-      <b-row class="justify-content-md-center">
-        <b-col s="12" md="6">
-          <landing-message> </landing-message>
-        </b-col>
-      </b-row>
-      <b-row class="justify-content-md-center">
-        <b-col s="12" md="6">
-          <login-card> </login-card>
+  <div id="login-page">
+    <b-container fluid>
+      <b-row>
+        <b-col cols="12">
+          Login in progress...
         </b-col>
       </b-row>
     </b-container>
@@ -16,7 +11,20 @@
 </template>
 
 <script>
-export default {}
+import { mapGetters, mapActions } from 'vuex'
+
+export default {
+  methods: {
+    ...mapActions('user', [
+      'login'
+    ])
+  },
+  created() {
+    const idToken = this.$route.query.code
+    this.login(idToken)
+  }
+}
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+</style>

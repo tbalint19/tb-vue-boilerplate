@@ -5,7 +5,7 @@ generateTemplateFiles([
         option: 'Create page',
         defaultCase: '(kebabCase)',
         entry: {
-            folderPath: './tools/templates/page.vue',
+            folderPath: './codegen/templates/page.vue',
         },
         stringReplacers: ['__pageName__'],
         output: {
@@ -20,7 +20,7 @@ generateTemplateFiles([
         option: 'Create route',
         defaultCase: '(kebabCase)',
         entry: {
-            folderPath: './tools/templates/route.js',
+            folderPath: './codegen/templates/route.js',
         },
         stringReplacers: ['__pageName__', '__guard__'],
         output: {
@@ -35,7 +35,7 @@ generateTemplateFiles([
         option: 'Create route w/authentication',
         defaultCase: '(kebabCase)',
         entry: {
-            folderPath: './tools/templates/route-authentication.js',
+            folderPath: './codegen/templates/route-authentication.js',
         },
         stringReplacers: ['__pageName__'],
         output: {
@@ -50,7 +50,7 @@ generateTemplateFiles([
         option: 'Create route w/authorization',
         defaultCase: '(kebabCase)',
         entry: {
-            folderPath: './tools/templates/route-authorization.js',
+            folderPath: './codegen/templates/route-authorization.js',
         },
         stringReplacers: ['__pageName__'],
         output: {
@@ -65,7 +65,7 @@ generateTemplateFiles([
         option: 'Create module',
         defaultCase: '(kebabCase)',
         entry: {
-            folderPath: './tools/templates/module.js',
+            folderPath: './codegen/templates/module.js',
         },
         stringReplacers: ['__moduleName__'],
         output: {

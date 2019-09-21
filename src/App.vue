@@ -16,26 +16,30 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   name: 'App',
-  created() {
-    /*
-      TODO
-        init store if necessary
-         - initialy api calls
-         - localstorage for "login"
-         this.$store.dispatch("INIT")
-         or nicer:
-         mapstate + this.init()
-       ...
-    */
+  methods: {
+    ...mapActions('user', [
+      'set'
+    ])
   },
+  mounted() {
+    const sessionToken = window.localStorage.getItem("sessionToken")
+    this.set({ sessionToken })
+  }
 }
 </script>
 
 <style>
 /* Put here style that is applied to all components */
 .container {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.container-fluid {
   margin-top: 100px;
   margin-bottom: 100px;
 }

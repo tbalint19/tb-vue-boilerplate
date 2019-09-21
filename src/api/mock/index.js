@@ -1,6 +1,6 @@
 import domains from '../client'
-import { applyDomainAdapter } from './domain-mock'
+import { applyServiceAdapter } from './service-mock'
 
 export default (() => {
-  applyDomainAdapter(domains['domain'].http)
+  applyServiceAdapter(domains['service'].http)
 })()

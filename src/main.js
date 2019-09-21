@@ -27,10 +27,7 @@ var components = [
   'common/navbar-top',
   'common/navbar-bottom',
 
-  'common/card/login-card',
-
   'common/text/landing-message',
-  'common/text/input-error',
 
   'common/notifications/custom-notification',
 
@@ -69,7 +66,7 @@ const app = new Vue({
   store,
   i18n,
   template: '<App/>',
-}).$mount('#app-container')
+})
 
 store.$app = app
 store.$api = domains
@@ -77,3 +74,5 @@ Object.values(domains)
   .forEach(addConnectionNotifictaionInterceptor(app))
 Object.values(domains)
   .forEach(addLoggerInterceptor)
+
+app.$mount('#app-container')

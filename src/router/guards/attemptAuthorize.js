@@ -8,5 +8,5 @@ export const attemptAuthorize = (cred) => (to, from, next) => {
     store.state.user.permissions.includes(cred)
   )
     next()
-  else next('/login')
+  else next('/auth')
 }

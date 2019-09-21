@@ -1,5 +1,9 @@
 <template lang="html">
   <b-navbar type="light" variant="light" fixed="bottom">
+    <span v-if="isLoggedIn">
+      <span>{{ $t('loggedInAs') }}:&nbsp;</span>
+      <span>{{ username }}</span>
+    </span>
     <b-navbar-nav class="ml-auto">
       <b-form-select
         v-model="selected"
@@ -11,6 +15,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
+
 export default {
   data() {
     return {
@@ -20,6 +26,12 @@ export default {
         { value: 'en', text: 'English' },
       ],
     }
+  },
+  computed: {
+    ...mapGetters('user', [
+      'username',
+      'isLoggedIn',
+    ])
   },
   watch: {
     selected(value) {

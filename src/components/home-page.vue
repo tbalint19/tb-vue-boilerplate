@@ -1,6 +1,6 @@
 <template lang="html">
   <div id="home-page">
-    <b-container>
+    <b-container fluid>
       <p>Home page</p>
     </b-container>
   </div>

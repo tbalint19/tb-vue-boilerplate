@@ -12,5 +12,6 @@ files.keys().forEach((key) => {
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes,
 })

@@ -17,7 +17,7 @@ export default {
     ...mapGetters('user', ['isLoggedIn']),
   },
   methods: {
-    ...mapActions('auth', ['logout']),
+    ...mapActions('user', ['logout']),
   },
 }
 </script>
