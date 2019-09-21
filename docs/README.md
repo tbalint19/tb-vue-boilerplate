@@ -603,6 +603,15 @@ It is already set up in the Spring boot boilerplate app, thus its documentation 
 
 ## Auth
 
+### Google openID
+
+1. https://console.developers.google.com - register and create a project
+2. Oauth consent screen - Scopes - opendid, profile, email
+3. Oauth consent screen - authorized domains (protocol - http - not needed)
+4. Credentials screen - create credentials - OAuth client ID
+5. Select Web application - add name (display name in console) - add token endpoint of spa (Authorized redirect URIs)
+6. Update google.json with client_ID, client_secret and redirect_uri (client-secret only for mock - only on backed)
+
 SPA auth can be done on the frontend - backend call is not needed for new page for example.
 The base of routing on the frontend is the JWT, and its payload.
 It should not be validated (with the secret key), only decoded.
