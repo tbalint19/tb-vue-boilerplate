@@ -8,7 +8,7 @@ import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
 import router from './router'
 import store from './store'
-import domains from './api'
+import services from './api'
 
 // 3rd party
 Vue.use(BootstrapVue)
@@ -66,13 +66,9 @@ const app = new Vue({
   store,
   i18n,
   template: '<App/>',
-})
+}).$mount('#app-container')
 
-store.$app = app
-store.$api = domains
-Object.values(domains)
+Object.values(services)
   .forEach(addConnectionNotifictaionInterceptor(app))
-Object.values(domains)
+Object.values(services)
   .forEach(addLoggerInterceptor)
-
-app.$mount('#app-container')

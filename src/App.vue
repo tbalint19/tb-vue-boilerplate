@@ -16,19 +16,8 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-
 export default {
   name: 'App',
-  methods: {
-    ...mapActions('user', [
-      'set'
-    ])
-  },
-  mounted() {
-    const sessionToken = window.localStorage.getItem("sessionToken")
-    this.set({ sessionToken })
-  }
 }
 </script>
 

@@ -1,10 +1,10 @@
 const files = require.context('.', false, /\.js$/)
 
-const domains = {}
+const services = {}
 
 files.keys().forEach((key) => {
   if (key === './index.js') return
-  domains[key.replace(/(\.\/|\.js)/g, '')] = new (files(key)).default()
+  services[key.replace(/(\.\/|\.js)/g, '')] = new (files(key)).default()
 })
 
-export default domains
+export default services

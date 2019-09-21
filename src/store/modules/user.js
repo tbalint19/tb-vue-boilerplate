@@ -1,4 +1,6 @@
 import { parse } from '@/util/jwt'
+import API from '@/api'
+import router from '@/router'
 
 const namespaced = true
 
@@ -41,30 +43,30 @@ const actions = {
       context.commit('DEL')
     if (user) {
       window.localStorage.setItem("sessionToken", sessionToken)
-      this.$api.service.http.defaults.headers.common['Authorization'] = sessionToken;
+      API.service.http.defaults.headers.common['Authorization'] = sessionToken;
     }
     else {
       window.localStorage.removeItem("sessionToken")
-      delete this.$api.service.http.defaults.headers.common['Authorization']
+      delete API.service.http.defaults.headers.common['Authorization']
     }
     if (redirect)
-      this.$app.$router.push(redirect)
+      router.push(redirect)
   },
 
   async login(context, authorizationCode) {
     try {
-      const loginResponse = await this.$api.service.login({ authorizationCode })
+      const loginResponse = await API.service.login({ authorizationCode })
       const sessionToken = loginResponse.data.sessionToken
       context.dispatch('set', { sessionToken, redirect: '/home' })
-      this.$app.$notify('success.login')
+      this._vm.$notify('success.login')
     } catch (e) {
     } finally {
     }
   },
 
   logout(context) {
-    this.$app.$notify('note.logout')
-    this.$app.$router.push('/auth')
+    this._vm.$notify('note.logout')
+    router.push('/auth')
   },
 }
 

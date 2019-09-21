@@ -1,5 +1,5 @@
-import domains from './client'
+import services from './client'
 
 require('./mock')
 
-export default domains
+export default services
