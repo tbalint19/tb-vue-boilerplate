@@ -29,7 +29,7 @@ export default {
       const baseURL = "https://accounts.google.com/o/oauth2/v2/auth"
       const clientId = "client_id=" + GOOGLE_CONFIG.client_ID
       const responseType = "response_type=code"
-      const scope = "scope=email+profile"
+      const scope = "scope=openid+email+profile"
       const redirectUri = "redirect_uri=" + GOOGLE_CONFIG.redirect_uri
       const prompt = "prompt=consent"
       const googleAuthUrl = baseURL
