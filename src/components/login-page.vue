@@ -20,8 +20,8 @@ export default {
     ])
   },
   created() {
-    const idToken = this.$route.query.code
-    this.login(idToken)
+    const authorizationCode = this.$route.query.code
+    this.login(authorizationCode)
   }
 }
 </script>

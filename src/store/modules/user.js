@@ -51,9 +51,9 @@ const actions = {
       this.$app.$router.push(redirect)
   },
 
-  async login(context, idToken) {
+  async login(context, authorizationCode) {
     try {
-      const loginResponse = await this.$api.service.login({ idToken })
+      const loginResponse = await this.$api.service.login({ authorizationCode })
       const sessionToken = loginResponse.data.sessionToken
       context.dispatch('set', { sessionToken, redirect: '/home' })
       this.$app.$notify('success.login')

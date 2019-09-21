@@ -16,8 +16,8 @@ const mockLogin = (adapter, use) => {
     call.passThrough()
   } else {
     call.reply(async (request) => {
-      const idToken = JSON.parse(request.data).idToken
-      const { id, username } = await validateTokenWithGoogle(idToken)
+      const authorizationCode = JSON.parse(request.data).authorizationCode
+      const { id, username } = await validateTokenWithGoogle(authorizationCode)
       const sessionToken = createSessionToken(id, username)
       if (sessionToken)
         return [ 200, { sessionToken }]
@@ -39,9 +39,9 @@ const createSessionToken = (id, username) =>
     },
     'secret-key'
   )
-const validateTokenWithGoogle = async (idToken) => {
-  console.log("Received id token on backend:", idToken);
-  const response = await requestValidation(idToken)
+const validateTokenWithGoogle = async (authorizationCode) => {
+  console.log("Received auth code on backend:", authorizationCode);
+  const response = await requestValidation(authorizationCode)
   const responseData = JSON.parse(response)
   const userData = parse(responseData.id_token)
   console.log("User data from token:", userData);
