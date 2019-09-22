@@ -5,7 +5,7 @@ import router from '@/router'
 const namespaced = true
 
 const state = () => ({
-  username: null,
+  email: null,
   isLoggedIn: false,
   role: null,
   permissions: [],
@@ -14,13 +14,13 @@ const state = () => ({
 const mutations = {
   SET(state, payload) {
     state.isLoggedIn = true
-    state.username = payload.username
+    state.email = payload.email
     state.role = payload.role
     state.permissions = payload.permissions
   },
 
   DEL(state) {
-    state.username = null
+    state.email = null
     state.isLoggedIn = false
     state.role = null
     state.permissions = []
@@ -28,7 +28,7 @@ const mutations = {
 }
 
 const getters = {
-  username: (state) => state.username,
+  email: (state) => state.email,
   isLoggedIn: (state) => state.isLoggedIn,
   is: (state) => (role) => state.role == role,
   can: (state) => (permission) => state.permissions.includes(permission),

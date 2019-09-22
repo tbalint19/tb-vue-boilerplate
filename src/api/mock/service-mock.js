@@ -17,8 +17,8 @@ const mockLogin = (adapter, use) => {
   } else {
     call.reply(async (request) => {
       const authorizationCode = JSON.parse(request.data).authorizationCode
-      const { id, username } = await validateTokenWithGoogle(authorizationCode)
-      const sessionToken = createSessionToken(id, username)
+      const { id, email } = await validateTokenWithGoogle(authorizationCode)
+      const sessionToken = createSessionToken(id, email)
       if (sessionToken)
         return [ 200, { sessionToken }]
       else
@@ -29,11 +29,11 @@ const mockLogin = (adapter, use) => {
 
 const on = (adapter) => adapter
 const use = (bool) => bool
-const createSessionToken = (id, username) =>
+const createSessionToken = (id, email) =>
   jwt.sign(
     {
       id,
-      username,
+      email,
       role: null,
       permissions: [],
     },
@@ -46,7 +46,7 @@ const validateTokenWithGoogle = async (authorizationCode) => {
   const responseData = JSON.parse(response)
   const userData = parse(responseData.id_token)
   console.log("User data from token:", userData);
-  return { id: userData.sub, username: userData.email }
+  return { id: userData.sub, email: userData.email }
 }
 
 const requestValidation = (idToken) => new Promise((resolve, reject) => {

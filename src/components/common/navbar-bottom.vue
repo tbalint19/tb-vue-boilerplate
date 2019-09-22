@@ -2,7 +2,7 @@
   <b-navbar type="light" variant="light" fixed="bottom">
     <span v-if="isLoggedIn">
       <span>{{ $t('loggedInAs') }}:&nbsp;</span>
-      <span>{{ username }}</span>
+      <span>{{ email }}</span>
     </span>
     <b-navbar-nav class="ml-auto">
       <b-form-select
@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     ...mapGetters('user', [
-      'username',
+      'email',
       'isLoggedIn',
     ])
   },
