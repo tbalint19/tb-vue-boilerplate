@@ -58,6 +58,8 @@ const actions = {
       context.dispatch('set', { sessionToken, redirect: '/home' })
       this._vm.$notify('success.login')
     } catch (e) {
+      context.dispatch('set', { sessionToken: null, redirect: '/auth' })
+      this._vm.$notify('error.login')
     } finally {
     }
   },

@@ -3,7 +3,7 @@ import axios from 'axios'
 export default class Service {
   constructor() {
     this.http = axios.create({
-      baseURL: 'https://service.com',
+      baseURL: 'http://localhost:3000',
     })
   }
 
@@ -11,10 +11,6 @@ export default class Service {
     return this.http.post('/api/login', {
       authorizationCode,
     })
-  }
-
-  renewSession() {
-    return this.http.get('/api/login')
   }
 
   authorize(sessionToken) {

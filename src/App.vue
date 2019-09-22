@@ -35,7 +35,7 @@ export default {
     let logoutTimeoutId
     let vm = this
     const logoutIfNeeded = function() {
-      if (vm.isLoggedIn) {
+      if (vm.isLoggedIn) { // map other logout blocking activities, e.g. 'isWatchingVideo'
         vm.logout()
       }
       startTimer()
