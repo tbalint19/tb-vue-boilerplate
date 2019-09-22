@@ -37,7 +37,8 @@ const createSessionToken = (id, username) =>
       role: null,
       permissions: [],
     },
-    'secret-key'
+    'secret-key',
+    { expiresIn: '8h' }
   )
 const validateTokenWithGoogle = async (authorizationCode) => {
   console.log("Received auth code on backend:", authorizationCode);

@@ -12,11 +12,11 @@ const state = () => ({
 })
 
 const mutations = {
-  SET(state, user) {
+  SET(state, payload) {
     state.isLoggedIn = true
-    state.username = user.username
-    state.role = user.role
-    state.permissions = user.permissions
+    state.username = payload.username
+    state.role = payload.role
+    state.permissions = payload.permissions
   },
 
   DEL(state) {
@@ -36,17 +36,15 @@ const getters = {
 
 const actions = {
   set(context, { sessionToken, redirect }) {
-    let user = parse(sessionToken)
-    if (user)
-      context.commit('SET', user)
-    else
-      context.commit('DEL')
-    if (user) {
-      window.localStorage.setItem("sessionToken", sessionToken)
+    let payload = parse(sessionToken)
+    if (payload) {
+      context.commit('SET', payload)
+      window.sessionStorage.setItem("sessionToken", sessionToken)
       API.service.authorize(sessionToken)
     }
     else {
-      window.localStorage.removeItem("sessionToken")
+      context.commit('DEL')
+      window.sessionStorage.removeItem("sessionToken")
       API.service.unauthorize()
     }
     if (redirect)
@@ -65,8 +63,8 @@ const actions = {
   },
 
   logout(context) {
+    context.dispatch('set', { sessionToken: null, redirect: '/auth' })
     this._vm.$notify('note.logout')
-    router.push('/auth')
   },
 }
 

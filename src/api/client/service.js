@@ -13,6 +13,10 @@ export default class Service {
     })
   }
 
+  renewSession() {
+    return this.http.get('/api/login')
+  }
+
   authorize(sessionToken) {
     this.http.defaults.headers.common['Authorization'] = sessionToken;
   }
