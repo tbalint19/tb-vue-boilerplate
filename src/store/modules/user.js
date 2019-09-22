@@ -29,6 +29,7 @@ const mutations = {
 
 const getters = {
   email: (state) => state.email,
+  username: (state) => state.email ? state.email.split("@")[0] : "",
   isLoggedIn: (state) => state.isLoggedIn,
   is: (state) => (role) => state.role == role,
   can: (state) => (permission) => state.permissions.includes(permission),
