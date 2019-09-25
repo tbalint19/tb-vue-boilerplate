@@ -9,6 +9,8 @@ import Icon from 'vue-awesome/components/Icon'
 import router from './router'
 import store from './store'
 import services from './api'
+import { AtomSpinner } from 'epic-spinners'
+Vue.component('atom-spinner', AtomSpinner)
 
 // 3rd party
 Vue.use(BootstrapVue)
@@ -41,7 +43,7 @@ components.forEach(register(Vue))
 // API interceptors
 const {
   addLoggerInterceptor,
-  addConnectionNotifictaionInterceptor
+  addConnectionNotifictaionInterceptor,
 } = require('./api/interceptor').default
 
 // Language config
@@ -68,7 +70,5 @@ const app = new Vue({
   template: '<App/>',
 }).$mount('#app-container')
 
-Object.values(services)
-  .forEach(addConnectionNotifictaionInterceptor(app))
-Object.values(services)
-  .forEach(addLoggerInterceptor)
+Object.values(services).forEach(addConnectionNotifictaionInterceptor(app))
+Object.values(services).forEach(addLoggerInterceptor)

@@ -22,36 +22,33 @@ const _ = require('lodash')
 export default {
   name: 'App',
   computed: {
-    ...mapGetters('user', [
-      'isLoggedIn'
-    ])
+    ...mapGetters('user', ['isLoggedIn']),
   },
   methods: {
-    ...mapActions('user', [
-      'logout'
-    ])
+    ...mapActions('user', ['logout']),
   },
   mounted() {
     let logoutTimeoutId
     let vm = this
     const logoutIfNeeded = function() {
-      if (vm.isLoggedIn) { // map other logout blocking activities, e.g. 'isWatchingVideo'
+      if (vm.isLoggedIn) {
+        // map other logout blocking activities, e.g. 'isWatchingVideo'
         vm.logout()
       }
-      startTimer()
+      debouncedTimer()
     }
     function startTimer() {
       if (logoutTimeoutId) clearTimeout(logoutTimeoutId)
       logoutTimeoutId = window.setTimeout(logoutIfNeeded, 900000)
     }
-    const debouncedTimer = _.debounce(startTimer, 1000)
-    document.addEventListener("mousemove", debouncedTimer, false);
-    document.addEventListener("mousedown", debouncedTimer, false);
-    document.addEventListener("scroll", debouncedTimer, false);
-    document.addEventListener("keyup", debouncedTimer, false);
-    document.addEventListener("touchmove", debouncedTimer, false);
-    startTimer()
-  }
+    const debouncedTimer = _.debounce(startTimer, 1000, { leading: true })
+    document.addEventListener('mousemove', debouncedTimer, false)
+    document.addEventListener('mousedown', debouncedTimer, false)
+    document.addEventListener('scroll', debouncedTimer, false)
+    document.addEventListener('keyup', debouncedTimer, false)
+    document.addEventListener('touchmove', debouncedTimer, false)
+    debouncedTimer()
+  },
 }
 </script>
 
@@ -65,6 +62,10 @@ export default {
 .container-fluid {
   margin-top: 100px;
   margin-bottom: 100px;
+}
+
+.op-50 {
+  opacity: 0.5;
 }
 
 .fa-icon {

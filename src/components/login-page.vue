@@ -1,9 +1,20 @@
 <template lang="html">
   <div id="login-page">
     <b-container fluid>
-      <b-row>
-        <b-col cols="12">
-          Login in progress...
+      <b-row class="justify-content-md-center">
+        <b-col s="12" md="6" class="op-50 mt-5">
+          <center>
+            <atom-spinner
+              :animation-duration="1000"
+              :size="200"
+              :color="'#28a745'"
+            />
+          </center>
+          <center>
+            <h4 class="mt-5 text-success">
+              {{ $t('login.inProcess') }}
+            </h4>
+          </center>
         </b-col>
       </b-row>
     </b-container>
@@ -15,16 +26,13 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   methods: {
-    ...mapActions('user', [
-      'login'
-    ])
+    ...mapActions('user', ['login']),
   },
   created() {
     const authorizationCode = this.$route.query.code
     this.login(authorizationCode)
-  }
+  },
 }
 </script>
 
-<style lang="css" scoped>
-</style>
+<style lang="css" scoped></style>

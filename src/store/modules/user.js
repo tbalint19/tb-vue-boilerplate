@@ -29,7 +29,7 @@ const mutations = {
 
 const getters = {
   email: (state) => state.email,
-  username: (state) => state.email ? state.email.split("@")[0] : "",
+  username: (state) => (state.email ? state.email.split('@')[0] : ''),
   isLoggedIn: (state) => state.isLoggedIn,
   is: (state) => (role) => state.role == role,
   can: (state) => (permission) => state.permissions.includes(permission),
@@ -40,16 +40,14 @@ const actions = {
     let payload = parse(sessionToken)
     if (payload) {
       context.commit('SET', payload)
-      window.sessionStorage.setItem("sessionToken", sessionToken)
+      window.sessionStorage.setItem('sessionToken', sessionToken)
       API.service.authorize(sessionToken)
-    }
-    else {
+    } else {
       context.commit('DEL')
-      window.sessionStorage.removeItem("sessionToken")
+      window.sessionStorage.removeItem('sessionToken')
       API.service.unauthorize()
     }
-    if (redirect)
-      router.push(redirect)
+    if (redirect) router.push(redirect)
   },
 
   async login(context, authorizationCode) {

@@ -28,10 +28,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('user', [
-      'username',
-      'isLoggedIn',
-    ])
+    ...mapGetters('user', ['username', 'isLoggedIn']),
   },
   watch: {
     selected(value) {

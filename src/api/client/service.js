@@ -14,7 +14,7 @@ export default class Service {
   }
 
   authorize(sessionToken) {
-    this.http.defaults.headers.common['Authorization'] = sessionToken;
+    this.http.defaults.headers.common['Authorization'] = sessionToken
   }
 
   unauthorize() {
