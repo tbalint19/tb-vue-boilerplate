@@ -6,13 +6,13 @@
           <center>
             <atom-spinner
               :animation-duration="1000"
-              :size="200"
+              :size="250"
               :color="'#28a745'"
             />
           </center>
           <center>
             <h4 class="mt-5 text-success">
-              {{ $t('login.inProcess') }}
+              {{ $t('login.inProgress') }}
             </h4>
           </center>
         </b-col>
