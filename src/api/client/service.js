@@ -8,7 +8,7 @@ export default class Service {
   }
 
   login({ authorizationCode }) {
-    return this.http.post('/api/login', {
+    return this.http.post('/api/user/login', {
       authorizationCode,
     })
   }

@@ -31,8 +31,10 @@ const getters = {
   email: (state) => state.email,
   username: (state) => (state.email ? state.email.split('@')[0] : ''),
   isLoggedIn: (state) => state.isLoggedIn,
-  is: (state) => (role) => state.role == role,
-  can: (state) => (permission) => state.permissions.includes(permission),
+  is: (state) => (role) => state.role ?  state.role.name == role : false,
+  isAt: (state) => (role, scope) => state.role ?  state.role.name == role && state.role.scope == scope : false,
+  can: (state) => (permission) => state.permissions.some(entry => entry.name == permission),
+  canAt: (state) => (permission, scope) => state.permissions.some(entry => entry.name == permission && entry.scope == scope),
 }
 
 const actions = {
