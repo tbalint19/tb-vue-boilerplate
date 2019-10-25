@@ -22,7 +22,7 @@ generateTemplateFiles([
         entry: {
             folderPath: './codegen/templates/route.js',
         },
-        stringReplacers: ['__pageName__', '__guard__'],
+        stringReplacers: ['__pageName__'],
         output: {
             path: './src/router/routes/__pageName__(kebabCase).js',
             pathAndFileNameDefaultCase: '(kebabCase)',
