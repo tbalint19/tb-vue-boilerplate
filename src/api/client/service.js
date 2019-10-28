@@ -13,6 +13,14 @@ export default class Service {
     })
   }
 
+  upload(formData) {
+    return this.http.post('/api/file/upload', formData , {
+      headers: {
+          'Content-Type': 'multipart/form-data'
+      }
+    })
+  }
+
   authorize(sessionToken) {
     this.http.defaults.headers.common['Authorization'] = sessionToken
   }
