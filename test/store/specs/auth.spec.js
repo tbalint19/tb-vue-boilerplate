@@ -192,7 +192,7 @@ describe('Auth tests', () => {
     // then
     expect(store.getters['user/isLoggedIn']).to.equal(false)
 
-    expectRedirect(by(store), to('/login'))
+    expectRedirect(by(store), to('/auth'))
     expectNotification(by(store), 'note.logout')
   })
 })
