@@ -1,5 +1,5 @@
 import services from './client'
 
-// require('./mock')
+require('./mock')
 
 export default services

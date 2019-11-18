@@ -43,7 +43,7 @@ components.forEach(register(Vue))
 // API interceptors
 const {
   addLoggerInterceptor,
-  addConnectionNotifictaionInterceptor,
+  addConnectionNotificationInterceptor,
 } = require('./api/interceptor').default
 
 // Language config
@@ -70,5 +70,5 @@ const app = new Vue({
   template: '<App/>',
 }).$mount('#app-container')
 
-Object.values(services).forEach(addConnectionNotifictaionInterceptor(app))
+Object.values(services).forEach(addConnectionNotificationInterceptor(app))
 Object.values(services).forEach(addLoggerInterceptor)

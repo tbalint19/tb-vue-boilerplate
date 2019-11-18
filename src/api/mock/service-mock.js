@@ -8,6 +8,7 @@ export const applyServiceAdapter = (axios) => {
   const adapter = new MockAdapter(axios, { delayResponse: 500 })
 
   mockLogin(on(adapter), use(true))
+  mockPackages(on(adapter), use(true))
 }
 
 const mockLogin = (adapter, use) => {
@@ -21,6 +22,18 @@ const mockLogin = (adapter, use) => {
       const sessionToken = createSessionToken(id, email)
       if (sessionToken) return [200, { sessionToken }]
       else return [401, { sessionToken: null }]
+    })
+  }
+}
+
+const mockPackages = (adapter, use) => {
+  let call = adapter.onGet('/api/packages')
+  if (!use) {
+    call.passThrough()
+  } else {
+    call.reply(async (request) => {
+      const packages = [ { name: "" }, { name: "" } ]
+      return [200, { packages }]
     })
   }
 }
