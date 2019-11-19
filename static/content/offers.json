@@ -2,29 +2,235 @@
   "primary": [
 
     {
-      "name": "a",
-      "type": "b",
-      "cardImageUrl": "",
+      "name": "elso offer",
+      "type": "elso tipus",
+      "cardImageUrl": "https://placeimg.com/200/200/any?1",
       "mainFeatures": [
         {
-          "text": "",
-          "icon": "",
-          "iconColor": ""
+          "text": "elso feature",
+          "icon": "beer",
+          "iconColor": "text-warning"
+        },
+        {
+          "text": "masodik feature",
+          "icon": "user",
+          "iconColor": "text-danger"
+        },
+        {
+          "text": "harmadik feature",
+          "icon": "trash",
+          "iconColor": "text-success"
         }
       ],
       "pageContent": {
-        "title": "",
-        "subTitle": "",
+        "title": "elso offer page cim",
+        "subTitle": "elso offer subtitle",
         "offerDetails": {
-          "id": "",
-          "price": "",
-          "quantity": "",
-          "unit": ""
+          "id": "1",
+          "price": "25",
+          "quantity": "1",
+          "unit": "kg"
         },
         "paragraphs": [
           {
-            "text": "",
-            "image": ""
+            "text": "Vedd meg",
+            "image": "https://placeimg.com/200/200/any2"
+          },
+          {
+            "text": "Vedd meg 2",
+            "image": "https://placeimg.com/200/200/any3"
+          },
+          {
+            "text": "Vedd meg 3",
+            "image": "https://placeimg.com/200/200/any4"
+          }
+        ]
+      }
+    },
+
+    {
+      "name": "masodik offer",
+      "type": "elso tipus",
+      "cardImageUrl": "https://placeimg.com/200/200/any?7",
+      "mainFeatures": [
+        {
+          "text": "elso feature",
+          "icon": "beer",
+          "iconColor": "text-warning"
+        },
+        {
+          "text": "masodik feature",
+          "icon": "user",
+          "iconColor": "text-danger"
+        },
+        {
+          "text": "harmadik feature",
+          "icon": "trash",
+          "iconColor": "text-success"
+        }
+      ],
+      "pageContent": {
+        "title": "elso offer page cim",
+        "subTitle": "elso offer subtitle",
+        "offerDetails": {
+          "id": "1",
+          "price": "25",
+          "quantity": "1",
+          "unit": "kg"
+        },
+        "paragraphs": [
+          {
+            "text": "Vedd meg",
+            "image": "https://placeimg.com/200/200/any2"
+          },
+          {
+            "text": "Vedd meg 2",
+            "image": "https://placeimg.com/200/200/any3"
+          },
+          {
+            "text": "Vedd meg 3",
+            "image": "https://placeimg.com/200/200/any4"
+          }
+        ]
+      }
+    },
+
+    {
+      "name": "harmadik offer",
+      "type": "harmadik tipus",
+      "cardImageUrl": "https://placeimg.com/200/200/any?9",
+      "mainFeatures": [
+        {
+          "text": "elso feature",
+          "icon": "beer",
+          "iconColor": "text-warning"
+        },
+        {
+          "text": "masodik feature",
+          "icon": "user",
+          "iconColor": "text-danger"
+        },
+        {
+          "text": "harmadik feature",
+          "icon": "trash",
+          "iconColor": "text-success"
+        }
+      ],
+      "pageContent": {
+        "title": "elso offer page cim",
+        "subTitle": "harmadik offer subtitle",
+        "offerDetails": {
+          "id": "1",
+          "price": "25",
+          "quantity": "1",
+          "unit": "kg"
+        },
+        "paragraphs": [
+          {
+            "text": "Vedd meg",
+            "image": "https://placeimg.com/200/200/any2"
+          },
+          {
+            "text": "Vedd meg 2",
+            "image": "https://placeimg.com/200/200/any3"
+          },
+          {
+            "text": "Vedd meg 3",
+            "image": "https://placeimg.com/200/200/any4"
+          }
+        ]
+      }
+    },
+
+    {
+      "name": "negyedik offer",
+      "type": "elso tipus",
+      "cardImageUrl": "https://placeimg.com/200/200/any?8",
+      "mainFeatures": [
+        {
+          "text": "elso feature",
+          "icon": "beer",
+          "iconColor": "text-warning"
+        },
+        {
+          "text": "masodik feature",
+          "icon": "user",
+          "iconColor": "text-danger"
+        },
+        {
+          "text": "valami feature",
+          "icon": "trash",
+          "iconColor": "text-success"
+        }
+      ],
+      "pageContent": {
+        "title": "elso offer page cim",
+        "subTitle": "elso offer subtitle",
+        "offerDetails": {
+          "id": "1",
+          "price": "25",
+          "quantity": "1",
+          "unit": "kg"
+        },
+        "paragraphs": [
+          {
+            "text": "Vedd meg",
+            "image": "https://placeimg.com/200/200/any2"
+          },
+          {
+            "text": "Vedd meg 2",
+            "image": "https://placeimg.com/200/200/any3"
+          },
+          {
+            "text": "Vedd meg 3",
+            "image": "https://placeimg.com/200/200/any4"
+          }
+        ]
+      }
+    },
+
+    {
+      "name": "5. offer",
+      "type": "elso tipus",
+      "cardImageUrl": "https://placeimg.com/200/200/any?18",
+      "mainFeatures": [
+        {
+          "text": "elso feature",
+          "icon": "beer",
+          "iconColor": "text-warning"
+        },
+        {
+          "text": "masodik feature",
+          "icon": "user",
+          "iconColor": "text-danger"
+        },
+        {
+          "text": "valami feature",
+          "icon": "trash",
+          "iconColor": "text-success"
+        }
+      ],
+      "pageContent": {
+        "title": "elso offer page cim",
+        "subTitle": "elso offer subtitle",
+        "offerDetails": {
+          "id": "1",
+          "price": "25",
+          "quantity": "1",
+          "unit": "kg"
+        },
+        "paragraphs": [
+          {
+            "text": "Vedd meg",
+            "image": "https://placeimg.com/200/200/any2"
+          },
+          {
+            "text": "Vedd meg 2",
+            "image": "https://placeimg.com/200/200/any3"
+          },
+          {
+            "text": "Vedd meg 3",
+            "image": "https://placeimg.com/200/200/any4"
           }
         ]
       }

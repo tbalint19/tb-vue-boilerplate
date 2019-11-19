@@ -6,17 +6,20 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
+import Carousel from 'vue-owl-carousel'
 import router from './router'
 import store from './store'
 import services from './api'
 import { AtomSpinner } from 'epic-spinners'
 Vue.component('atom-spinner', AtomSpinner)
 
+
 // 3rd party
 Vue.use(BootstrapVue)
 Vue.use(Notifications)
 Vue.use(VueI18n)
 Vue.component('v-icon', Icon)
+Vue.component('carousel', Carousel)
 
 // Components
 const register = (Vue) => (path) => {

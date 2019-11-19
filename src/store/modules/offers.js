@@ -28,14 +28,14 @@ const mutations = {
 const getters = {
   filterParam: (state) => state.filterParam,
   isLoading: (state) => state.isLoading,
-  primaryOffers: (state) => state.offers.primaryOffers,
-  filteredOffers: (state) => state.offers.primaryOffers
+  primaryOffers: (state) => state.offers.primary,
+  filteredOffers: (state, getters) => getters.primaryOffers
     .filter(offer => offer.name.includes(state.filterParam)),
   personalizedOffers: (state, getters) => getters.filteredOffers
-    .filter(offer => purchasedPackages
-      .map(package => package.name)
-        .includes(offer.name)),
-  selected: (state) => state.offers
+    .filter(offer => !(state.purchasedPackages
+      .map(p => p.name)
+        .includes(offer.name))),
+  selected: (state, getters) => getters.primaryOffers
     .find(offer => offer.name == state.selected)
 }
 
