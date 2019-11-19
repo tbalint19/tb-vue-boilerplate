@@ -4,7 +4,7 @@ const namespaced = true
 
 const state = () => ({
   filterParam: "",
-  offers: content.offers,
+  primaryOffers: content.primaryOffers,
   purchasedPackages: [],
   isLoading: false,
   selected: null
@@ -28,7 +28,7 @@ const mutations = {
 const getters = {
   filterParam: (state) => state.filterParam,
   isLoading: (state) => state.isLoading,
-  primaryOffers: (state) => state.offers.primary,
+  primaryOffers: (state) => state.primaryOffers,
   filteredOffers: (state, getters) => getters.primaryOffers
     .filter(offer => offer.name.includes(state.filterParam)),
   personalizedOffers: (state, getters) => getters.filteredOffers
