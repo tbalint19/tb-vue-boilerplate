@@ -3,7 +3,7 @@
     <b-container fluid>
       <b-row>
         <b-col cols="6">
-          <h4 class="text-center">{{ selected.pageContent.title }}</h4>
+          <h4>{{ selected.pageContent.title }}</h4>
           <h6 class="text-center">{{ selected.pageContent.subTitle }}</h6>
         </b-col>
         <b-col cols="6">
@@ -19,7 +19,7 @@
         </b-col>
       </b-row>
       <hr>
-      <b-row v-for="paragraph of selected.pageContent.paragraphs">
+      <b-row v-for="paragraph of selected.pageContent.paragraphs" :key="paragraph.text">
         <b-col cols="3">
           <b-img thumbnail fluid :src="paragraph.image"></b-img>
         </b-col>

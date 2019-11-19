@@ -33,6 +33,7 @@ var components = [
   'common/navbar-bottom',
 
   'common/text/landing-message',
+  'common/text/voda-heading',
 
   'common/notifications/custom-notification',
 

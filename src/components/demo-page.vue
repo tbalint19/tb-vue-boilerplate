@@ -13,7 +13,7 @@
               tag="article"
               class="m-2"
             >
-              <b-card-text v-for="feature of offer.mainFeatures">
+              <b-card-text v-for="feature of offer.mainFeatures" :key="feature.text">
                 <span :class="feature.iconColor">
                   <v-icon :name="feature.icon"/>
                 </span>

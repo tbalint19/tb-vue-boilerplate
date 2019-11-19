@@ -16,6 +16,4 @@ contentFiles.keys().forEach((key) => {
   }
 })
 
-console.log(content);
-
 export default content
