@@ -10,8 +10,6 @@ import Carousel from 'vue-owl-carousel'
 import router from './router'
 import store from './store'
 import services from './api'
-import { AtomSpinner } from 'epic-spinners'
-Vue.component('atom-spinner', AtomSpinner)
 
 
 // 3rd party

@@ -4,11 +4,7 @@
       <b-row class="justify-content-md-center">
         <b-col s="12" md="6" class="op-50 mt-5">
           <center>
-            <atom-spinner
-              :animation-duration="1000"
-              :size="250"
-              :color="'#28a745'"
-            />
+            <p>Loading</p>
           </center>
           <center>
             <h4 class="mt-5 text-success">
