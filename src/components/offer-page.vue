@@ -3,7 +3,7 @@
     <b-container fluid>
       <b-row>
         <b-col cols="6">
-          <h4>{{ selected.pageContent.title }}</h4>
+          <voda-heading :text="selected.pageContent.title"></voda-heading>
           <h6 class="text-center">{{ selected.pageContent.subTitle }}</h6>
         </b-col>
         <b-col cols="6">

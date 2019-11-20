@@ -3,7 +3,7 @@
     <b-container fluid>
       <b-row>
         <b-col cols="12">
-          <carousel :responsive="{0:{items:1,nav:false},600:{items:4,nav:true}}">
+          <carousel :responsive="{0:{items:1,nav:true},600:{items:3,nav:false}}">
             <b-card
               v-for="offer of personalizedOffers"
               :key="offer.name"
