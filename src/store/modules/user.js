@@ -57,17 +57,13 @@ const actions = {
       const loginResponse = await API.service.login({ authorizationCode })
       const sessionToken = loginResponse.data.sessionToken
       context.dispatch('set', { sessionToken, redirect: '/home' })
-      this._vm.$notify('success.login')
     } catch (e) {
       context.dispatch('set', { sessionToken: null, redirect: '/auth' })
-      this._vm.$notify('error.login')
-    } finally {
     }
   },
 
   logout(context) {
     context.dispatch('set', { sessionToken: null, redirect: '/auth' })
-    this._vm.$notify('note.logout')
   },
 }
 
