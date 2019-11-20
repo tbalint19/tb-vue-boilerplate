@@ -1,5 +1,5 @@
 import API from '@/api'
-const MockAdapter = require('axios-mock-adapter');
+const MockAdapter = require('axios-mock-adapter')
 
 export const mockAPI = () => {
   let mockApi = {}
