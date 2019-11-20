@@ -10,9 +10,9 @@ export const mockAPI = () => {
   return mockApi
 }
 
-export const restoreAPI = (mockApi) => {
+export const resetAPI = (mockApi) => {
   const services = Object.keys(mockApi)
   services.forEach((service) => {
-    mockApi[service].restore()
+    mockApi[service].reset()
   })
 }

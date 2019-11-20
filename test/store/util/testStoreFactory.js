@@ -6,7 +6,4 @@ import Vuex from 'vuex'
 const localVue = createLocalVue()
 localVue.use(Vuex)
 
-export const testStore = () => {
-  const testStore = new Vuex.Store({ modules, strict: true })
-  return testStore
-}
+export const testStore = () => new Vuex.Store({ modules, strict: true })
