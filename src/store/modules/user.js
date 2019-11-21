@@ -31,10 +31,15 @@ const getters = {
   email: (state) => state.email,
   username: (state) => (state.email ? state.email.split('@')[0] : ''),
   isLoggedIn: (state) => state.isLoggedIn,
-  is: (state) => (role) => state.role ?  state.role.name == role : false,
-  isAt: (state) => (role, scope) => state.role ?  state.role.name == role && state.role.scope == scope : false,
-  can: (state) => (permission) => state.permissions.some(entry => entry.name == permission),
-  canAt: (state) => (permission, scope) => state.permissions.some(entry => entry.name == permission && entry.scope == scope),
+  is: (state) => (role) => (state.role ? state.role.name == role : false),
+  isAt: (state) => (role, scope) =>
+    state.role ? state.role.name == role && state.role.scope == scope : false,
+  can: (state) => (permission) =>
+    state.permissions.some((entry) => entry.name == permission),
+  canAt: (state) => (permission, scope) =>
+    state.permissions.some(
+      (entry) => entry.name == permission && entry.scope == scope
+    ),
 }
 
 const actions = {
@@ -57,17 +62,13 @@ const actions = {
       const loginResponse = await API.service.login({ authorizationCode })
       const sessionToken = loginResponse.data.sessionToken
       context.dispatch('set', { sessionToken, redirect: '/home' })
-      this._vm.$notify('success.login')
     } catch (e) {
       context.dispatch('set', { sessionToken: null, redirect: '/auth' })
-      this._vm.$notify('error.login')
-    } finally {
     }
   },
 
   logout(context) {
     context.dispatch('set', { sessionToken: null, redirect: '/auth' })
-    this._vm.$notify('note.logout')
   },
 }
 

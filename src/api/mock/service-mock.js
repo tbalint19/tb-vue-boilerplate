@@ -12,7 +12,7 @@ export const applyServiceAdapter = (axios) => {
 }
 
 const mockLogin = (adapter, use) => {
-  let call = adapter.onPost('/api/login')
+  let call = adapter.onPost('/api/user/login')
   if (!use) {
     call.passThrough()
   } else {
