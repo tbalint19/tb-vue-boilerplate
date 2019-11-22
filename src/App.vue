@@ -38,6 +38,7 @@
     </v-app-bar>
     <v-content>
       <router-view></router-view>
+      <p class="my-color">lajos</p>
     </v-content>
   </v-app>
 </template>
@@ -51,3 +52,7 @@ export default {
   }),
 };
 </script>
+
+<style lang="scss">
+@import './assets/style.scss';
+</style>
