@@ -1,13 +1,13 @@
-import content from "@/content"
+import content from '@/content'
 
 const namespaced = true
 
 const state = () => ({
-  filterParam: "",
+  filterParam: '',
   primaryOffers: content.primaryOffers,
   purchasedPackages: [],
   isLoading: false,
-  selected: null
+  selected: null,
 })
 
 const mutations = {
@@ -22,26 +22,29 @@ const mutations = {
   },
   SELECT_OFFER(state, name) {
     state.selected = name
-  }
+  },
 }
 
 const getters = {
   filterParam: (state) => state.filterParam,
   isLoading: (state) => state.isLoading,
   primaryOffers: (state) => state.primaryOffers,
-  filteredOffers: (state, getters) => getters.primaryOffers
-    .filter(offer => offer.name.includes(state.filterParam)),
-  personalizedOffers: (state, getters) => getters.filteredOffers
-    .filter(offer => !(state.purchasedPackages
-      .map(p => p.name)
-        .includes(offer.name))),
-  selected: (state, getters) => getters.primaryOffers
-    .find(offer => offer.name == state.selected)
+  filteredOffers: (state, getters) =>
+    getters.primaryOffers.filter((offer) =>
+      offer.name.includes(state.filterParam)
+    ),
+  personalizedOffers: (state, getters) =>
+    getters.filteredOffers.filter(
+      (offer) =>
+        !state.purchasedPackages.map((p) => p.name).includes(offer.name)
+    ),
+  selected: (state, getters) =>
+    getters.primaryOffers.find((offer) => offer.name == state.selected),
 }
 
 const actions = {
   reset(context) {
-    context.commit('UPDATE_FILTER_PARAM', "")
+    context.commit('UPDATE_FILTER_PARAM', '')
     context.commit('SET_PURCHASED_PACKAGES', [])
   },
   updateFilterParam(context, value) {
@@ -61,7 +64,7 @@ const actions = {
     } finally {
       context.commit('TOGGLE_LOADING', false)
     }
-  }
+  },
 }
 
 export default {

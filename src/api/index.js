@@ -4,9 +4,8 @@ const clients = {}
 
 files.keys().forEach((key) => {
   if (key === './index.js') return
-  clients[key.replace(/(\.\/|\.js)/g, '')] = new (files(key)).default()
+  clients[key.replace(/(\.\/|\.js)/g, '')] = new (files(key).default)()
 })
-
 
 // require('./mock')
 

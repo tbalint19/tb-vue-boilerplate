@@ -1,7 +1,7 @@
 const contentFiles = require.context('@/../public/content', true, /\.json$/)
 
-const isList = key => key.split('/').length === 3
-const listName = key => key.split('/')[1]
+const isList = (key) => key.split('/').length === 3
+const listName = (key) => key.split('/')[1]
 
 const content = {}
 contentFiles.keys().forEach((key) => {
@@ -10,8 +10,7 @@ contentFiles.keys().forEach((key) => {
       content[listName(key)] = []
     }
     content[listName(key)].push(contentFiles(key))
-  }
-  else {
+  } else {
     content[key.replace(/(\.\/|\.json)/g, '')] = contentFiles(key)
   }
 })

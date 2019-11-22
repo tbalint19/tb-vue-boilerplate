@@ -3,8 +3,18 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
-import vuetify from './plugins/vuetify';
+import vuetify from './plugins/vuetify'
 import i18n from './plugins/i18n'
+
+// Components
+const register = (Vue) => (path) => {
+  const name = (path) => path.split('/')[path.split('/').length - 1]
+  const component = (path) => require('@/components/' + path + '.vue').default
+  Vue.component(name(path), component(path))
+}
+
+var components = ['navbar-top']
+components.forEach(register(Vue))
 
 Vue.config.productionTip = false
 
@@ -13,5 +23,5 @@ new Vue({
   store,
   vuetify,
   i18n,
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount('#app')
