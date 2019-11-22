@@ -1,12 +1,33 @@
-const files = require.context('./client', false, /\.js$/)
-
-const clients = {}
-
-files.keys().forEach((key) => {
-  if (key === './index.js') return
-  clients[key.replace(/(\.\/|\.js)/g, '')] = new (files(key).default)()
+const clientFiles = require.context('./client', false, /\.js$/)
+const API = {}
+clientFiles.keys().forEach((key) => {
+  const serviceName = key.replace(/(\.\/|\.js)/g, '')
+  API[serviceName] = new (clientFiles(key).default)()
 })
 
-// require('./mock')
 
-export default clients
+const mockFiles = require.context('./mock', false, /\.js$/)
+mockFiles.keys().forEach((key) => {
+  const serviceName = key.replace(/(\.\/|\.js)/g, '')
+  const { applyAdapter } = mockFiles(key)
+  applyAdapter(API[serviceName])
+})
+
+
+Object.values(API).forEach((client) => {
+  if (!(process.env.NODE_ENV == 'development')) return
+  client.http.interceptors.response.use(
+    (response) => {
+      console.log(response)
+      return response
+    },
+    (error) => {
+      console.log(error)
+      if (error.response) console.log(error.response)
+      return Promise.reject(error)
+    }
+  )
+})
+
+
+export default API

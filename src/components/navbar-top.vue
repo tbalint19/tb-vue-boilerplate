@@ -8,8 +8,14 @@
       <v-spacer></v-spacer>
 
       <v-btn @click="snackbar = !snackbar" text>
-        <v-icon>mdi-bookmark</v-icon>
+        <v-icon>mdi-apps</v-icon>
       </v-btn>
+      <login-button
+        v-if="!isLoggedIn">
+      </login-button>
+      <logout-button
+        v-else>
+      </logout-button>
     </v-app-bar>
     <v-snackbar bottom right v-model="snackbar" color="grey lighten-5">
       <v-select rounded v-model="selected" :items="items"></v-select>
@@ -18,6 +24,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data: () => ({
     snackbar: false,
@@ -27,6 +34,9 @@ export default {
       { text: 'English', value: 'en' },
     ],
   }),
+  computed: {
+    ...mapGetters('user', ['isLoggedIn'])
+  },
   watch: {
     selected(value) {
       this.$i18n.locale = value

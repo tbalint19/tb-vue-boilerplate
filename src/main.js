@@ -13,7 +13,12 @@ const register = (Vue) => (path) => {
   Vue.component(name(path), component(path))
 }
 
-var components = ['navbar-top']
+var components = [
+  'navbar-top',
+
+  'button/login-button',
+  'button/logout-button'
+]
 components.forEach(register(Vue))
 
 Vue.config.productionTip = false

@@ -48,27 +48,29 @@ const actions = {
     if (payload) {
       context.commit('SET', payload)
       window.sessionStorage.setItem('sessionToken', sessionToken)
-      API.service.authorize(sessionToken)
+      API.userService.authorize(sessionToken)
+      API.packageService.authorize(sessionToken)
     } else {
       context.commit('DEL')
       window.sessionStorage.removeItem('sessionToken')
-      API.service.unauthorize()
+      API.userService.unauthorize()
+      API.packageService.unauthorize()
     }
-    if (redirect) router.push(redirect)
+    if (redirect) router.push(redirect).catch(err => {})
   },
 
-  async login(context, authorizationCode) {
+  async login(context, { authorizationCode, redirect }) {
     try {
-      const loginResponse = await API.service.login({ authorizationCode })
+      const loginResponse = await API.userService.login({ authorizationCode })
       const sessionToken = loginResponse.data.sessionToken
-      context.dispatch('set', { sessionToken, redirect: '/home' })
+      context.dispatch('set', { sessionToken, redirect })
     } catch (e) {
-      context.dispatch('set', { sessionToken: null, redirect: '/auth' })
+      context.dispatch('set', { sessionToken: null, redirect: '/' })
     }
   },
 
   logout(context) {
-    context.dispatch('set', { sessionToken: null, redirect: '/auth' })
+    context.dispatch('set', { sessionToken: null, redirect: '/' })
   },
 }
 

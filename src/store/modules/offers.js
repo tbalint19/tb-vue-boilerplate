@@ -56,9 +56,8 @@ const actions = {
   async loadPurchasedPackages(context) {
     context.commit('TOGGLE_LOADING', true)
     try {
-      const purchasedPackages = await API.service.getPackages()
+      const purchasedPackages = await API.packageService.getPackages()
       context.commit('SET_PURCHASED_PACKAGES', purchasedPackages)
-      this._vm.$notify('packages.loaded')
     } catch (e) {
       context.commit('SET_PURCHASED_PACKAGES', [])
     } finally {
