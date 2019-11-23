@@ -9,8 +9,7 @@ clientFiles.keys().forEach((key) => {
 const mockFiles = require.context('./mock', false, /\.js$/)
 mockFiles.keys().forEach((key) => {
   const serviceName = key.replace(/(\.\/|\.js)/g, '')
-  const { applyAdapter } = mockFiles(key)
-  applyAdapter(API[serviceName])
+  new (mockFiles(serviceName).default)()
 })
 
 

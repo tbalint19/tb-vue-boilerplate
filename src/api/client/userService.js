@@ -1,10 +1,8 @@
-import axios from 'axios'
+import Service from '../abstract/service.js'
 
-export default class UserService {
+export default class UserService extends Service {
   constructor() {
-    this.http = axios.create({
-      baseURL: 'http://localhost:3000',
-    })
+    super('http://localhost:3000')
   }
 
   login({ authorizationCode }) {
@@ -13,11 +11,4 @@ export default class UserService {
     })
   }
 
-  authorize(sessionToken) {
-    this.http.defaults.headers.common['Authorization'] = sessionToken
-  }
-
-  unauthorize() {
-    delete this.http.defaults.headers.common['Authorization']
-  }
 }

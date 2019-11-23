@@ -1,21 +1,12 @@
-import axios from 'axios'
+import Service from '@/api/abstract/service.js'
 
-export default class PackageService {
+export default class PackageService extends Service {
   constructor() {
-    this.http = axios.create({
-      baseURL: 'http://localhost:4000',
-    })
+    super('http://localhost:4000')
   }
 
   getPackages() {
     return this.http.get('/api/packages')
   }
 
-  authorize(sessionToken) {
-    this.http.defaults.headers.common['Authorization'] = sessionToken
-  }
-
-  unauthorize() {
-    delete this.http.defaults.headers.common['Authorization']
-  }
 }
