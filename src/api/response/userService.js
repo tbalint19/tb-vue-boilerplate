@@ -1,32 +1,15 @@
-var MockAdapter = require('axios-mock-adapter')
-var jwt = require('jsonwebtoken')
-var { parse } = require('@/util/jwt')
-var GOOGLE_CONFIG = require('@/../google.json')
+const jwt = require('jsonwebtoken')
+const { parse } = require('@/util/jwt')
+const GOOGLE_CONFIG = require('@/../google.json')
 
-export const applyAdapter = (service) => {
-  console.log('User service mock is used!')
-  const adapter = new MockAdapter(service.http, { delayResponse: 500 })
-
-  mockLogin(on(adapter), use(true))
+export const loginResponse = async (request) => {
+  const authorizationCode = JSON.parse(request.data).authorizationCode
+  const { id, email } = await validateTokenWithGoogle(authorizationCode)
+  const sessionToken = createSessionToken(id, email)
+  if (sessionToken) return [200, { sessionToken }]
+  else return [401, { sessionToken: null }]
 }
 
-const mockLogin = (adapter, use) => {
-  let call = adapter.onPost('/api/user/login')
-  if (!use) {
-    call.passThrough()
-  } else {
-    call.reply(async (request) => {
-      const authorizationCode = JSON.parse(request.data).authorizationCode
-      const { id, email } = await validateTokenWithGoogle(authorizationCode)
-      const sessionToken = createSessionToken(id, email)
-      if (sessionToken) return [200, { sessionToken }]
-      else return [401, { sessionToken: null }]
-    })
-  }
-}
-
-const on = (adapter) => adapter
-const use = (bool) => bool
 const createSessionToken = (id, email) =>
   jwt.sign(
     {
@@ -38,6 +21,7 @@ const createSessionToken = (id, email) =>
     'secret-key',
     { expiresIn: '8h' }
   )
+
 const validateTokenWithGoogle = async (authorizationCode) => {
   console.log('Received auth code on backend:', authorizationCode)
   const response = await requestValidation(authorizationCode)
