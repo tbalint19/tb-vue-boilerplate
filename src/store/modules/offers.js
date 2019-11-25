@@ -1,12 +1,10 @@
-import content from '@/content'
-
 const namespaced = true
 
-const state = () => ({
+const state = (content) => () => ({
   filterParam: '',
-  primaryOffers: content.primaryOffers,
   purchasedPackages: [],
   isLoading: false,
+  primaryOffers: content.primaryOffers,
   selected: null,
 })
 
@@ -26,9 +24,9 @@ const mutations = {
 }
 
 const getters = {
+  primaryOffers: (state) => state.primaryOffers,
   filterParam: (state) => state.filterParam,
   isLoading: (state) => state.isLoading,
-  primaryOffers: (state) => state.primaryOffers,
   filteredOffers: (state, getters) =>
     getters.primaryOffers.filter((offer) =>
       offer.name.includes(state.filterParam)
@@ -56,7 +54,7 @@ const actions = {
   async loadPurchasedPackages(context) {
     context.commit('TOGGLE_LOADING', true)
     try {
-      const purchasedPackages = await API.packageService.getPackages()
+      const purchasedPackages = await this.$api.packageService.getPackages()
       context.commit('SET_PURCHASED_PACKAGES', purchasedPackages)
     } catch (e) {
       context.commit('SET_PURCHASED_PACKAGES', [])
@@ -66,10 +64,10 @@ const actions = {
   },
 }
 
-export default {
+export default (content) => ({
   namespaced,
-  state,
+  state: state(content),
   getters,
   mutations,
   actions,
-}
+})

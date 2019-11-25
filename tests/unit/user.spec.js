@@ -1,6 +1,4 @@
 import { testStore } from './helper/testStore.js'
-import content from '../../src/content.js'
-jest.mock('../../src/content.js');
 
 describe('User module tests', () => {
 
@@ -9,10 +7,10 @@ describe('User module tests', () => {
     const store = testStore()
 
     // when
-    const result = null
+    store.dispatch('user/logout')
 
     // then
-    expect(result).toBe(null)
+    expect(null).toBe(null)
   })
 
 })

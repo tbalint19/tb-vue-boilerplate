@@ -1,10 +1,8 @@
 import { parse } from '@/util/jwt'
-import API from '@/api'
-import router from '@/router'
 
 const namespaced = true
 
-const state = () => ({
+const state = (content) => () => ({
   email: null,
   isLoggedIn: false,
   role: null,
@@ -48,20 +46,20 @@ const actions = {
     if (payload) {
       context.commit('SET', payload)
       window.sessionStorage.setItem('sessionToken', sessionToken)
-      API.userService.authorize(sessionToken)
-      API.packageService.authorize(sessionToken)
+      this.$api.userService.authorize(sessionToken)
+      this.$api.packageService.authorize(sessionToken)
     } else {
       context.commit('DEL')
       window.sessionStorage.removeItem('sessionToken')
-      API.userService.unauthorize()
-      API.packageService.unauthorize()
+      this.$api.userService.unauthorize()
+      this.$api.packageService.unauthorize()
     }
-    if (redirect) router.push(redirect).catch(err => {})
+    if (redirect) this.$router.push(redirect).catch(err => {})
   },
 
   async login(context, { authorizationCode, redirect }) {
     try {
-      const loginResponse = await API.userService.login({ authorizationCode })
+      const loginResponse = await this.$api.userService.login({ authorizationCode })
       const sessionToken = loginResponse.data.sessionToken
       context.dispatch('set', { sessionToken, redirect })
     } catch (e) {
@@ -74,10 +72,10 @@ const actions = {
   },
 }
 
-export default {
+export default (content) => ({
   namespaced,
-  state,
+  state: state(content),
   getters,
   mutations,
   actions,
-}
+})
