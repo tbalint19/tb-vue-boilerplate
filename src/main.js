@@ -17,7 +17,10 @@ var components = [
   'navbar-top',
 
   'button/login-button',
-  'button/logout-button'
+  'button/logout-button',
+
+  'loading',
+  'list-element'
 ]
 components.forEach(register(Vue))
 

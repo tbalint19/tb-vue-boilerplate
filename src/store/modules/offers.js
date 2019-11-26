@@ -46,8 +46,8 @@ const actions = {
     context.commit('UPDATE_FILTER_PARAM', '')
     context.commit('SET_PURCHASED_PACKAGES', [])
   },
-  updateFilterParam(context, value) {
-    context.commit('UPDATE_FILTER_PARAM', value)
+  updateFilterParam(context, event) {
+    context.commit('UPDATE_FILTER_PARAM', event.target.value)
   },
   selectOffer(context, name) {
     context.commit('SELECT_OFFER', name)
