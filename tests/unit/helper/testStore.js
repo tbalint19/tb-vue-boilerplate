@@ -1,9 +1,9 @@
 import { createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
 import fs from 'fs'
-import { defaultContent } from './defaultContent'
-import apiMock from './apiMock'
-import routerMock from './routerMock'
+import { defaultContent } from './content'
+import api from './api'
+import router from './router'
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
@@ -21,8 +21,8 @@ export const testStore = (content = defaultContent()) => {
 
   const store = new Vuex.Store({ modules, strict: true })
 
-  store.$api = apiMock.clients
-  store.$router = routerMock
+  store.$api = api.clients
+  store.$router = router
 
   return store
 }

@@ -1,6 +1,6 @@
 import { testStore } from './helper/testStore.js'
-import apiMock from './helper/apiMock.js'
-import routerMock from './helper/routerMock.js'
+import api from './helper/api.js'
+import router from './helper/router.js'
 import jwt from 'jsonwebtoken'
 
 describe('User module tests', () => {
@@ -21,8 +21,8 @@ describe('User module tests', () => {
     expect(store.getters['user/email']).toBe(null)
     expect(store.getters['user/is']('user')).toBe(false)
 
-    expect(routerMock.push.mock.calls.length).toBe(1)
-    expect(routerMock.push.mock.calls[0][0]).toBe("/")
+    expect(router.push.mock.calls.length).toBe(1)
+    expect(router.push.mock.calls[0][0]).toBe("/")
   })
 
   it('should login user', async () => {
@@ -35,7 +35,7 @@ describe('User module tests', () => {
         permissions: []
       },
     'secret-key')
-    apiMock.mockServices.userService
+    api.services.userService
       .onPost('/api/user/login')
       .reply(200, { sessionToken })
 
@@ -47,8 +47,8 @@ describe('User module tests', () => {
     expect(store.getters['user/email']).toBe('a@bc')
     expect(store.getters['user/is']('user')).toBe(true)
 
-    expect(routerMock.push.mock.calls.length).toBe(1)
-    expect(routerMock.push.mock.calls[0][0]).toBe("/about")
+    expect(router.push.mock.calls.length).toBe(1)
+    expect(router.push.mock.calls[0][0]).toBe("/about")
   })
 
 })

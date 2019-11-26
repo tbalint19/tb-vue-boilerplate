@@ -1,7 +1,7 @@
 import { testStore } from './helper/testStore.js'
-import apiMock from './helper/apiMock.js'
-import routerMock from './helper/routerMock.js'
-import { defaultContent, defaultPrimaryOffer } from './helper/defaultContent.js'
+import api from './helper/api.js'
+import router from './helper/router.js'
+import { defaultContent, defaultPrimaryOffer } from './helper/content.js'
 
 describe('Offers module tests', () => {
 
@@ -43,7 +43,7 @@ describe('Offers module tests', () => {
 
     store.dispatch('offers/updateFilterParam', "3")
 
-    apiMock.mockServices.packageService
+    api.services.packageService
       .onGet('/api/packages')
       .reply(200, [ primaryOffer4 ])
 
