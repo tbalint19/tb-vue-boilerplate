@@ -21,7 +21,7 @@ export const testStore = (content = defaultContent()) => {
 
   const store = new Vuex.Store({ modules, strict: true })
 
-  store.$api = apiMock
+  store.$api = apiMock.clients
   store.$router = routerMock
 
   return store
