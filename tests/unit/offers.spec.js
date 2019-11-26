@@ -41,14 +41,14 @@ describe('Offers module tests', () => {
 
     const store = testStore(content)
 
-    store.dispatch('offers/updateFilterParam', "3")
+    store.dispatch('offers/updateFilterParam', { target: { value: "3" } })
 
     api.services.packageService
       .onGet('/api/packages')
       .reply(200, [ primaryOffer4 ])
 
     // when
-    await store.dispatch('offers/loadPurchasedPackages', "3")
+    await store.dispatch('offers/loadPurchasedPackages')
 
     // then
     expect(store.getters['offers/personalizedOffers']).toHaveLength(1)
@@ -64,7 +64,7 @@ describe('Offers module tests', () => {
       .reply(200, [ ])
 
     // when
-    store.dispatch('offers/loadPurchasedPackages', "3")
+    store.dispatch('offers/loadPurchasedPackages')
 
     // then
     expect(store.getters['offers/isLoading']).toBe(true)
