@@ -1,5 +1,5 @@
 const routerMock = {
-  push: () => new Promise((resolve, reject) => {})
+  push: jest.fn(path => new Promise((resolve, reject) => {}))
 }
 
 export default routerMock
