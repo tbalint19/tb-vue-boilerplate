@@ -53,6 +53,35 @@ describe('Offers module tests', () => {
     // then
     expect(store.getters['offers/personalizedOffers']).toHaveLength(1)
     expect(store.getters['offers/personalizedOffers']).toEqual([primaryOffer3])
+    expect(store.getters['offers/isLoading']).toBe(false)
+  })
+
+  it('should be loading when package response has not arrived', async () => {
+    // given
+    const store = testStore()
+    api.services.packageService
+      .onGet('/api/packages')
+      .reply(200, [ ])
+
+    // when
+    store.dispatch('offers/loadPurchasedPackages', "3")
+
+    // then
+    expect(store.getters['offers/isLoading']).toBe(true)
+  })
+
+  it('should not be loading when package response lead to network error', async () => {
+    // given
+    const store = testStore()
+    api.services.packageService
+      .onGet('/api/packages')
+      .networkError()
+
+    // when
+    await store.dispatch('offers/loadPurchasedPackages', "3")
+
+    // then
+    expect(store.getters['offers/isLoading']).toBe(false)
   })
 
 })
