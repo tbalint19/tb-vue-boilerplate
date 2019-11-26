@@ -25,6 +25,7 @@ const mutations = {
 
 const getters = {
   primaryOffers: (state) => state.primaryOffers,
+  purchasedPackages: (state) => state.purchasedPackages,
   filterParam: (state) => state.filterParam,
   isLoading: (state) => state.isLoading,
   filteredOffers: (state, getters) =>
@@ -34,7 +35,7 @@ const getters = {
   personalizedOffers: (state, getters) =>
     getters.filteredOffers.filter(
       (offer) =>
-        !state.purchasedPackages.map((p) => p.name).includes(offer.name)
+        !(state.purchasedPackages.map((p) => p.name).includes(offer.name))
     ),
   selected: (state, getters) =>
     getters.primaryOffers.find((offer) => offer.name == state.selected),
@@ -54,8 +55,8 @@ const actions = {
   async loadPurchasedPackages(context) {
     context.commit('TOGGLE_LOADING', true)
     try {
-      const purchasedPackages = await this.$api.packageService.getPackages()
-      context.commit('SET_PURCHASED_PACKAGES', purchasedPackages)
+      const response = await this.$api.packageService.getPackages()
+      context.commit('SET_PURCHASED_PACKAGES', response.data)
     } catch (e) {
       context.commit('SET_PURCHASED_PACKAGES', [])
     } finally {
