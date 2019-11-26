@@ -28,8 +28,16 @@ describe('User module tests', () => {
   it('should login user', async () => {
     // given
     const store = testStore()
-    const sessionToken = jwt.sign({ email: 'a@bc', role: { name: "user", scope: null }, permissions: [] }, 'shhhhh');
-    apiMock.mockServices.userService.onPost('/api/user/login').reply(200, { sessionToken })
+    const sessionToken = jwt.sign(
+      {
+        email: 'a@bc',
+        role: { name: "user", scope: null },
+        permissions: []
+      },
+    'secret-key')
+    apiMock.mockServices.userService
+      .onPost('/api/user/login')
+      .reply(200, { sessionToken })
 
     // when
     await store.dispatch('user/login', { authorizationCode: "abc", redirect: "/about" })
