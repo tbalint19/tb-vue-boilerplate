@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="@/../public/img/logo.png" />
     <center>
       <input
         type="text"
