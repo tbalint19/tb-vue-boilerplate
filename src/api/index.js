@@ -5,11 +5,13 @@ clientFiles.keys().forEach((key) => {
   API[serviceName] = new (clientFiles(key).default)()
 })
 
-const mockFiles = require.context('./mock', false, /\.js$/)
-mockFiles.keys().forEach((key) => {
-  const serviceName = key.replace(/(\.\/|\.js)/g, '')
-  new (mockFiles(key).default)(API[serviceName])
-})
+if (process.env.NODE_ENV == 'development') {  
+  const mockFiles = require.context('./mock', false, /\.js$/)
+  mockFiles.keys().forEach((key) => {
+    const serviceName = key.replace(/(\.\/|\.js)/g, '')
+    new (mockFiles(key).default)(API[serviceName])
+  })
+}
 
 
 Object.values(API).forEach((client) => {
