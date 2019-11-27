@@ -1,3 +1,6 @@
+const path = require('path')
+const PrerenderSPAPlugin = require('prerender-spa-plugin')
+
 module.exports = {
   "transpileDependencies": [
     "vuetify"
@@ -10,5 +13,14 @@ module.exports = {
       localeDir: '../public/locales',
       enableInSFC: false
     }
+  },
+
+  configureWebpack: {
+    plugins: [
+      new PrerenderSPAPlugin({
+        staticDir: path.join(__dirname, 'dist'),
+        routes: [ '/', '/about' ],
+      })
+    ]
   }
 }
