@@ -22,5 +22,15 @@ module.exports = {
         routes: [ '/', '/about' ],
       })
     ]
+  },
+
+  pwa: {
+    name: 'Boilerplate app as PWA',
+    themeColor: '#4DBA87',
+    msTileColor: '#000000',
+    appleMobileWebAppCapable: 'yes',
+    appleMobileWebAppStatusBarStyle: 'black',
+
+    workboxPluginMode: 'GenerateSW'
   }
 }
