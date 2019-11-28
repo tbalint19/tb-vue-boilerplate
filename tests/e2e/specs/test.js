@@ -3,14 +3,11 @@ module.exports = {
     browser
       .init()
       .waitForElementVisible('#app')
+  },
+
+  afterEach(browser) {
+    browser
+      .pause(3000)
       .end()
-  },
-
-  before: function() {
-    console.log("before");
-  },
-
-  beforeEach: function(browser) {
-    console.log("before each");
   }
 }
