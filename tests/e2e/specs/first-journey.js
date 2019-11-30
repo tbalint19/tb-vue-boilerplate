@@ -10,6 +10,7 @@ module.exports = {
     browser
       .init()
       .waitForElementVisible('#app')
+      .waitForElementVisible('.lofasz', 15000)
   },
 
   afterEach(browser) {
