@@ -16,6 +16,7 @@ node('linux && docker') {
       checkCodeFormat()
       runUnitTests()
       runUITests()
+      localizationReport()
       sonar(projectName)
       build()
       dockerize(projectName)
@@ -74,6 +75,12 @@ def runUnitTests() {
 def runUITests() {
   stage('Run UI tests') {
     sh 'npm run test:e2e'
+  }
+}
+
+def localizationReport() {
+  stage('Localization report') {
+    sh 'npm run i18n:report'
   }
 }
 
