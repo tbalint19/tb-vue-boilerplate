@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="">
-    <v-app-bar app color="success" dark>
+    <v-app-bar app color="primary" dark>
       <div class="d-flex align-center">
         <h1>{{ $t('navbar.title') }}</h1>
       </div>

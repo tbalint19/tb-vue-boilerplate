@@ -20,7 +20,7 @@ var components = [
   'button/logout-button',
 
   'loading',
-  'list-element'
+  'offer-card'
 ]
 components.forEach(register(Vue))
 

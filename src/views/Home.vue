@@ -1,20 +1,33 @@
 <template>
   <div class="home">
-    <center>
-      <input
-        type="text"
-        placeholder="Keress"
-        :value="filterParam"
-        @input="updateFilterParam">
-      <loading v-if="isLoading"></loading>
-      <div v-else>
-        <list-element
-          v-for="offer of personalizedOffers"
-          :text="offer.name"
-          :key="offer.name">
-        </list-element>
-      </div>
-    </center>
+    <v-container fluid>
+      <v-row>
+        <v-col cols="3" justify="center">
+          <v-text-field
+            label="Search"
+            outlined
+            placeholder="Type to search in full offer"
+            @input="updateFilterParam"
+            :value="filterParam"
+            color="primary">
+          </v-text-field>
+        </v-col>
+        <v-col cols="9" justify="center">
+          <v-row v-if="!isLoading">
+            <v-col cols="4" justify="center" v-for="offer of personalizedOffers" :key="offer.name">
+              <offer-card
+                :offer="offer">
+              </offer-card>
+            </v-col>
+          </v-row>
+          <v-row v-else>
+            <v-col cols="4" offset="4">
+              <loading></loading>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
