@@ -1,7 +1,7 @@
 <template lang="html">
   <v-btn @click="logout()" text>
     <v-icon>mdi-account-circle</v-icon>
-    <v-icon>mdi-times</v-icon>
+    <v-icon>mdi-exit-to-app</v-icon>
   </v-btn>
 </template>
 
