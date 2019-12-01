@@ -7,8 +7,18 @@
       class="white--text align-end"
       height="200px"
       :src="offer.cardImageUrl"
+      :lazy-src="'https://picsum.photos/10/6?image=20'"
     >
       <v-card-title>{{ offer.name }}</v-card-title>
+      <template v-slot:placeholder>
+        <v-row
+          class="fill-height ma-0"
+          align="center"
+          justify="center"
+        >
+          <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+        </v-row>
+      </template>
     </v-img>
 
     <v-card-subtitle class="pb-0">{{ offer.type }}</v-card-subtitle>
