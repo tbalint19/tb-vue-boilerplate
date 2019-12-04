@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="lofasz">
+  <div class="loading">
     <div class="d-flex">
       <v-icon x-large>fas fa-circle-notch fa-spin</v-icon>
       <v-spacer></v-spacer>

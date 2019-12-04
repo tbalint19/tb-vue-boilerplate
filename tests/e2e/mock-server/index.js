@@ -17,14 +17,10 @@ const startMockServer = (journey) => {
 		return response.end()
 	}
 
-    console.log("request");
     const mockResponse = await axios({
       method: request.method,
       url: request.url
     })
-    console.log("response");
-
-    console.log(mockResponse)
 
     if (mockResponse.headers)
       Object.entries(mockResponse.headers).forEach(([key, value]) => response.setHeader(key, value))
@@ -37,7 +33,6 @@ const startMockServer = (journey) => {
     if (mockResponse.data)
       response.write(JSON.stringify(mockResponse.data))
 
-    console.log("---END");
     response.end()
 
   }).listen(19791)

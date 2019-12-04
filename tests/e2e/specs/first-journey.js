@@ -21,12 +21,12 @@ module.exports = {
   'LoadHomePage': browser => {
     browser
       .waitForElementVisible('#app')
-      .waitForElementVisible('.lofasz', 15000, 200)
+      .waitForElementVisible('.loading', 15000, 200)
   },
 
   afterEach(browser) {
     browser
-      .pause(15000)
+      .pause(5000)
       .end()
   },
 
