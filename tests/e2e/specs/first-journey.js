@@ -1,16 +1,27 @@
-const { start, shutdown } = require('../mock-server')
+const { startMockServer, shutdownMockServer, mockServer, response } = require('../mock-server')
 
 module.exports = {
 
   before() {
-    start('first-journey')
+    mockServer
+      .onGet('/api/packages')
+      .replyOnce(response({
+        status: 200,
+        body: [ { name: "elso offer" } ],
+        delay: 5000
+      }))
+    startMockServer()
+  },
+
+  beforeEach(browser) {
+    browser
+      .init()
   },
 
   'LoadHomePage': browser => {
     browser
-      .init()
       .waitForElementVisible('#app')
-      .waitForElementVisible('.lofasz', 15000)
+      .waitForElementVisible('.lofasz', 15000, 200)
   },
 
   afterEach(browser) {
@@ -20,6 +31,6 @@ module.exports = {
   },
 
   after() {
-    shutdown()
+    shutdownMockServer()
   }
 }
