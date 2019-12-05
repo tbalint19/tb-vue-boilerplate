@@ -1,4 +1,5 @@
 const { startMockServer, shutdownMockServer, mockServer, response } = require('../mock-server')
+const { timeout } = require('../helper/timeout')
 
 /*
   User opens the home page
@@ -13,7 +14,7 @@ module.exports = {
       .replyOnce(response({
         status: 200,
         body: [ { name: "elso offer" } ],
-        delay: 5000
+        delay: timeout(5)
       }))
     startMockServer()
   },
@@ -31,7 +32,7 @@ module.exports = {
 
   afterEach(browser) {
     browser
-      .pause(10000)
+      .pause(timeout(10))
       .end()
   },
 

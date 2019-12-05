@@ -1,5 +1,7 @@
 const { startMockServer, shutdownMockServer, mockServer, response } = require('../mock-server')
+const { timeout } = require('../helper/timeout')
 const { loadHomePage } = require('./first-journey')
+
 /*
   User starts to filter on the homepage
   The number of cards changes accordingly
@@ -12,7 +14,7 @@ module.exports = {
       .replyOnce(response({
         status: 200,
         body: [ { name: "elso offer" } ],
-        delay: 5000
+        delay: timeout(5)
       }))
     startMockServer()
   },
@@ -28,7 +30,7 @@ module.exports = {
 
   afterEach(browser) {
     browser
-      .pause(10000)
+      .pause(timeout(10))
       .end()
   },
 
