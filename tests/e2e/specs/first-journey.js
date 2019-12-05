@@ -7,6 +7,7 @@ const { timeout } = require('../helper/timeout')
   When the response arrives they see the cards
 */
 module.exports = {
+  '@disabled': true,
 
   before() {
     mockServer

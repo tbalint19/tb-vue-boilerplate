@@ -4,6 +4,7 @@
       <v-row>
         <v-col cols="3" justify="center">
           <v-text-field
+            id="filter"
             label="Search"
             outlined
             placeholder="Type to search in full offer"

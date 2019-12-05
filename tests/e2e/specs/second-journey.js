@@ -7,6 +7,7 @@ const { loadHomePage } = require('./first-journey')
   The number of cards changes accordingly
 */
 module.exports = {
+  '@disabled': false,
 
   before() {
     mockServer
@@ -22,10 +23,21 @@ module.exports = {
   beforeEach(browser) {
     browser
       .init()
+    loadHomePage(browser)
   },
 
   'filterOffers': browser => {
-    loadHomePage(browser)
+    browser
+      .pause(timeout(5))
+      .click('#filter')
+      .pause(timeout(0.5))
+      .keys('a')
+      .pause(timeout(3))
+      .keys('a')
+      .pause(timeout(3))
+
+    browser
+      .keys(browser.Keys.BACK_SPACE)
   },
 
   afterEach(browser) {
