@@ -27,17 +27,29 @@ module.exports = {
   },
 
   'filterOffers': browser => {
+    browser.expect.elements('.offer-card').count.to.equal(3)
+
     browser
       .pause(timeout(5))
       .click('#filter')
       .pause(timeout(0.5))
       .keys('a')
+
+    browser.expect.elements('.offer-card').count.to.equal(2)
+
+    browser
       .pause(timeout(3))
       .keys('a')
+
+    browser.expect.elements('.offer-card').count.to.equal(0)
+
+    browser
       .pause(timeout(3))
 
     browser
       .keys(browser.Keys.BACK_SPACE)
+
+    browser.expect.elements('.offer-card').count.to.equal(2)
   },
 
   afterEach(browser) {
