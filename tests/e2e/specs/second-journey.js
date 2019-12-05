@@ -1,9 +1,8 @@
 const { startMockServer, shutdownMockServer, mockServer, response } = require('../mock-server')
-
+const { loadHomePage } = require('./first-journey')
 /*
-  User opens the home page
-  The loading mask is shonw
-  When the response arrives they see the cards
+  User starts to filter on the homepage
+  The number of cards changes accordingly
 */
 module.exports = {
 
@@ -23,10 +22,8 @@ module.exports = {
       .init()
   },
 
-  'loadHomePage': browser => {
-    browser
-      .waitForElementVisible('#app')
-      .waitForElementVisible('.loading')
+  'filterOffers': browser => {
+    loadHomePage(browser)
   },
 
   afterEach(browser) {
