@@ -8,7 +8,7 @@
       <v-spacer></v-spacer>
 
       <v-btn @click="snackbar = !snackbar" text>
-        <v-icon>mdi-apps</v-icon>
+        <v-icon>language</v-icon>
       </v-btn>
       <login-button
         v-if="!isLoggedIn">
