@@ -4,7 +4,7 @@ const state = (content) => () => ({
   filterParam: '',
   purchasedPackages: [],
   isLoading: false,
-  primaryOffers: content.primaryOffers,
+  primaryOffers: content.demo.offer,
   selected: null,
 })
 
@@ -18,8 +18,8 @@ const mutations = {
   TOGGLE_LOADING(state, to) {
     state.isLoading = to
   },
-  SELECT_OFFER(state, name) {
-    state.selected = name
+  SELECT_OFFER(state, title) {
+    state.selected = title
   },
 }
 
@@ -30,15 +30,15 @@ const getters = {
   isLoading: (state) => state.isLoading,
   filteredOffers: (state, getters) =>
     getters.primaryOffers.filter((offer) =>
-      offer.name.includes(state.filterParam)
+      offer.title.includes(state.filterParam)
     ),
   personalizedOffers: (state, getters) =>
     getters.filteredOffers.filter(
       (offer) =>
-        !(state.purchasedPackages.map((p) => p.name).includes(offer.name))
+        !(state.purchasedPackages.map((p) => p.title).includes(offer.title))
     ),
   selected: (state, getters) =>
-    getters.primaryOffers.find((offer) => offer.name == state.selected),
+    getters.primaryOffers.find((offer) => offer.title == state.selected),
 }
 
 const actions = {
@@ -49,8 +49,8 @@ const actions = {
   updateFilterParam(context, value) {
     context.commit('UPDATE_FILTER_PARAM', value)
   },
-  selectOffer(context, name) {
-    context.commit('SELECT_OFFER', name)
+  selectOffer(context, title) {
+    context.commit('SELECT_OFFER', title)
   },
   async loadPurchasedPackages(context) {
     context.commit('TOGGLE_LOADING', true)

@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="offer-card">    
+  <div class="offer-card">
     <v-card
       class="mx-auto"
       max-width="400"
@@ -7,10 +7,10 @@
       <v-img
         class="white--text align-end"
         height="200px"
-        :src="offer.cardImageUrl"
+        :src="offer.images[0]"
         :lazy-src="'https://picsum.photos/10/6?image=20'"
       >
-        <v-card-title>{{ offer.name }}</v-card-title>
+        <v-card-title>{{ offer.title }}</v-card-title>
         <template v-slot:placeholder>
           <v-row
             class="fill-height ma-0"
@@ -22,10 +22,15 @@
         </template>
       </v-img>
 
-      <v-card-subtitle class="pb-0">{{ offer.type }}</v-card-subtitle>
+      <v-card-subtitle class="pb-0">{{ offer.subtitle }}</v-card-subtitle>
 
       <v-card-text class="text--primary">
-        <div v-for="feature of offer.mainFeatures">{{ feature.text }}</div>
+        <div v-for="advantage of offer.advantages">
+          <span>
+            <v-icon :class="advantage.color.name">{{ advantage.icon.name }}</v-icon>
+            <span class="ml-3">{{ advantage.name }}</span>
+          </span>
+        </div>
       </v-card-text>
 
       <v-card-actions>
