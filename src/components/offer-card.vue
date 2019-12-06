@@ -42,6 +42,7 @@
         </v-btn>
 
         <v-btn
+        @click="$router.push(`/offer?offer=${offer.title}`)"
         color="orange"
         text
         >
