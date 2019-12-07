@@ -7,15 +7,15 @@ const { loadHomePage } = require('./first-journey')
   The number of cards changes accordingly
 */
 module.exports = {
-  '@disabled': true,
+  '@disabled': false,
 
   before() {
     mockServer
       .onGet('/api/packages')
       .replyOnce(response({
         status: 200,
-        body: [ { name: "Samsung 10" } ],
-        delay: timeout(5)
+        body: [  ],
+        delay: timeout(3)
       }))
     startMockServer()
   },
@@ -26,24 +26,13 @@ module.exports = {
     loadHomePage(browser)
   },
 
-  'filterOffers': browser => {
-    browser.expect.elements('.offer-card').count.to.equal(1)
+  'checkOffer': browser => {
+    browser.waitForElementVisible('button[data-uid="Iphone X"]')
 
     browser
-      .pause(timeout(5))
-      .click('#filter')
-      .pause(timeout(0.5))
-      .keys('a')
+      .pause(timeout(1))
 
-    browser.expect.elements('.offer-card').count.to.equal(0)
-
-    browser
-      .pause(timeout(3))
-
-    browser
-      .keys(browser.Keys.BACK_SPACE)
-
-    browser.expect.elements('.offer-card').count.to.equal(1)
+    browser.click('button[data-uid="Iphone X"]')
   },
 
   afterEach(browser) {
