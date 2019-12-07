@@ -13,35 +13,35 @@ describe('Offers module tests', () => {
     // given
     const content = defaultContent()
     const primaryOffer = defaultPrimaryOffer()
-    content.primaryOffers.push(primaryOffer)
+    content.demo.offer.push(primaryOffer)
 
     // when
     const store = testStore(content)
 
     // then
-    expect(store.getters['offers/primaryOffers']).toEqual(content.primaryOffers)
+    expect(store.getters['offers/primaryOffers']).toEqual(content.demo.offer)
   })
 
   it('should show all related offers with filter applied', async () => {
     // given
     const primaryOffer1 = defaultPrimaryOffer()
-    primaryOffer1.name = "offer1"
+    primaryOffer1.title = "offer1"
 
     const primaryOffer2 = defaultPrimaryOffer()
-    primaryOffer2.name = "offer2"
+    primaryOffer2.title = "offer2"
 
     const primaryOffer3 = defaultPrimaryOffer()
-    primaryOffer3.name = "offer3"
+    primaryOffer3.title = "offer3"
 
     const primaryOffer4 = defaultPrimaryOffer()
-    primaryOffer4.name = "stuff3"
+    primaryOffer4.title = "stuff3"
 
     const content = defaultContent()
-    content.primaryOffers = [ primaryOffer1, primaryOffer2, primaryOffer3, primaryOffer4 ]
+    content.demo.offer = [ primaryOffer1, primaryOffer2, primaryOffer3, primaryOffer4 ]
 
     const store = testStore(content)
 
-    store.dispatch('offers/updateFilterParam', { target: { value: "3" } })
+    store.dispatch('offers/updateFilterParam', "3")
 
     api.services.packageService
       .onGet('/api/packages')
