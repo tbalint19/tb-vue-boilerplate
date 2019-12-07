@@ -14,7 +14,7 @@ module.exports = {
       .onGet('/api/packages')
       .replyOnce(response({
         status: 200,
-        body: [ { name: "elso offer" } ],
+          body: [ { name: "Samsung 10" } ],
         delay: timeout(5)
       }))
     startMockServer()

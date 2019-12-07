@@ -14,7 +14,7 @@ module.exports = {
       .onGet('/api/packages')
       .replyOnce(response({
         status: 200,
-        body: [ { name: "elso offer" } ],
+        body: [ { name: "Samsung 10" } ],
         delay: timeout(5)
       }))
     startMockServer()
@@ -27,18 +27,12 @@ module.exports = {
   },
 
   'filterOffers': browser => {
-    browser.expect.elements('.offer-card').count.to.equal(3)
+    browser.expect.elements('.offer-card').count.to.equal(1)
 
     browser
       .pause(timeout(5))
       .click('#filter')
       .pause(timeout(0.5))
-      .keys('a')
-
-    browser.expect.elements('.offer-card').count.to.equal(2)
-
-    browser
-      .pause(timeout(3))
       .keys('a')
 
     browser.expect.elements('.offer-card').count.to.equal(0)
@@ -49,7 +43,7 @@ module.exports = {
     browser
       .keys(browser.Keys.BACK_SPACE)
 
-    browser.expect.elements('.offer-card').count.to.equal(2)
+    browser.expect.elements('.offer-card').count.to.equal(1)
   },
 
   afterEach(browser) {

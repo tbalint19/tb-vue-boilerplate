@@ -9,11 +9,11 @@ module.exports = {
   'default': {
 
     webdriver: {
-      port: 9516,
+      port: 9515,
       server_path: './node_modules/.bin/chromedriver',
       start_process: true,
       cli_args: [
-        '--port=9516'
+        '--port=9515'
       ]
     },
 
