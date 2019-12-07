@@ -7,7 +7,7 @@
             id="filter"
             label="Search"
             outlined
-            placeholder="Type to search in full offer"
+            placeholder="Type to search in offers"
             @input="updateFilterParam"
             :value="filterParam"
             color="primary">

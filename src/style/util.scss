@@ -1,5 +1,9 @@
 @import './color.scss';
 
+.pointer-cursor {
+  cursor: pointer;
+}
+
 .op-25 {
   opacity: 0.25;
   color: $border-dark;

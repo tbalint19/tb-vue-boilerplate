@@ -2,7 +2,7 @@
   <div class="">
     <v-app-bar app color="primary" dark>
       <div class="d-flex align-center">
-        <h1>{{ $t('navbar.title') }}</h1>
+        <h1 class="pointer-cursor" @click="$router.push('/')">{{ $t('navbar.title') }}</h1>
       </div>
 
       <v-spacer></v-spacer>
@@ -47,4 +47,5 @@ export default {
 }
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+</style>
