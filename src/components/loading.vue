@@ -1,10 +1,10 @@
 <template lang="html">
   <div class="loading">
-    <div class="d-flex">
-      <v-icon x-large>fas fa-circle-notch fa-spin</v-icon>
-      <v-spacer></v-spacer>
-      <h1>{{ $t('loading.offers') }}</h1>
-    </div>
+    <v-row>
+      <v-col cols="4" offset="4">
+        Loading
+      </v-col>
+    </v-row>
   </div>
 </template>
 

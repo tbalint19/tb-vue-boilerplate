@@ -2,7 +2,7 @@
   <div class="about">
     <v-container fluid>
       <v-row>
-        <v-col cols="4" justify="center">
+        <v-col cols="12" sm="12" md="6" lg="4" justify="center">
           <v-alert
             border="top"
             colored-border
@@ -52,7 +52,7 @@
              </v-carousel-item>
            </v-carousel>
         </v-col>
-        <v-col cols="8" justify="center">
+        <v-col cols="12" sm="12" md="6" lg="8" justify="center">
           <v-card
             class="mx-auto"
           >

@@ -2,7 +2,7 @@
   <div class="home">
     <v-container fluid>
       <v-row>
-        <v-col cols="3" justify="center">
+        <v-col cols="12" sm="12" md="4" lg="3" justify="center">
           <v-text-field
             id="filter"
             label="Search"
@@ -13,16 +13,16 @@
             color="primary">
           </v-text-field>
         </v-col>
-        <v-col cols="9" justify="center">
+        <v-col cols="12" sm="12" md="8" lg="9">
           <v-row v-if="!isLoading">
-            <v-col cols="4" justify="center" v-for="offer of personalizedOffers" :key="offer.name">
+            <v-col cols="12" sm="12" md="6" lg="4" v-for="offer of personalizedOffers" :key="offer.name">
               <offer-card
                 :offer="offer">
               </offer-card>
             </v-col>
           </v-row>
           <v-row v-else>
-            <v-col cols="4" offset="4">
+            <v-col cols="12" justify="center">
               <loading></loading>
             </v-col>
           </v-row>
