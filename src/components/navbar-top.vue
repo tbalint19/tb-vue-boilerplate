@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="">
-    <v-app-bar app color="primary" dark>
+    <v-app-bar app color="red accent-4" dark>
       <div class="d-flex align-center">
         <h1 class="pointer-cursor" @click="$router.push('/')">{{ $t('navbar.title') }}</h1>
       </div>

@@ -7,12 +7,14 @@
             border="top"
             colored-border
             type="info"
+            color="red accent-4"
             elevation="2"
           >
           {{ selected.title }} - {{ selected.subtitle }}
           </v-alert>
           <hr>
           <v-carousel
+             class="mt-3"
              cycle
              height="400"
              hide-delimiter-background
@@ -23,7 +25,7 @@
                :key="i"
              >
                <v-sheet
-                 color="info"
+                 color="grey darken-2"
                  height="100%"
                >
                  <v-row
@@ -44,7 +46,7 @@
                     align="center"
                     justify="center"
                     >
-                    <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+                    <v-progress-circular indeterminate color="red accent-4"></v-progress-circular>
                   </v-row>
                   </v-img>
                  </v-row>

@@ -5,7 +5,7 @@ const mockServer = new MockAdapter(axios)
 let instance
 
 const startMockServer = (journey) => {
-  console.log(`Mock server starts for ${journey}`)
+  console.log(`Mock server is running...`)
   instance = http.createServer(async (request, response) => {
 
 	if (request.method === 'OPTIONS') {

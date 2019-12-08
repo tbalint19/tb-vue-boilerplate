@@ -17,5 +17,10 @@ module.exports = {
       ]
     },
 
-  }
+  },
+
+  before(cb) {
+    console.log('GLOBAL BEFORE')
+    cb();
+  },
 }

@@ -10,7 +10,7 @@
             placeholder="Type to search in offers"
             @input="updateFilterParam"
             :value="filterParam"
-            color="primary">
+            color="red accent-4">
           </v-text-field>
         </v-col>
         <v-col cols="12" sm="12" md="8" lg="9">

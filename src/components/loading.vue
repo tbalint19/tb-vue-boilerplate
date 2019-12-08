@@ -9,11 +9,11 @@
         class="subtitle-1 text-center"
         cols="12"
       >
-        Személyre szabjuk ajánlatainkat a számodra...
+        Személyre szabjuk ajánlatunkat a számodra...
       </v-col>
       <v-col cols="6">
         <v-progress-linear
-          color="primary lighten-2"
+          color="red accent-4"
           indeterminate
           rounded
           height="10"

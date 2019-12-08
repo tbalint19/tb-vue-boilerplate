@@ -17,14 +17,14 @@
             align="center"
             justify="center"
             >
-            <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
+            <v-progress-circular indeterminate color="red accent-4"></v-progress-circular>
           </v-row>
         </template>
       </v-img>
 
       <v-card-subtitle class="pb-0">{{ offer.subtitle }}</v-card-subtitle>
 
-      <v-card-text class="text--primary">
+      <v-card-text class="mt-3">
         <div v-for="advantage of offer.advantages">
           <span>
             <v-icon :class="advantage.color.name">{{ advantage.icon.name }}</v-icon>
@@ -35,7 +35,7 @@
 
       <v-card-actions>
         <v-btn
-          color="orange"
+          color="grey darken-2"
           text
           >
           Share
@@ -44,7 +44,7 @@
         <v-btn
         :data-uid="offer.title"
         @click="$router.push(`/offer?offer=${offer.title}`)"
-        color="orange"
+        color="red accent-4"
         text
         >
         Explore
