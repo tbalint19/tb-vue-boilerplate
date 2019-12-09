@@ -41,13 +41,15 @@
                     max-width="500"
                     max-height="300"
                   >
-                  <v-row
-                    class="fill-height ma-0"
-                    align="center"
-                    justify="center"
-                    >
-                    <v-progress-circular indeterminate color="red accent-4"></v-progress-circular>
-                  </v-row>
+                  <template v-slot:placeholder>
+                    <v-row
+                      class="fill-height ma-0"
+                      align="center"
+                      justify="center"
+                      >
+                      <v-progress-circular indeterminate color="red accent-4"></v-progress-circular>
+                    </v-row>
+                  </template>
                   </v-img>
                  </v-row>
                </v-sheet>
