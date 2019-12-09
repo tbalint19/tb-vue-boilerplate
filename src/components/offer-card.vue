@@ -7,7 +7,7 @@
       <v-img
         class="white--text align-end"
         height="200px"
-        :src="offer.images[0]"
+        :src="offer.images[0].url"
         :lazy-src="'https://picsum.photos/10/6?image=20'"
       >
         <v-card-title>{{ offer.title }}</v-card-title>

@@ -34,7 +34,7 @@
                    justify="center"
                  >
                  <v-img
-                    :src="image"
+                    :src="image.url"
                     :lazy-src="'https://picsum.photos/10/6?image=20'"
                     aspect-ratio="1"
                     class="grey lighten-2"
