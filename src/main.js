@@ -15,6 +15,7 @@ const register = (Vue) => (path) => {
 
 var components = [
   'navbar-top',
+  'carousel',
 
   'button/login-button',
   'button/logout-button',
