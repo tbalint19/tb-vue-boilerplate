@@ -6,6 +6,7 @@ node('linux && docker') {
   branch = checkout(scm).GIT_BRANCH
   commitHash = checkout(scm).GIT_COMMIT
   projectName = sanitizeProjectName(branch)
+  imageName = "vueapp"
 
   sh "echo Branch: ${branch}, Commit hash: ${commitHash}, Project name: ${projectName}, Build id: ${env.BUILD_ID}"
 
@@ -98,7 +99,7 @@ def build() {
 
 def dockerize(String projectName) {
   stage('Dockerize') {
-    sh "docker build . -t ${projectName}"
+    sh "docker build . -t ${imageName}"
   }
 }
 
@@ -106,8 +107,8 @@ def artifactoryUpload(String projectName) {
   stage('Upload to artifactory') {
     if (isMaster(branch)) {
       def registry = "repository.vodafone.hu/docker-cas"
-      sh "docker tag ${projectName} ${registry}/${projectName}:${env.BUILD_ID}"
-      sh "docker push ${registry}/${projectName}:${env.BUILD_ID}"
+      sh "docker tag ${imageName} ${registry}/${imageName}:${env.BUILD_ID}"
+      sh "docker push ${registry}/${imageName}:${env.BUILD_ID}"
     } else {
       Utils.markStageSkippedForConditional(env.STAGE_NAME)
     }
