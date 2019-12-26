@@ -74,3 +74,36 @@
   # and all quality checks together
   npm run ci
   ```
+
+5. _Setup githook_
+  - create githook for before push - .git/hooks folder
+  - delete the file extension for pre-push.sample (".sample")
+  - in the pre-push file (only this, delete what is currently there):
+
+  ```bash
+  #!/bin/sh
+  npm run ci
+  ```
+
+  __-> Before all remote save the quality of the code is checked__
+
+6. _Setup docker_
+  - Setup an account at [dockerhub](https://hub.docker.com)
+  - (Shell docker login is required)
+  - Edit @/CD/config.json
+  - user is your dockerhub username
+  - repo is the name of the project (whatever you choose)
+  - tag is latest by default, automated versioning the images is not implemented here
+
+  ```bash
+  npm run cd
+  ```
+
+  __-> Releases are kept as images on docker hub__
+
+7. _Setup host - sloppy.io_
+  - Setup an account at [sloppy.io](https://admin.sloppy.io/)
+  - Create a project, name it, name the service, and add to app
+  - Then with [Add app], select the image, set url...
+
+  __-> App is on the internet__

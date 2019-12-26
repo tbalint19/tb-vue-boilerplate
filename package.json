@@ -15,7 +15,7 @@
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './public/locales/*.json'",
     "sonar-check": "node CI/sonar",
     "ci": "npm run format-check && npm run i18n:report && npm run test:unit && npm run test:e2e && npm run sonar-check",
-    "cd": "node CD",
+    "cd": "npm run build && node CD",
     "cicd": "npm run ci && npm run cd"
   },
   "dependencies": {

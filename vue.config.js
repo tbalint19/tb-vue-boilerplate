@@ -1,5 +1,5 @@
 const path = require('path')
-const PrerenderSPAPlugin = require('prerender-spa-plugin')
+//const PrerenderSPAPlugin = require('prerender-spa-plugin')
 
 module.exports = {
   "transpileDependencies": [
@@ -14,7 +14,7 @@ module.exports = {
       enableInSFC: false
     }
   },
-
+/*
   configureWebpack: {
     plugins: [
       new PrerenderSPAPlugin({
@@ -23,7 +23,7 @@ module.exports = {
       })
     ]
   },
-
+*/
   pwa: {
     name: 'Boilerplate app as PWA',
     themeColor: '#4DBA87',
