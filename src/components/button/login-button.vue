@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 const GOOGLE_CONFIG = require('@/../google.json')
 
 export default {
@@ -41,5 +41,4 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
-</style>
+<style lang="css" scoped></style>

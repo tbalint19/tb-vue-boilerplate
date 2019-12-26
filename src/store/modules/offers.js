@@ -1,6 +1,6 @@
 const namespaced = true
 
-const state = (content) => () => ({
+const _state = (content) => () => ({
   filterParam: '',
   purchasedPackages: [],
   isLoading: false,
@@ -8,7 +8,7 @@ const state = (content) => () => ({
   selected: null,
 })
 
-const mutations = {
+const _mutations = {
   UPDATE_FILTER_PARAM(state, value) {
     state.filterParam = value
   },
@@ -23,7 +23,7 @@ const mutations = {
   },
 }
 
-const getters = {
+const _getters = {
   primaryOffers: (state) => state.primaryOffers,
   purchasedPackages: (state) => state.purchasedPackages,
   filterParam: (state) => state.filterParam,
@@ -35,13 +35,13 @@ const getters = {
   personalizedOffers: (state, getters) =>
     getters.filteredOffers.filter(
       (offer) =>
-        !(state.purchasedPackages.map((p) => p.title).includes(offer.title))
+        !state.purchasedPackages.map((p) => p.title).includes(offer.title)
     ),
   selected: (state, getters) =>
     getters.primaryOffers.find((offer) => offer.title == state.selected),
 }
 
-const actions = {
+const _actions = {
   reset(context) {
     context.commit('UPDATE_FILTER_PARAM', '')
     context.commit('SET_PURCHASED_PACKAGES', [])
@@ -67,8 +67,8 @@ const actions = {
 
 export default (content) => ({
   namespaced,
-  state: state(content),
-  getters,
-  mutations,
-  actions,
+  state: _state(content),
+  getters: _getters,
+  mutations: _mutations,
+  actions: _actions,
 })

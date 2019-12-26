@@ -10,15 +10,21 @@
             placeholder="Type to search in offers"
             @input="updateFilterParam"
             :value="filterParam"
-            color="red accent-4">
+            color="red accent-4"
+          >
           </v-text-field>
         </v-col>
         <v-col cols="12" sm="12" md="8" lg="9">
           <v-row v-if="!isLoading">
-            <v-col cols="12" sm="12" md="6" lg="4" v-for="offer of personalizedOffers" :key="offer.name">
-              <offer-card
-                :offer="offer">
-              </offer-card>
+            <v-col
+              cols="12"
+              sm="12"
+              md="6"
+              lg="4"
+              v-for="offer of personalizedOffers"
+              :key="offer.name"
+            >
+              <offer-card :offer="offer"> </offer-card>
             </v-col>
           </v-row>
           <v-row v-else>
@@ -38,20 +44,13 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'home',
   computed: {
-    ...mapGetters('offers', [
-      'isLoading',
-      'filterParam',
-      'personalizedOffers'
-    ])
+    ...mapGetters('offers', ['isLoading', 'filterParam', 'personalizedOffers']),
   },
   methods: {
-    ...mapActions('offers', [
-      'updateFilterParam',
-      'loadPurchasedPackages'
-    ])
+    ...mapActions('offers', ['updateFilterParam', 'loadPurchasedPackages']),
   },
   created() {
     this.loadPurchasedPackages()
-  }
+  },
 }
 </script>

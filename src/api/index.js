@@ -13,9 +13,8 @@ if (process.env.NODE_ENV == 'development') {
   })
 }
 
-
 Object.values(API).forEach((client) => {
-  if (!(process.env.NODE_ENV == 'development')) return
+  if (process.env.NODE_ENV != 'development') return
   client.http.interceptors.response.use(
     (response) => {
       console.log(response)
@@ -28,6 +27,5 @@ Object.values(API).forEach((client) => {
     }
   )
 })
-
 
 export default API

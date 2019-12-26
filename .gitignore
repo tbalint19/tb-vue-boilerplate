@@ -7,6 +7,7 @@ selenium-debug.log
 chromedriver.log
 geckodriver.log
 coverage
+.scannerwork
 
 # local env files
 .env.local

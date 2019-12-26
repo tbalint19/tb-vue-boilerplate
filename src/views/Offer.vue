@@ -10,17 +10,13 @@
             color="red accent-4"
             elevation="2"
           >
-          {{ selected.title }} - {{ selected.subtitle }}
+            {{ selected.title }} - {{ selected.subtitle }}
           </v-alert>
-          <hr>
-          <carousel
-            :images="selected.images">
-          </carousel>
+          <hr />
+          <carousel :images="selected.images"> </carousel>
         </v-col>
         <v-col cols="12" sm="12" md="6" lg="8" justify="center">
-          <v-card
-            class="mx-auto"
-          >
+          <v-card class="mx-auto">
             <v-card-text>
               <p class="text-justify">{{ selected.description }}</p>
             </v-card-text>
@@ -47,25 +43,18 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'offer',
   computed: {
-    ...mapGetters('offers', [
-      'selected',
-    ])
+    ...mapGetters('offers', ['selected']),
   },
   methods: {
-    ...mapActions('offers', [
-      'selectOffer',
-    ])
+    ...mapActions('offers', ['selectOffer']),
   },
   created() {
     const offer = this.$route.query.offer
-    if (!this.$route.query.offer)
-      return this.$router.push({ path: "/" })
+    if (!this.$route.query.offer) return this.$router.push({ path: '/' })
     this.selectOffer(offer)
-    if (!this.selected)
-      return this.$router.push({ path: "/" })
-  }
+    if (!this.selected) return this.$router.push({ path: '/' })
+  },
 }
 </script>
 
-<style lang="css" scoped>
-</style>
+<style lang="css" scoped></style>

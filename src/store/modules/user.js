@@ -2,14 +2,29 @@ import { parse } from '@/util/jwt'
 
 const namespaced = true
 
-const state = (content) => () => ({
+const _state = (content) => () => ({
   email: null,
   isLoggedIn: false,
   role: null,
   permissions: [],
 })
 
-const mutations = {
+const _getters = {
+  email: (state) => state.email,
+  username: (state) => (state.email ? state.email.split('@')[0] : ''),
+  isLoggedIn: (state) => state.isLoggedIn,
+  is: (state) => (role) => (state.role ? state.role.name == role : false),
+  isAt: (state) => (role, scope) =>
+    state.role ? state.role.name == role && state.role.scope == scope : false,
+  can: (state) => (permission) =>
+    state.permissions.some((entry) => entry.name == permission),
+  canAt: (state) => (permission, scope) =>
+    state.permissions.some(
+      (entry) => entry.name == permission && entry.scope == scope
+    ),
+}
+
+const _mutations = {
   SET(state, payload) {
     state.isLoggedIn = true
     state.email = payload.email
@@ -25,22 +40,7 @@ const mutations = {
   },
 }
 
-const getters = {
-  email: (state) => state.email,
-  username: (state) => (state.email ? state.email.split('@')[0] : ''),
-  isLoggedIn: (state) => state.isLoggedIn,
-  is: (state) => (role) => (state.role ? state.role.name == role : false),
-  isAt: (state) => (role, scope) =>
-    state.role ? state.role.name == role && state.role.scope == scope : false,
-  can: (state) => (permission) =>
-    state.permissions.some((entry) => entry.name == permission),
-  canAt: (state) => (permission, scope) =>
-    state.permissions.some(
-      (entry) => entry.name == permission && entry.scope == scope
-    ),
-}
-
-const actions = {
+const _actions = {
   set(context, { sessionToken, redirect }) {
     let payload = parse(sessionToken)
     if (payload) {
@@ -54,12 +54,14 @@ const actions = {
       this.$api.userService.unauthorize()
       this.$api.packageService.unauthorize()
     }
-    if (redirect) this.$router.push(redirect).catch(err => {})
+    if (redirect) this.$router.push(redirect).catch((err) => {})
   },
 
   async login(context, { authorizationCode, redirect }) {
     try {
-      const loginResponse = await this.$api.userService.login({ authorizationCode })
+      const loginResponse = await this.$api.userService.login({
+        authorizationCode,
+      })
       const sessionToken = loginResponse.data.sessionToken
       context.dispatch('set', { sessionToken, redirect })
     } catch (e) {
@@ -74,8 +76,8 @@ const actions = {
 
 export default (content) => ({
   namespaced,
-  state: state(content),
-  getters,
-  mutations,
-  actions,
+  state: _state(content),
+  getters: _getters,
+  mutations: _mutations,
+  actions: _actions,
 })

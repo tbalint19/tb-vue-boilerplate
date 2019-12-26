@@ -8,5 +8,4 @@ export default class PackageService extends Service {
   getPackages() {
     return this.http.get('/api/packages')
   }
-
 }

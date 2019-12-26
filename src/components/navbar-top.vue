@@ -2,7 +2,9 @@
   <div class="">
     <v-app-bar app color="red accent-4" dark>
       <div class="d-flex align-center">
-        <h1 class="pointer-cursor" @click="$router.push('/')">{{ $t('navbar.title') }}</h1>
+        <h1 class="pointer-cursor" @click="$router.push('/')">
+          {{ $t('navbar.title') }}
+        </h1>
       </div>
 
       <v-spacer></v-spacer>
@@ -10,12 +12,8 @@
       <v-btn @click="snackbar = !snackbar" text>
         <v-icon>language</v-icon>
       </v-btn>
-      <login-button
-        v-if="!isLoggedIn">
-      </login-button>
-      <logout-button
-        v-else>
-      </logout-button>
+      <login-button v-if="!isLoggedIn"> </login-button>
+      <logout-button v-else> </logout-button>
     </v-app-bar>
     <v-snackbar bottom right v-model="snackbar" color="grey lighten-5">
       <v-select rounded v-model="selected" :items="items"></v-select>
@@ -35,7 +33,7 @@ export default {
     ],
   }),
   computed: {
-    ...mapGetters('user', ['isLoggedIn'])
+    ...mapGetters('user', ['isLoggedIn']),
   },
   watch: {
     selected(value) {
@@ -47,5 +45,4 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
-</style>
+<style lang="css" scoped></style>

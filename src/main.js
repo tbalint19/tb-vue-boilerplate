@@ -7,10 +7,10 @@ import vuetify from './plugins/vuetify'
 import i18n from './plugins/i18n'
 
 // Components
-const register = (Vue) => (path) => {
+const register = (descriptor) => {
   const name = (path) => path.split('/')[path.split('/').length - 1]
   const component = (path) => require('@/components/' + path + '.vue').default
-  Vue.component(name(path), component(path))
+  Vue.component(name(descriptor), component(descriptor))
 }
 
 var components = [
@@ -21,9 +21,9 @@ var components = [
   'button/logout-button',
 
   'loading',
-  'offer-card'
+  'offer-card',
 ]
-components.forEach(register(Vue))
+components.forEach(register)
 
 Vue.config.productionTip = false
 

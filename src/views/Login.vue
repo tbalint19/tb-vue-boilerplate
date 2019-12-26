@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   methods: {
@@ -13,12 +13,11 @@ export default {
   },
   created() {
     const authorizationCode = this.$route.query.code
-    const redirect = window.localStorage.getItem('redirect') || "/"
+    const redirect = window.localStorage.getItem('redirect') || '/'
     window.localStorage.removeItem('redirect')
     this.login({ authorizationCode, redirect })
   },
 }
 </script>
 
-<style lang="css" scoped>
-</style>
+<style lang="css" scoped></style>
