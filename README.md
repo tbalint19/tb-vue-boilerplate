@@ -107,3 +107,13 @@
   - Then with [Add app], select the image, set url...
 
   __-> App is on the internet__
+
+8. _Setup openID connect with google_
+  - Select project -> [New project](https://console.developers.google.com/)
+  - Oauth consent screen -> external
+  - Application name, authorized domains (.sloppy.zone)
+  - Credentials -[+ Create credentials] (Oauth2) -> Web app, set name & redirect uri (localhost or authorized domain) -> client_ID & client_secret
+  - update client_ID, client_secret and redirect_uri (can be anything for now) in google.json
+  - Full guide(https://developers.google.com/identity/protocols/OpenIDConnect)
+
+  __-> OpenID works on the frontend
