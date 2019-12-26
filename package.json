@@ -14,7 +14,7 @@
     "coverage-ui": "cross-env ./node_modules/http-server/bin/http-server ./coverage/lcov-report/ --cors -a localhost -p 8088 -o",
     "i18n:report": "vue-cli-service i18n:report --src './src/**/*.?(js|vue)' --locales './public/locales/*.json'",
     "sonar-check": "node CI/sonar",
-    "ci": "npm run format-check && npm run i18n:report && npm run test:unit && npm run test:e2e && npm audit && npm run sonar-check",
+    "ci": "npm run format-check && npm run test:unit && npm run test:e2e && npm run sonar-check && npm run i18n:report && npm audit",
     "cd": "npm run build && node CD",
     "cicd": "npm run ci && npm run cd"
   },
