@@ -16,6 +16,7 @@ import { mapGetters, mapActions } from 'vuex'
 import content from '@/content'
 
 export default {
+  name: 'App',
   data: () => ({
     navbar: content.demo.common.navbar,
 
@@ -23,10 +24,6 @@ export default {
     language: 'hu',
     navigationDrawer: null,
   }),
-  name: 'App',
-  computed: {
-    ...mapGetters('user', ['isLoggedIn']),
-  },
   methods: {
     ...mapActions('user', ['logout', 'set']),
   },
@@ -36,8 +33,8 @@ export default {
     if (sessionToken) this.set({ sessionToken, redirect: this.$route.path })
   },
   mounted() {
-    this.$onIdle('50m', () => console.log('will logout soon'))
-    this.$onIdle('1h', this.logout)
+    this.$onIdle('10m', () => console.log('will logout soon'))
+    this.$onIdle('20m', this.logout)
   },
 }
 </script>

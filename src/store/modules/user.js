@@ -7,10 +7,16 @@ const _state = (content) => () => ({
   isLoggedIn: false,
   role: null,
   permissions: [],
+  picture: null,
+  firstName: null,
+  lastName: null,
 })
 
 const _getters = {
   email: (state) => state.email,
+  picture: (state) => state.picture,
+  firstName: (state) => state.firstName,
+  lastName: (state) => state.lastName,
   username: (state) => (state.email ? state.email.split('@')[0] : ''),
   isLoggedIn: (state) => state.isLoggedIn,
   is: (state) => (role) => (state.role ? state.role.name == role : false),
@@ -30,6 +36,9 @@ const _mutations = {
     state.email = payload.email
     state.role = payload.role
     state.permissions = payload.permissions
+    state.picture = payload.picture
+    state.firstName = payload.firstName
+    state.lastName = payload.lastName
   },
 
   DEL(state) {
@@ -37,6 +46,9 @@ const _mutations = {
     state.isLoggedIn = false
     state.role = null
     state.permissions = []
+    state.picture = null
+    state.firstName = null
+    state.lastName = null
   },
 }
 

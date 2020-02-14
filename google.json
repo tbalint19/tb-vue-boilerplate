@@ -1,5 +1,5 @@
 {
   "client_ID": "73794645273-0u80l3rd9d8e32ogfp6hbhhhqji28rfk.apps.googleusercontent.com",
-  "client_secret": "lofasz",
-  "redirect_uri": "https://tothbalint719vue.sloppy.zone/login"
+  "client_secret": "WZQdyFm-STgwpmXAqkF6H1P8",
+  "redirect_uri": "http://localhost:8080/login"
 }
