@@ -1,9 +1,6 @@
 <template>
   <v-app>
-    <x-navbar
-      :links="navbar.links"
-      :locales="navbar.locales">
-    </x-navbar>
+    <x-navbar :links="navbar.links" :locales="navbar.locales"> </x-navbar>
 
     <v-content>
       <router-view></router-view>

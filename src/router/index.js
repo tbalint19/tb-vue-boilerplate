@@ -21,7 +21,7 @@ const routes = [
     path: '/about',
     name: 'about',
     component: About,
-  }
+  },
 ]
 
 const router = new VueRouter({

@@ -4,10 +4,8 @@ export default class NavPlugin {
       if (_new) {
         window.open(_to, '_blank')
       } else {
-        if (_to.startsWith('http'))
-          window.location.replace(_to)
-        else
-          this.$router.push(_to)
+        if (_to.startsWith('http')) window.location.replace(_to)
+        else this.$router.push(_to)
       }
     }
   }

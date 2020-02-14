@@ -8,7 +8,6 @@ import i18n from './plugins/i18n'
 import NavPlugin from './plugins/nav'
 import IdlePlugin from 'lutzvue'
 
-
 // Components
 const register = (descriptor) => {
   const name = (path) => path.split('/')[path.split('/').length - 1]

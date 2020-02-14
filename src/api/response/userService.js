@@ -6,7 +6,13 @@ export const loginResponse = async (request) => {
   const authorizationCode = JSON.parse(request.data).authorizationCode
   const res = await validateTokenWithGoogle(authorizationCode)
   const { id, email, picture, firstName, lastName } = res
-  const sessionToken = createSessionToken(id, email, picture, firstName, lastName)
+  const sessionToken = createSessionToken(
+    id,
+    email,
+    picture,
+    firstName,
+    lastName
+  )
   if (sessionToken) return [200, { sessionToken }]
   else return [401, { sessionToken: null }]
 }
@@ -20,7 +26,7 @@ const createSessionToken = (id, email, picture, firstName, lastName) =>
       permissions: [],
       picture,
       firstName,
-      lastName
+      lastName,
     },
     'secret-key',
     { expiresIn: '8h' }
@@ -32,7 +38,13 @@ const validateTokenWithGoogle = async (authorizationCode) => {
   const responseData = JSON.parse(response)
   const userData = parse(responseData.id_token)
   console.log('User data from token:', userData)
-  return { id: userData.sub, email: userData.email, picture: userData.picture, firstName: userData.given_name, lastName: userData.family_name }
+  return {
+    id: userData.sub,
+    email: userData.email,
+    picture: userData.picture,
+    firstName: userData.given_name,
+    lastName: userData.family_name,
+  }
 }
 
 const requestValidation = (idToken) =>

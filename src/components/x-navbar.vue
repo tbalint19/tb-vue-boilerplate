@@ -25,7 +25,12 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn aria-label="shop" tile text @click="languageSnackbar = !languageSnackbar">
+      <v-btn
+        aria-label="shop"
+        tile
+        text
+        @click="languageSnackbar = !languageSnackbar"
+      >
         <v-icon>language</v-icon>
       </v-btn>
       <login-button v-if="!isLoggedIn"> </login-button>
@@ -35,12 +40,7 @@
       <logout-button v-if="isLoggedIn"> </logout-button>
     </v-app-bar>
 
-    <v-navigation-drawer
-      v-model="navigationDrawer"
-      fixed
-      temporary
-      width="450"
-    >
+    <v-navigation-drawer v-model="navigationDrawer" fixed temporary width="450">
       <div v-for="(link, i) in links">
         <v-list-item
           v-if="!link.subLinks.length"
@@ -87,10 +87,7 @@ export default {
     language: 'hu',
     navigationDrawer: null,
   }),
-  props: [
-    'links',
-    'locales'
-  ],
+  props: ['links', 'locales'],
   computed: {
     ...mapGetters('user', ['isLoggedIn', 'picture']),
   },
