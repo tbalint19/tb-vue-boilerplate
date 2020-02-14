@@ -1,18 +1,35 @@
-const contentFiles = require.context('@/../public/content', true, /\.json$/)
+const content = require('../public/content.json')
 
-const isList = (key) => key.split('/').length === 3
-const listName = (key) => key.split('/')[1]
+const isLocalizeAble = key => typeof key == "string" && (key.includes("__en") || key.includes("__hu"))
 
-const content = {}
-contentFiles.keys().forEach((key) => {
-  if (isList(key)) {
-    if (!content[listName(key)]) {
-      content[listName(key)] = []
-    }
-    content[listName(key)].push(contentFiles(key))
-  } else {
-    content[key.replace(/(\.\/|\.json)/g, '')] = contentFiles(key)
+const locales = {
+  'en': {},
+  'hu': {}
+}
+
+const localize = (content, path=[], root=content) => {
+  if (Array.isArray(content))
+    content
+      .forEach((item, index) => localize(item, [ ...path, index ], item))
+  else if (typeof content === 'object' && content != null)
+    Object
+      .entries(content)
+      .forEach(([ key, value]) => localize(value, [ ...path, key], content))
+  else {
+    const _key = path.slice(-1)[0]
+    if (!isLocalizeAble(_key)) return
+    const key = _key.split('__')[0]
+    const locale = _key.split('__')[1]
+    const localePath = [ ...path.slice(0, -1), key ].join(".")
+    root[key] = localePath
+    locales[locale][localePath] = content
   }
-})
+}
 
-export default content
+localize(content)
+
+console.log("locales", locales);
+
+
+
+module.exports = {demo:content, locales}

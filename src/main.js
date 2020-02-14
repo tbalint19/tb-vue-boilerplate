@@ -5,6 +5,8 @@ import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
 import i18n from './plugins/i18n'
+import NavPlugin from './plugins/nav'
+
 
 // Components
 const register = (descriptor) => {
@@ -14,7 +16,7 @@ const register = (descriptor) => {
 }
 
 var components = [
-  'navbar-top',
+  'x-navbar',
   'carousel',
 
   'button/login-button',
@@ -24,6 +26,9 @@ var components = [
   'offer-card',
 ]
 components.forEach(register)
+
+Vue.use(NavPlugin)
+
 
 Vue.config.productionTip = false
 
