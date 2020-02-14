@@ -7,7 +7,7 @@ const { timeout } = require('../helper/timeout')
   When the response arrives they see the cards
 */
 module.exports = {
-  '@disabled': true,
+  '@disabled': false,
 
   before() {
     mockServer
@@ -28,7 +28,6 @@ module.exports = {
   'loadHomePage': browser => {
     browser
       .waitForElementVisible('#app')
-      .waitForElementVisible('.loading')
   },
 
   afterEach(browser) {

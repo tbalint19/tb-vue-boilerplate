@@ -7,7 +7,7 @@ const { loadHomePage } = require('./first-journey')
   The number of cards changes accordingly
 */
 module.exports = {
-  '@disabled': false,
+  '@disabled': true,
 
   before() {
     mockServer
