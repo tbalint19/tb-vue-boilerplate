@@ -10,12 +10,12 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import content from '@/content'
+import { content } from '@/content'
 
 export default {
   name: 'App',
   data: () => ({
-    navbar: content.demo.common.navbar,
+    navbar: content.common.navbar,
 
     languageSnackbar: false,
     language: 'hu',

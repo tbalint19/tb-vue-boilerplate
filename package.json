@@ -4,6 +4,7 @@
   "author": "TBalint19 <tothbalint719@gmail.com>",
   "private": true,
   "scripts": {
+    "cgen": "node scripts/process-content.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit --coverage",
