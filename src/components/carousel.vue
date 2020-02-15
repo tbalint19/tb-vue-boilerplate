@@ -35,5 +35,3 @@ export default {
   props: ['images'],
 }
 </script>
-
-<style lang="css" scoped></style>

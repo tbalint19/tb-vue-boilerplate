@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="">
+  <div>
     This is a login page
   </div>
 </template>
@@ -19,5 +19,3 @@ export default {
   },
 }
 </script>
-
-<style lang="css" scoped></style>

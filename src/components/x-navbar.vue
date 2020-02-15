@@ -78,8 +78,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState } from 'vuex'
-import { content } from '@/content'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data: () => ({
@@ -103,5 +102,3 @@ export default {
   },
 }
 </script>
-
-<style lang="css" scoped></style>
