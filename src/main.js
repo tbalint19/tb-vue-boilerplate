@@ -21,9 +21,6 @@ var components = [
 
   'button/login-button',
   'button/logout-button',
-
-  'loading',
-  'offer-card',
 ]
 components.forEach(register)
 
