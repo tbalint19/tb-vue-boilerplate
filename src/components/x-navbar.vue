@@ -100,7 +100,7 @@ export default {
       const vm = this
       setTimeout(() => (vm.languageSnackbar = false), 150)
     },
-  },
+  }
 }
 </script>
 
