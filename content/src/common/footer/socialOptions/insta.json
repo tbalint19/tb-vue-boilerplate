@@ -1,0 +1,11 @@
+{
+  "_rank": 2,
+  "to": {
+    "url": "https://www.instagram.com/akarmi",
+    "open": true
+  },
+  "icon": {
+    "name": "mdi-instagram",
+    "type": "material"
+  }
+}

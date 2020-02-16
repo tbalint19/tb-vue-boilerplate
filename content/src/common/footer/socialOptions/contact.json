@@ -1,0 +1,11 @@
+{
+  "_rank": 5,
+  "to": {
+    "url": "/about",
+    "open": false
+  },
+  "icon": {
+    "name": "mdi-monitor-cellphone",
+    "type": "material"
+  }
+}

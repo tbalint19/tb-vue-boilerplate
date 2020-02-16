@@ -1,0 +1,16 @@
+{
+  "_rank": 3,
+  "icon":{
+    "name":"language",
+    "type":"material"
+  },
+  "nav":{
+    "_to":"/whatever",
+    "_new":true
+  },
+  "subLinks":[
+
+  ],
+  "text__en":"Whatever",
+  "text__hu":"Akármi"
+}

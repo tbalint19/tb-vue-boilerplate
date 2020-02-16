@@ -1,0 +1,11 @@
+{
+  "_rank": 4,
+  "to": {
+    "url": "https://www.linkedin.com/company/akarmi",
+    "open": true
+  },
+  "icon": {
+    "name": "mdi-linkedin",
+    "type": "material"
+  }
+}

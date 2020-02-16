@@ -1,0 +1,8 @@
+{
+  "text__hu": "Adatkezelési tájékoztató",
+  "text__en": "Data protection document",
+  "nav":{
+    "_to": "/adatkezeles",
+    "_new": true
+  }
+}

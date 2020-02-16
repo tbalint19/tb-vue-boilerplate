@@ -5,6 +5,8 @@
     <v-content>
       <router-view></router-view>
     </v-content>
+
+    <x-footer :links="footer.legal" :company="footer.company"> </x-footer>
   </v-app>
 </template>
 
@@ -16,6 +18,7 @@ export default {
   name: 'App',
   data: () => ({
     navbar: content.common.navbar,
+    footer: content.common.footer,
 
     languageSnackbar: false,
     language: 'hu',

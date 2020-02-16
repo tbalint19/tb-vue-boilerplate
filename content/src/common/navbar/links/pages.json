@@ -1,0 +1,17 @@
+{
+  "_rank": 1,
+  "icon":null,
+  "nav":null,
+  "subLinks":[
+    {
+      "nav":{
+        "_to":"/about",
+        "_new":false
+      },
+      "text__en":"About - en",
+      "text__hu":"Rólunk - hu"
+    }
+  ],
+  "text__en":"Pages",
+  "text__hu":"Oldalak"
+}

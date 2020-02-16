@@ -17,7 +17,7 @@ const register = (descriptor) => {
 
 var components = [
   'x-navbar',
-  'carousel',
+  'x-footer',
 
   'button/login-button',
   'button/logout-button',

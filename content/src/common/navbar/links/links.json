@@ -1,0 +1,25 @@
+{
+  "_rank": 2,
+  "icon":null,
+  "nav":null,
+  "subLinks":[
+    {
+      "nav":{
+        "_to":"http://nemzetisport.hu",
+        "_new":true
+      },
+      "text__en":"Nemzetisport - en",
+      "text__hu":"Nemzetisport - hu"
+    },
+    {
+      "nav":{
+        "_to":"http://kezdo5.hu",
+        "_new":true
+      },
+      "text__en":"Kezdo5 - en",
+      "text__hu":"Kezdo5 - hu"
+    }
+  ],
+  "text__en":"Links",
+  "text__hu":"Linkek"
+}
