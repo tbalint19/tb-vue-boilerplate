@@ -1,8 +1,8 @@
 {
   "_rank": 3,
-  "to": {
-    "url": "https://www.youtube.com/user/akarmi",
-    "open": true
+  "nav": {
+    "_to": "https://www.youtube.com/user/akarmi",
+    "_new": true
   },
   "icon": {
     "name": "mdi-youtube",

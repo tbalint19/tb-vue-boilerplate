@@ -1,8 +1,8 @@
 {
   "_rank": 1,
-  "to": {
-    "url": "http://www.facebook.com/akarkmi",
-    "open": true
+  "nav": {
+    "_to": "http://www.facebook.com/akarkmi",
+    "_new": true
   },
   "icon": {
     "name": "mdi-facebook",

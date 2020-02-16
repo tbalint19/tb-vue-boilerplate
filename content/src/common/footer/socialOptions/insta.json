@@ -1,8 +1,8 @@
 {
   "_rank": 2,
-  "to": {
-    "url": "https://www.instagram.com/akarmi",
-    "open": true
+  "nav": {
+    "_to": "https://www.instagram.com/akarmi",
+    "_new": true
   },
   "icon": {
     "name": "mdi-instagram",

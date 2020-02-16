@@ -1,8 +1,8 @@
 {
   "_rank": 5,
-  "to": {
-    "url": "/about",
-    "open": false
+  "nav": {
+    "_to": "/about",
+    "_new": false
   },
   "icon": {
     "name": "mdi-monitor-cellphone",

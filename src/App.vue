@@ -6,6 +6,7 @@
       <router-view></router-view>
     </v-content>
 
+    <x-contact :options="footer.socialOptions"> </x-contact>
     <x-footer :links="footer.legal" :company="footer.company"> </x-footer>
   </v-app>
 </template>
