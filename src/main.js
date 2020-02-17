@@ -22,6 +22,10 @@ var components = [
 
   'button/login-button',
   'button/logout-button',
+
+  'transition/x-fade-appear-swap',
+  'transition/x-grow-appear',
+  'transition/x-slide-swap',
 ]
 components.forEach(register)
 

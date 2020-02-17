@@ -1,12 +1,21 @@
 <template>
   <v-app>
-    <x-navbar :links="navbar.links" :locales="navbar.locales"> </x-navbar>
+    <x-navbar
+      :links="navbar.links"
+      :locales="navbar.locales"
+      :siteName="navbar.siteName"
+      :shortName="navbar.shortName"
+    >
+    </x-navbar>
 
     <v-content>
-      <router-view></router-view>
+      <x-slide-swap>
+        <router-view></router-view>
+      </x-slide-swap>
     </v-content>
 
     <x-contact :options="footer.socialOptions"> </x-contact>
+
     <x-footer :links="footer.legal" :company="footer.company"> </x-footer>
   </v-app>
 </template>

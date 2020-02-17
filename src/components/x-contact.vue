@@ -38,8 +38,8 @@
 <script>
 export default {
   data: () => ({
-    fab: false
+    fab: false,
   }),
-  props: [ 'options' ]
+  props: ['options'],
 }
 </script>

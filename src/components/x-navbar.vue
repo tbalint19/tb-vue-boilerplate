@@ -20,7 +20,10 @@
         >
           <v-icon>menu</v-icon>
         </v-btn>
-        <h2 class="ml-5 voda-red">Demo Portal</h2>
+        <h2 @click="$router.push('/')" class="ml-5 pointer-cursor">
+          <span v-if="$vuetify.breakpoint.smAndUp">{{ siteName }}</span>
+          <span v-else>{{ shortName }}</span>
+        </h2>
       </div>
 
       <v-spacer></v-spacer>
@@ -86,7 +89,7 @@ export default {
     language: 'hu',
     navigationDrawer: null,
   }),
-  props: ['links', 'locales'],
+  props: ['links', 'locales', 'siteName', 'shortName'],
   computed: {
     ...mapGetters('user', ['isLoggedIn', 'picture']),
   },

@@ -22,6 +22,6 @@
 
 <script>
 export default {
-  props: ['links', 'company']
+  props: ['links', 'company'],
 }
 </script>
