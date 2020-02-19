@@ -18,6 +18,7 @@ const register = (descriptor) => {
 var components = [
   'x-navbar',
   'x-contact',
+  'x-cookie-consent',
   'x-footer',
 
   'button/login-button',

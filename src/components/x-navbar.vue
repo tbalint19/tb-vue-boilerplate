@@ -86,7 +86,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data: () => ({
     languageSnackbar: false,
-    language: 'hu',
+    language: 'en',
     navigationDrawer: null,
   }),
   props: ['links', 'locales', 'siteName', 'shortName'],
@@ -95,6 +95,16 @@ export default {
   },
   methods: {
     ...mapActions('user', []),
+  },
+  created() {
+    this.language =
+      navigator.languages && navigator.languages.length
+        ? navigator.languages[0].split('-')[0]
+        : navigator.userLanguage ||
+          navigator.language ||
+          navigator.browserLanguage ||
+          process.env.VUE_APP_I18N_LOCALE
+    this.$i18n.locale = this.language
   },
   watch: {
     language(value) {

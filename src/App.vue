@@ -14,6 +14,9 @@
       </x-slide-swap>
     </v-content>
 
+    <x-cookie-consent :text="consent.text" :button="consent.button">
+    </x-cookie-consent>
+
     <x-contact :options="footer.socialOptions"> </x-contact>
 
     <x-footer :links="footer.legal" :company="footer.company"> </x-footer>
@@ -28,11 +31,8 @@ export default {
   name: 'App',
   data: () => ({
     navbar: content.common.navbar,
+    consent: content.common.consent,
     footer: content.common.footer,
-
-    languageSnackbar: false,
-    language: 'hu',
-    navigationDrawer: null,
   }),
   methods: {
     ...mapActions('user', ['logout', 'set']),
