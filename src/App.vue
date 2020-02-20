@@ -52,13 +52,13 @@ export default {
   methods: {
     ...mapActions('user', ['logout']),
     googleAuthRedirect() {
-      const googleAuthBaseUrl = "https://accounts.google.com/o/oauth2/v2/auth"
+      const googleAuthBaseUrl = 'https://accounts.google.com/o/oauth2/v2/auth'
       const query = querystring.stringify({
-        'client_id': process.env.VUE_APP_GOOGLE_CLIENT_ID,
-        'response_type': "code",
-        'scope': "openid email profile",
-        'redirect_uri': process.env.VUE_APP_GOOGLE_REDIRECT_URI,
-        'prompt': "consent"
+        client_id: process.env.VUE_APP_GOOGLE_CLIENT_ID,
+        response_type: 'code',
+        scope: 'openid email profile',
+        redirect_uri: process.env.VUE_APP_GOOGLE_REDIRECT_URI,
+        prompt: 'consent',
       })
       window.localStorage.setItem('redirect', this.$route.fullPath)
       window.location.href = `${googleAuthBaseUrl}?${query}`
