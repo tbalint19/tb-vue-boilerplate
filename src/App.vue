@@ -6,6 +6,17 @@
       :siteName="navbar.siteName"
       :shortName="navbar.shortName"
     >
+      <template v-slot:menu>
+        <v-btn v-if="!isLoggedIn" @click="googleAuthRedirect()" text>
+          <v-icon>mdi-account-circle</v-icon> <v-icon>mdi-chevron-right</v-icon>
+        </v-btn>
+        <v-avatar size="40" v-if="picture">
+          <img :src="picture" alt="user" />
+        </v-avatar>
+        <v-btn v-if="isLoggedIn" @click="logout()" text>
+          <v-icon>mdi-account-circle</v-icon> <v-icon>mdi-exit-to-app</v-icon>
+        </v-btn>
+      </template>
     </x-navbar>
 
     <v-content>
@@ -24,8 +35,9 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { content } from '@/content'
+import querystring from 'querystring'
 
 export default {
   name: 'App',
@@ -34,8 +46,23 @@ export default {
     consent: content.common.consent,
     footer: content.common.footer,
   }),
+  computed: {
+    ...mapGetters('user', ['isLoggedIn', 'picture']),
+  },
   methods: {
-    ...mapActions('user', ['logout', 'set']),
+    ...mapActions('user', ['logout']),
+    googleAuthRedirect() {
+      const googleAuthBaseUrl = "https://accounts.google.com/o/oauth2/v2/auth"
+      const query = querystring.stringify({
+        'client_id': process.env.VUE_APP_GOOGLE_CLIENT_ID,
+        'response_type': "code",
+        'scope': "openid email profile",
+        'redirect_uri': process.env.VUE_APP_GOOGLE_REDIRECT_URI,
+        'prompt': "consent"
+      })
+      window.localStorage.setItem('redirect', this.$route.fullPath)
+      window.location.href = `${googleAuthBaseUrl}?${query}`
+    },
   },
   created() {
     this.$observeIdle()

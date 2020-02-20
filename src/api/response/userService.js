@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken')
 const { parse } = require('@/util/jwt')
-const GOOGLE_CONFIG = require('@/../google.json')
 
 export const loginResponse = async (request) => {
   const authorizationCode = JSON.parse(request.data).authorizationCode
@@ -58,9 +57,11 @@ const requestValidation = (idToken) =>
       }
     }
     const code = 'code=' + idToken
-    const redirectUri = 'redirect_uri=' + GOOGLE_CONFIG.redirect_uri
-    const clientId = 'client_id=' + GOOGLE_CONFIG.client_ID
-    const clientSecret = 'client_secret=' + GOOGLE_CONFIG.client_secret
+    const redirectUri =
+      'redirect_uri=' + process.env.VUE_APP_GOOGLE_REDIRECT_URI
+    const clientId = 'client_id=' + process.env.VUE_APP_GOOGLE_CLIENT_ID
+    const clientSecret =
+      'client_secret=' + process.env.VUE_APP_GOOGLE_CLIENT_SECRET
     const scope = 'scope=email+profile'
     const grantType = 'grant_type=authorization_code'
     const data =

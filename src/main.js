@@ -21,8 +21,7 @@ var components = [
   'x-cookie-consent',
   'x-footer',
 
-  'button/login-button',
-  'button/logout-button',
+  //'button/x-primary-button',
 
   'transition/x-fade-appear-swap',
   'transition/x-grow-appear',

@@ -36,11 +36,7 @@
       >
         <v-icon>language</v-icon>
       </v-btn>
-      <login-button v-if="!isLoggedIn"> </login-button>
-      <v-avatar size="40" v-if="picture">
-        <img :src="picture" alt="user" />
-      </v-avatar>
-      <logout-button v-if="isLoggedIn"> </logout-button>
+      <slot name="menu"></slot>
     </v-app-bar>
 
     <v-navigation-drawer v-model="navigationDrawer" fixed temporary width="450">
@@ -81,8 +77,6 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
-
 export default {
   data: () => ({
     languageSnackbar: false,
@@ -90,12 +84,6 @@ export default {
     navigationDrawer: null,
   }),
   props: ['links', 'locales', 'siteName', 'shortName'],
-  computed: {
-    ...mapGetters('user', ['isLoggedIn', 'picture']),
-  },
-  methods: {
-    ...mapActions('user', []),
-  },
   created() {
     this.language =
       navigator.languages && navigator.languages.length
