@@ -59,12 +59,10 @@ const _actions = {
       context.commit('SET', payload)
       window.sessionStorage.setItem('sessionToken', sessionToken)
       this.$api.userService.authorize(sessionToken)
-      this.$api.packageService.authorize(sessionToken)
     } else {
       context.commit('DEL')
       window.sessionStorage.removeItem('sessionToken')
       this.$api.userService.unauthorize()
-      this.$api.packageService.unauthorize()
     }
     if (redirect) this.$router.push(redirect).catch((err) => {})
   },
