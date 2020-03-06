@@ -26,11 +26,13 @@
   - rename app folder
   - install dependencies
   - rename project in package.json (+author, description)
+  - create content
 
   ```bash
   mv tb-vue-boilerplate frontend
   cd frontend
   npm i
+  npm run cgen
   npm run serve
   ```
 
