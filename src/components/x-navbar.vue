@@ -21,8 +21,13 @@
           <v-icon>menu</v-icon>
         </v-btn>
         <h2 @click="$router.push('/')" class="ml-5 pointer-cursor">
-          <span v-if="$vuetify.breakpoint.smAndUp">{{ siteName }}</span>
-          <span v-else>{{ shortName }}</span>
+          <span v-if="!$slots.logo">
+            <span v-if="$vuetify.breakpoint.smAndUp">{{ siteName }}</span>
+            <span v-else>{{ shortName }}</span>
+          </span>
+          <span v-else>
+            <slot name="logo"></slot>
+          </span>
         </h2>
       </div>
 
