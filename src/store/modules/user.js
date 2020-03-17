@@ -5,6 +5,7 @@ const namespaced = true
 const _state = (content) => () => ({
   email: null,
   isLoggedIn: false,
+  isLoggingIn: false,
   role: null,
   permissions: [],
   picture: null,
@@ -17,6 +18,7 @@ const _getters = {
   picture: (state) => state.picture,
   firstName: (state) => state.firstName,
   lastName: (state) => state.lastName,
+  isLoggingIn: (state) => state.isLoggingIn,
   username: (state) => (state.email ? state.email.split('@')[0] : ''),
   isLoggedIn: (state) => state.isLoggedIn,
   is: (state) => (role) => (state.role ? state.role.name == role : false),
@@ -50,6 +52,10 @@ const _mutations = {
     state.firstName = null
     state.lastName = null
   },
+
+  TOGGLE_LOADING(state, to) {
+    state.isLoggingIn = to
+  },
 }
 
 const _actions = {
@@ -68,6 +74,7 @@ const _actions = {
   },
 
   async login(context, { authorizationCode, redirect }) {
+    context.commit('TOGGLE_LOADING', true)
     try {
       const loginResponse = await this.$api.userService.login({
         authorizationCode,
@@ -76,6 +83,8 @@ const _actions = {
       context.dispatch('set', { sessionToken, redirect })
     } catch (e) {
       context.dispatch('set', { sessionToken: null, redirect: '/' })
+    } finally {
+      context.commit('TOGGLE_LOADING', false)
     }
   },
 

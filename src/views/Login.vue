@@ -28,7 +28,10 @@ export default {
     const authorizationCode = this.$route.query.code
     const redirect = window.localStorage.getItem('redirect') || '/'
     window.localStorage.removeItem('redirect')
-    this.login({ authorizationCode, redirect })
+    if (window.opener) {
+     window.opener.postMessage({ authorizationCode, redirect });
+     window.close();
+    }
   },
 }
 </script>

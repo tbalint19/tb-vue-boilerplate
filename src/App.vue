@@ -7,7 +7,7 @@
       :shortName="navbar.shortName"
     >
       <template v-slot:menu>
-        <v-btn v-if="!isLoggedIn" @click="googleAuthRedirect()" text>
+        <v-btn v-if="!isLoggedIn" @click="googleAuthRedirect()" text :loading="isLoggingIn" :disabled="isLoggingIn">
           <v-icon>mdi-account-circle</v-icon> <v-icon>mdi-chevron-right</v-icon>
         </v-btn>
         <v-avatar size="40" v-if="picture">
@@ -47,10 +47,10 @@ export default {
     footer: content.common.footer,
   }),
   computed: {
-    ...mapGetters('user', ['isLoggedIn', 'picture']),
+    ...mapGetters('user', ['isLoggedIn', 'picture', 'isLoggingIn']),
   },
   methods: {
-    ...mapActions('user', [ 'set','logout' ]),
+    ...mapActions('user', [ 'set', 'login', 'logout' ]),
     googleAuthRedirect() {
       const googleAuthBaseUrl = 'https://accounts.google.com/o/oauth2/v2/auth'
       const query = querystring.stringify({
@@ -61,7 +61,41 @@ export default {
         prompt: 'consent',
       })
       window.localStorage.setItem('redirect', this.$route.fullPath)
-      window.location.href = `${googleAuthBaseUrl}?${query}`
+      const url = `${googleAuthBaseUrl}?${query}`
+      const name = 'Authentication - openID'
+
+      let windowObjectReference = null;
+      let previousUrl = null;
+
+      const vm = this
+      const receiveMessage = ({ data }) => {
+        const authorizationCode = data.authorizationCode
+        const redirect = data.redirect
+        vm.login({ authorizationCode, redirect })
+      }
+
+       window.removeEventListener('message', receiveMessage);
+
+       const viewportwidth = document.documentElement.clientWidth
+       const width = 350
+       const height = 500
+       const top = 225
+       const left = viewportwidth - 350 - 25
+       const strWindowFeatures =
+         `toolbar=no, menubar=no, width=${width}, height=${height}, top=${top}, left=${left}`;
+
+       if (windowObjectReference === null || windowObjectReference.closed) {
+         windowObjectReference = window.open(url, name, strWindowFeatures);
+       } else if (previousUrl !== url) {
+         windowObjectReference = window.open(url, name, strWindowFeatures)
+         windowObjectReference.focus()
+       } else {
+         windowObjectReference.focus()
+       }
+
+       window.addEventListener('message', receiveMessage, false)
+       previousUrl = url
+
     },
   },
   created() {
