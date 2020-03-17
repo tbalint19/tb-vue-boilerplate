@@ -50,7 +50,7 @@ export default {
     ...mapGetters('user', ['isLoggedIn', 'picture']),
   },
   methods: {
-    ...mapActions('user', ['logout']),
+    ...mapActions('user', [ 'set','logout' ]),
     googleAuthRedirect() {
       const googleAuthBaseUrl = 'https://accounts.google.com/o/oauth2/v2/auth'
       const query = querystring.stringify({
