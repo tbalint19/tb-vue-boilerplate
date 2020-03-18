@@ -71,7 +71,8 @@ export default {
       const receiveMessage = ({ data }) => {
         const authorizationCode = data.authorizationCode
         const redirect = data.redirect
-        vm.login({ authorizationCode, redirect })
+        if (authorizationCode)
+          vm.login({ authorizationCode, redirect })
       }
 
        window.removeEventListener('message', receiveMessage);
