@@ -79,7 +79,7 @@ export default {
 
        const viewportwidth = document.documentElement.clientWidth
        const width = 350
-       const height = 500
+       const height = 550
        const top = 225
        const left = viewportwidth - 350 - 25
        const strWindowFeatures =
