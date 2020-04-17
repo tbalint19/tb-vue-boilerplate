@@ -45,6 +45,9 @@ import { mapGetters, mapActions } from 'vuex'
 import { content } from '@/content'
 import querystring from 'querystring'
 
+let windowObjectReference = null
+let previousUrl = null
+
 export default {
   name: 'App',
   data: () => ({
@@ -69,9 +72,6 @@ export default {
       window.localStorage.setItem('redirect', this.$route.fullPath)
       const url = `${googleAuthBaseUrl}?${query}`
       const name = 'Authentication - openID'
-
-      let windowObjectReference = null
-      let previousUrl = null
 
       const vm = this
       const receiveMessage = ({ data }) => {

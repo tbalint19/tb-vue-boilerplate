@@ -3,8 +3,8 @@
 ## Features
 - Vuex state management
 - Vue router
-- Unit tests (store tests) with jest
-- E2E testing with nightwatch
+- Unit tests with jest
+- Integration tests (store tests) with jest
 - Google OpenID authentication
 - Vue18n added
 - Mockable content
@@ -56,7 +56,7 @@
   npm run format
   npm run format-check
   npm run test:unit
-  npm run test:e2e
+  npm run test:integration
   npm run demo
   ```
 

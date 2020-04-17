@@ -1,0 +1,27 @@
+{
+  "preset": "@vue/cli-plugin-unit-jest",
+  "testMatch": [
+    "<rootDir>/tests/integration/*.spec.js"
+  ],
+  "coverageDirectory": "<rootDir>/tests/integration/coverage",
+  "collectCoverageFrom": [
+    "src/store/**",
+    "!src/store/index.js",
+    "!**/node_modules/**",
+    "!**/vendor/**",
+    "!src/api/**",
+    "!src/components/**",
+    "!src/plugins/**",
+    "!src/router/**",
+    "!src/util/**",
+    "!src/views/**"
+  ],
+  "coverageThreshold": {
+    "global": {
+      "branches": 100,
+      "functions": 100,
+      "lines": 80,
+      "statements": 80
+    }
+  }
+}

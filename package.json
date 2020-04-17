@@ -1,20 +1,20 @@
 {
   "name": "boilerplate",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "author": "TBalint19 <tothbalint719@gmail.com>",
   "private": true,
   "scripts": {
     "cgen": "node scripts/process-content.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test:unit": "vue-cli-service test:unit --coverage",
-    "test:e2e": "vue-cli-service test:e2e --mode e2e-mock --headless",
-    "demo": "vue-cli-service test:e2e --mode e2e-mock",
     "format": "cross-env ./node_modules/.bin/prettier --write '{src,test,scripts}/**/*'",
     "format-check": "cross-env ./node_modules/.bin/prettier --check '{src,test,scripts}/**/*'",
-    "coverage-ui": "cross-env ./node_modules/http-server/bin/http-server ./coverage/lcov-report/ --cors -a localhost -p 8088 -o",
+    "test:unit": "vue-cli-service test:unit --config jest-unit.config.json --coverage ",
+    "ut-ui": "http-server ./tests/unit/coverage/lcov-report/ --cors -a localhost -p 8088 -o",
+    "test:integration": "vue-cli-service test:unit --config jest-integration.config.json --coverage ",
+    "it-ui": "http-server ./tests/integration/coverage/lcov-report/ --cors -a localhost -p 8089 -o",
     "sonar-check": "node CI/sonar",
-    "ci": "npm run format-check && npm run test:unit && npm run test:e2e && npm run sonar-check && npm audit",
+    "ci": "npm run format-check && npm run test:unit && npm run test:integration && npm run sonar-check && npm audit",
     "cd": "npm run build && node CD",
     "cicd": "npm run ci && npm run cd"
   },
@@ -23,7 +23,6 @@
     "core-js": "^3.3.2",
     "lodash": "^4.17.15",
     "lutzvue": "^1.0.0",
-    "prerender-spa-plugin": "^3.4.0",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.10",
     "vue-i18n": "^8.0.0",
@@ -42,12 +41,12 @@
     "@vue/test-utils": "1.0.0-beta.29",
     "axios-mock-adapter": "^1.17.0",
     "cross-env": "^6.0.3",
-
     "jsonwebtoken": "^8.5.1",
+    "mockserver": "^3.1.1",
     "prettier": "^1.19.1",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
-
+    "sonarqube-scanner": "^2.6.0",
     "vue-cli-plugin-i18n": "^0.6.0",
     "vue-cli-plugin-vuetify": "^2.0.2",
     "vue-template-compiler": "^2.6.10",
@@ -61,16 +60,5 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ],
-  "jest": {
-    "preset": "@vue/cli-plugin-unit-jest",
-    "coverageThreshold": {
-      "global": {
-        "branches": 100,
-        "functions": 100,
-        "lines": 80,
-        "statements": 80
-      }
-    }
-  }
+  ]
 }

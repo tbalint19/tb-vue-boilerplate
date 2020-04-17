@@ -26,12 +26,12 @@ export default {
   },
   created() {
     const authorizationCode = this.$route.query.code
-    const redirect = window.localStorage.getItem('redirect') || '/'
-    window.localStorage.removeItem('redirect')
-    if (window.opener) {
+    if (window.opener && window.opener.origin === process.env.VUE_APP_BASE_URL) {
+      const redirect = window.localStorage.getItem('redirect') || '/'
+      window.localStorage.removeItem('redirect')
       window.opener.postMessage({ authorizationCode, redirect })
-      window.close()
     }
+    window.close()
   },
 }
 </script>
