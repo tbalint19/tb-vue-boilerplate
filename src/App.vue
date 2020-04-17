@@ -7,7 +7,13 @@
       :shortName="navbar.shortName"
     >
       <template v-slot:menu>
-        <v-btn v-if="!isLoggedIn" @click="googleAuthRedirect()" text :loading="isLoggingIn" :disabled="isLoggingIn">
+        <v-btn
+          v-if="!isLoggedIn"
+          @click="googleAuthRedirect()"
+          text
+          :loading="isLoggingIn"
+          :disabled="isLoggingIn"
+        >
           <v-icon>mdi-account-circle</v-icon> <v-icon>mdi-chevron-right</v-icon>
         </v-btn>
         <v-avatar size="40" v-if="picture">
@@ -50,7 +56,7 @@ export default {
     ...mapGetters('user', ['isLoggedIn', 'picture', 'isLoggingIn']),
   },
   methods: {
-    ...mapActions('user', [ 'set', 'login', 'logout' ]),
+    ...mapActions('user', ['set', 'login', 'logout']),
     googleAuthRedirect() {
       const googleAuthBaseUrl = 'https://accounts.google.com/o/oauth2/v2/auth'
       const query = querystring.stringify({
@@ -64,39 +70,36 @@ export default {
       const url = `${googleAuthBaseUrl}?${query}`
       const name = 'Authentication - openID'
 
-      let windowObjectReference = null;
-      let previousUrl = null;
+      let windowObjectReference = null
+      let previousUrl = null
 
       const vm = this
       const receiveMessage = ({ data }) => {
         const authorizationCode = data.authorizationCode
         const redirect = data.redirect
-        if (authorizationCode)
-          vm.login({ authorizationCode, redirect })
+        if (authorizationCode) vm.login({ authorizationCode, redirect })
       }
 
-       window.removeEventListener('message', receiveMessage);
+      window.removeEventListener('message', receiveMessage)
 
-       const viewportwidth = document.documentElement.clientWidth
-       const width = 350
-       const height = 550
-       const top = 225
-       const left = viewportwidth - 350 - 25
-       const strWindowFeatures =
-         `toolbar=no, menubar=no, width=${width}, height=${height}, top=${top}, left=${left}`;
+      const viewportwidth = document.documentElement.clientWidth
+      const width = 350
+      const height = 550
+      const top = 225
+      const left = viewportwidth - 350 - 25
+      const strWindowFeatures = `toolbar=no, menubar=no, width=${width}, height=${height}, top=${top}, left=${left}`
 
-       if (windowObjectReference === null || windowObjectReference.closed) {
-         windowObjectReference = window.open(url, name, strWindowFeatures);
-       } else if (previousUrl !== url) {
-         windowObjectReference = window.open(url, name, strWindowFeatures)
-         windowObjectReference.focus()
-       } else {
-         windowObjectReference.focus()
-       }
+      if (windowObjectReference === null || windowObjectReference.closed) {
+        windowObjectReference = window.open(url, name, strWindowFeatures)
+      } else if (previousUrl !== url) {
+        windowObjectReference = window.open(url, name, strWindowFeatures)
+        windowObjectReference.focus()
+      } else {
+        windowObjectReference.focus()
+      }
 
-       window.addEventListener('message', receiveMessage, false)
-       previousUrl = url
-
+      window.addEventListener('message', receiveMessage, false)
+      previousUrl = url
     },
   },
   created() {

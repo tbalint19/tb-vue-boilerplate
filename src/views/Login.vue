@@ -29,8 +29,8 @@ export default {
     const redirect = window.localStorage.getItem('redirect') || '/'
     window.localStorage.removeItem('redirect')
     if (window.opener) {
-     window.opener.postMessage({ authorizationCode, redirect });
-     window.close();
+      window.opener.postMessage({ authorizationCode, redirect })
+      window.close()
     }
   },
 }
