@@ -5,7 +5,7 @@ clientFiles.keys().forEach((key) => {
   API[serviceName] = new (clientFiles(key).default)()
 })
 
-if (process.env.NODE_ENV == 'development') {
+if (process.env.VUE_APP_USE_MOCKS == 'true') {
   const mockFiles = require.context('./mock', false, /\.js$/)
   mockFiles.keys().forEach((key) => {
     const serviceName = key.replace(/(\.\/|\.js)/g, '')

@@ -85,19 +85,12 @@
 export default {
   data: () => ({
     languageSnackbar: false,
-    language: 'en',
+    language: null,
     navigationDrawer: null,
   }),
   props: ['links', 'locales', 'siteName', 'shortName'],
   created() {
-    this.language =
-      navigator.languages && navigator.languages.length
-        ? navigator.languages[0].split('-')[0]
-        : navigator.userLanguage ||
-          navigator.language ||
-          navigator.browserLanguage ||
-          process.env.VUE_APP_I18N_LOCALE
-    this.$i18n.locale = this.language
+    this.language = this.$i18n.locale
   },
   watch: {
     language(value) {
