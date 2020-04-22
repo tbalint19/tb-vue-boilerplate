@@ -69,7 +69,6 @@ export default {
         redirect_uri: process.env.VUE_APP_GOOGLE_REDIRECT_URI,
         prompt: 'consent',
       })
-      window.localStorage.setItem('redirect', this.$route.fullPath)
       const url = `${googleAuthBaseUrl}?${query}`
       const name = 'Authentication - openID'
 
