@@ -10,7 +10,7 @@
       ></v-select>
     </v-snackbar>
 
-    <v-app-bar app color="grey lighten-5">
+    <v-app-bar app color="blue darken-4" dark>
       <div class="d-flex align-center">
         <v-btn
           aria-label="nav"

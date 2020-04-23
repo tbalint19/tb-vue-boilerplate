@@ -11,7 +11,7 @@
       <v-btn
         aria-label="social"
         v-model="fab"
-        color="red accent-4"
+        color="green accent-4"
         dark
         fab
         x-large
@@ -28,7 +28,7 @@
       fab
       dark
       small
-      color="grey accent-4"
+      color="green accent-4"
     >
       <v-icon>{{ site.icon.name }}</v-icon>
     </v-btn>
