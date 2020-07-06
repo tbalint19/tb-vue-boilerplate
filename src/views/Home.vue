@@ -16,7 +16,7 @@
         ></v-checkbox>
         <v-switch :label="'Hírlevél azért jöhet'"></v-switch>
         <div class="d-flex flex-row-reverse">
-          <v-btn color="success">
+          <v-btn color="success" @click="submit()">
             Küldés
           </v-btn>
         </div>
@@ -27,11 +27,45 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import axios from 'axios'
+
+const backendMock = (url) => {
+  // https://www.google.com/recaptcha/api/siteverify?response=&secret=6LdbLa4ZAAAAAIHduf78nb_XgDyy-ik93MXtOSIy
+
+  const isHuman = (url) => {
+    return axios.post(url)
+      .then(({ data }) => console.log("Response:", data));
+  }
+
+  isHuman(token)
+}
+
+const url = (token) => {
+  const RECAPTCHA_VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify';
+  const RECAPTCHA_SECRET = "6LdbLa4ZAAAAAIHduf78nb_XgDyy-ik93MXtOSIy"
+  return `${RECAPTCHA_VERIFY_URL}?response=${token}&secret=${RECAPTCHA_SECRET}`;
+}
 
 export default {
   name: 'home',
   computed: {
     ...mapGetters('user', ['firstName', 'lastName']),
   },
+  methods: {
+    async submit() {
+      const token = await this.recaptchaToken()
+      console.log(url(token))
+
+    },
+    recaptchaToken() {
+      return new Promise((resolve) => {
+        grecaptcha.ready(async () => {
+          const RECAPTCHA_TOKEN = "6LdbLa4ZAAAAAANU86OKpQ5TSTsdzKhCt8fdtmTy"
+          const token = await grecaptcha.execute(RECAPTCHA_TOKEN)
+          resolve(token)
+        });
+      });
+    }
+  }
 }
 </script>
