@@ -29,17 +29,6 @@
 import { mapGetters } from 'vuex'
 import axios from 'axios'
 
-const backendMock = (url) => {
-  // https://www.google.com/recaptcha/api/siteverify?response=&secret=6LdbLa4ZAAAAAIHduf78nb_XgDyy-ik93MXtOSIy
-
-  const isHuman = (url) => {
-    return axios.post(url)
-      .then(({ data }) => console.log("Response:", data));
-  }
-
-  isHuman(token)
-}
-
 const url = (token) => {
   const RECAPTCHA_VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify';
   const RECAPTCHA_SECRET = "6LdbLa4ZAAAAAIHduf78nb_XgDyy-ik93MXtOSIy"
@@ -54,8 +43,9 @@ export default {
   methods: {
     async submit() {
       const token = await this.recaptchaToken()
-      console.log(url(token))
-
+      console.log("TOKEN (SEND TO BACKEND IN A HEADER ALONG WITH THE SUBMIT)", token)
+      // ACTUAL SUBMIT (POST REQUEST WITH THE FORM DATA IN BODY AND TOKEN IN HEADER)
+      console.log("URL TARGET ON BACKEND (WITH THE SECRET)", url(token))
     },
     recaptchaToken() {
       return new Promise((resolve) => {
