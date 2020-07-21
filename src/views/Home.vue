@@ -51,7 +51,7 @@ export default {
       return new Promise((resolve) => {
         grecaptcha.ready(async () => {
           const RECAPTCHA_TOKEN = "6LdbLa4ZAAAAAANU86OKpQ5TSTsdzKhCt8fdtmTy"
-          const token = await grecaptcha.execute(RECAPTCHA_TOKEN)
+          const token = await grecaptcha.execute(RECAPTCHA_TOKEN, { action: 'submitOfFormOnHome' })
           resolve(token)
         });
       });
