@@ -42,16 +42,16 @@ export default {
   },
   methods: {
     async submit() {
-      const token = await this.recaptchaToken()
+      const token = await this.recaptchaToken('submitOfFormOnHome')
       console.log("TOKEN (SEND TO BACKEND IN A HEADER ALONG WITH THE SUBMIT)", token)
       // ACTUAL SUBMIT (POST REQUEST WITH THE FORM DATA IN BODY AND TOKEN IN HEADER)
       console.log("URL TARGET ON BACKEND (WITH THE SECRET)", url(token))
     },
-    recaptchaToken() {
+    recaptchaToken(action) {
       return new Promise((resolve) => {
         grecaptcha.ready(async () => {
           const RECAPTCHA_TOKEN = "6LdbLa4ZAAAAAANU86OKpQ5TSTsdzKhCt8fdtmTy"
-          const token = await grecaptcha.execute(RECAPTCHA_TOKEN, { action: 'submitOfFormOnHome' })
+          const token = await grecaptcha.execute(RECAPTCHA_TOKEN, { action })
           resolve(token)
         });
       });
